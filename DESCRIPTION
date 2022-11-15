@@ -42,10 +42,12 @@ Collate:
     'configure_inset.R'
     'coord_sf_zoom.R'
     'crs.R'
+    'data.R'
     'geoscatter.R'
     'ggautomap-package.R'
     'pie.R'
     'position_circle_repel.R'
     'zzz.R'
-URL: https://github.com/cidm-ph/ggautomap
+URL: https://github.com/cidm-ph/ggautomap,
+    https://cidm-ph.github.io/ggautomap/
 BugReports: https://github.com/cidm-ph/ggautomap/issues

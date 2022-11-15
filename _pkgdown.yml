@@ -1,0 +1,24 @@
+url: https://cidm-ph.github.io/ggautomap/
+template:
+  bootstrap: 5
+
+reference:
+- title: ggplot2 extensions
+  contents:
+  - starts_with("geom_")
+  - position_circle_repel
+  - coord_sf_zoom
+- title: map data
+  contents:
+  - register_map
+  - feature_names
+  - feature_types
+  - resolve_feature_type
+- title: map helpers
+  contents:
+  - configure_inset
+  - crs_eqc
+- title: package
+  contents:
+  - ggautomap-package
+  - nc_type_example

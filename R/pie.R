@@ -1,5 +1,15 @@
 #' Summarise regions with pie charts
 #'
+#' @section Aesthetics:
+#' The \code{location} aesthetic is required.
+#'
+#' @examples
+#' library(ggplot2)
+#'
+#' ggplot(nc_type_example, aes(location = location)) +
+#' geom_boundaries(feature_type = "sf.nc") +
+#' geom_pie(aes(fill = type), pie_radius = 0.1)
+#'
 #' @param pie_radius Scale the side of all pies
 #' @param proportional If \code{TRUE}, scale the pies by the number of rows in
 #'   each region. The radius of each pi is proportional to the count.

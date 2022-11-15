@@ -25,7 +25,7 @@ geom_boundaries(
 
 \item{data}{Ignored (this geometry always uses the registered geographic data).}
 
-\item{feature_type}{Type of map feature. See \link{feature_types} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
 the data.}
 
@@ -45,4 +45,11 @@ geometry dataset and add inset support.
 As well as the chosen feature boundaries, the outline of the map is
 drawn separately, with the possibility to override its \code{colour} and
 \code{linewidth} aesthetics.
+}
+\examples{
+library(ggplot2)
+
+ggplot(nc_type_example, aes(location = location)) +
+geom_boundaries(feature_type = "sf.nc")
+
 }

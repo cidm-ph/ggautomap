@@ -28,7 +28,7 @@ offsets respectively.}
 \item{units}{Base length unit (e.g. \code{"km"} or \code{"mi"}).
 See \code{\link[ggmapinset:configure_inset]{ggmapinset::configure_inset()}} for supported values.}
 
-\item{feature_type}{Type of map feature. See \link{feature_types} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
 the data.}
 }

@@ -100,12 +100,14 @@ get_outline <- function(feature_type) {
 
 #' Guess the feature type if it was missing
 #'
-#' @param feature_type Type of map feature. See [feature_types] for a list of
+#' @param feature_type Type of map feature. See [feature_types()] for a list of
 #'   registered types. If \code{NA}, the type is guessed based on the values in
 #'   the data.
 #' @param locations Character vector of location names in the data.
 #' @param context Name of the calling function, for inclusion in error message
 #'   if it's not possible to unambiguously guess the feature type.
+#'
+#' @usage NULL
 resolve_feature_type <- function (feature_type, locations, context) {
   if (is.null(feature_type)) return(NULL)
   if (is.na(feature_type)) feature_type <- guess_feature_type(locations)

@@ -10,6 +10,14 @@
 #' The \code{location} aesthetic is required.
 #' \code{geom_choropleth()} understands the same aesthetics as [ggplot2::geom_sf()].
 #'
+#' @examples
+#' library(ggplot2)
+#'
+#' ggplot(nc_type_example, aes(location = location)) +
+#' geom_boundaries(feature_type = "sf.nc") +
+#' geom_choropleth() +
+#' scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
+#'
 #' @inheritParams stat_choropleth
 #' @inheritParams ggmapinset::geom_sf_inset
 #'

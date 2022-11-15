@@ -37,7 +37,7 @@ stat_choropleth(
 \arguments{
 \item{mapping, data, stat, geom, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}}.}
 
-\item{feature_type}{Type of map feature. See \link{feature_types} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
 the data.}
 
@@ -68,4 +68,13 @@ The \code{location} aesthetic is required.
 }
 }
 
+\examples{
+library(ggplot2)
+
+ggplot(nc_type_example, aes(location = location)) +
+geom_boundaries(feature_type = "sf.nc") +
+geom_choropleth() +
+scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
+
+}
 \keyword{datasets}

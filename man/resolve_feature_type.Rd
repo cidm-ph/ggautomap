@@ -3,11 +3,8 @@
 \name{resolve_feature_type}
 \alias{resolve_feature_type}
 \title{Guess the feature type if it was missing}
-\usage{
-resolve_feature_type(feature_type, locations, context)
-}
 \arguments{
-\item{feature_type}{Type of map feature. See \link{feature_types} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
 the data.}
 

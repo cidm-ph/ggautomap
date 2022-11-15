@@ -11,6 +11,13 @@
 #' The \code{location} aesthetic is required.
 #' \code{geom_geoscatter()} understands the same aesthetics as [ggplot2::geom_point()].
 #'
+#' @examples
+#' library(ggplot2)
+#'
+#' ggplot(nc_type_example, aes(location = location)) +
+#' geom_boundaries(feature_type = "sf.nc") +
+#' geom_geoscatter(aes(colour = type), size = 0.5)
+#'
 #' @param sample_type sampling type (see the \code{type} argument of [sf::st_sample()]).
 #'   \code{"random"} will place points randomly inside the boundaries, whereas
 #'   \code{"regular"} and \code{"hexagonal"} will evenly space points, leaving

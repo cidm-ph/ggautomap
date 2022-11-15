@@ -11,6 +11,15 @@ This package provides ggplot geoms that make maps from a data frame where
 one of the columns contains place names. The map data must be registered
 either by the user or by another package (e.g. \code{nswgeo}).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/cidm-ph/ggautomap}
+  \item \url{https://cidm-ph.github.io/ggautomap/}
+  \item Report bugs at \url{https://github.com/cidm-ph/ggautomap/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Carl Suster \email{Carl.Suster@health.nsw.gov.au} (\href{https://orcid.org/0000-0001-7021-9380}{ORCID})
 

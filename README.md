@@ -42,17 +42,12 @@ head(feature_names("sf.nc"))
 #> [6] "Hertford"
 ```
 
-The example dataset will work with any data frame that has a column
-containing place names in the list above.
+All you need is a column in your dataset that matches the
+`feature_names()` of the map data. For the `"sf.nc"` map data, this
+dataset is suitable:
 
 ``` r
-set.seed(1234)
-example <- data.frame(
-  location = sample(feature_names("sf.nc"), size = 5) |>
-             sample(size = 50, replace = TRUE, prob = c(2, 5, 1, 1, 1)),
-  type = sample(c("A", "B"), size = 50, replace = TRUE, prob = c(3, 7))
-)
-head(example)
+head(nc_type_example)
 #>   location type
 #> 1   Bertie    A
 #> 2   Bertie    A
@@ -67,7 +62,7 @@ the map outline, you’ll need to specify `feature_type`, but the other
 geoms will usually be able to guess the correct value.
 
 ``` r
-ggplot(example, aes(location = location)) +
+ggplot(nc_type_example, aes(location = location)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_geoscatter(aes(colour = type), size = 0.5)
 ```
@@ -75,7 +70,7 @@ ggplot(example, aes(location = location)) +
 <img src="man/figures/README-example-basic-1.png" width="100%" />
 
 ``` r
-ggplot(example, aes(location = location)) +
+ggplot(nc_type_example, aes(location = location)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_centroids(aes(colour = type, scale = 6), size = 0.5)
 ```
@@ -83,7 +78,7 @@ ggplot(example, aes(location = location)) +
 <img src="man/figures/README-example-basic-2.png" width="100%" />
 
 ``` r
-ggplot(example, aes(location = location)) +
+ggplot(nc_type_example, aes(location = location)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_choropleth() +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
@@ -92,7 +87,7 @@ ggplot(example, aes(location = location)) +
 <img src="man/figures/README-example-basic-3.png" width="100%" />
 
 ``` r
-ggplot(example, aes(location = location)) +
+ggplot(nc_type_example, aes(location = location)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_pie(aes(fill = type), pie_radius = 0.1)
 ```
