@@ -47,3 +47,5 @@ Collate:
     'pie.R'
     'position_circle_repel.R'
     'zzz.R'
+URL: https://github.com/cidm-ph/ggautomap
+BugReports: https://github.com/cidm-ph/ggautomap/issues
