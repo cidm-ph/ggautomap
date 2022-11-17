@@ -169,19 +169,7 @@ resolve_feature_type <- function (feature_type, locations, context) {
 resolve_feature_names <- function(locations, feature_type) {
   feature_names <- get_feature_names(feature_type)
   aliases <- get_aliases(feature_type)
-
-  matches <- mapply(
-    function(...) {
-      m <- c(...)
-      m <- as.integer(m[!is.na(m)])
-      if (length(m) > 0) m[[1]] else NA_integer_
-    },
-    match(locations, feature_names),
-    match(aliases[locations], feature_names),
-    match(tolower(locations), tolower(feature_names)),
-    match(stats::setNames(aliases, tolower(names(aliases)))[tolower(locations)], feature_names),
-    match(stats::setNames(tolower(aliases), tolower(names(aliases)))[tolower(locations)], tolower(feature_names))
-  )
+  matches <- match_feature_names(locations, feature_names, aliases)
 
   unknown_features <- locations[is.na(matches)]
   if (length(unknown_features) > 0) {
@@ -196,10 +184,37 @@ resolve_feature_names <- function(locations, feature_type) {
   feature_names[matches]
 }
 
+match_feature_names <- function(locations, feature_names, aliases) {
+  if (length(locations) == 0) return(integer(0))
+
+  mapply(
+    function(...) {
+      m <- c(...)
+      m <- as.integer(m[!is.na(m)])
+      if (length(m) > 0) m[[1]] else NA_integer_
+    },
+    match(locations, feature_names),
+    match(aliases[locations], feature_names),
+    match(tolower(locations), tolower(feature_names)),
+    match(stats::setNames(aliases, tolower(names(aliases)))[tolower(locations)],
+          feature_names),
+    match(stats::setNames(tolower(aliases), tolower(names(aliases)))[tolower(locations)],
+          tolower(feature_names))
+  )
+}
+
+# FIXME this approach is forcing _all_ of the lazy loaded datasets
 guess_feature_type <- function (locations) {
   locations <- unique(locations)
   types <- feature_types()
-  found <- sapply(types, function (ty) sum(locations %in% get_feature_names(ty)))
+
+  found <- sapply(types, function (ty) {
+    feature_names <- get_feature_names(ty)
+    aliases <- get_aliases(ty)
+    matches <- match_feature_names(locations, feature_names, aliases)
+    sum(!is.na(matches))
+  })
+
   if (length(locations) == 0) {
     cli::cli_abort(c("Unable to guess {.arg feature_type} from locations",
                      "x" = "{.field location} is empty",
