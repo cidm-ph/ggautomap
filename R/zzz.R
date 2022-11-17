@@ -1,4 +1,5 @@
 .onLoad <- function(libname, pkgname) {
-  nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
-  register_map("sf.nc", nc, "NAME")
+  register_map("sf.nc",
+    function() sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE),
+    feature_column = "NAME")
 }

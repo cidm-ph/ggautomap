@@ -1,47 +1,77 @@
 ggautomap_global <- new.env(parent = emptyenv())
 
-ggautomap_global$maps <- list()
-
 #' Register a new feature type
 #'
 #' This adds a new feature type that can then be used by all the geoms in this
 #' package. If registering from another package, this should occur in the
 #' \code{.onLoad()} hook in the package.
 #'
+#' Registration supports delayed evaluation (lazy loading). This is particularly
+#' useful for larger datasets, so that they are not loaded into memory until
+#' they are accessed.
+#'
+#' @examples
+#' register_map(
+#'   "sf.nc",
+#'   function() sf::st_read(system.file("shape/nc.shp", package = "sf")),
+#'   feature_column = "NAME")
+#'
 #' @param feature_type Name of the type. Should include the package name to
 #'   avoid clashes if registered in a package.
-#' @param data A simple feature data frame with the map data.
+#' @param data A simple feature data frame with the map data, or a function
+#'   that returns a data frame. When \code{lazy} is \code{TRUE}, the function
+#'   will not be called until the data is first accessed.
 #' @param feature_column Name of the column of \code{data} that contains the
 #'   feature names.
 #' @param aliases Optional named character vector or list that maps aliases to
 #'   values that appear in the feature column. This allows abbreviations or
 #'   alternative names to be supported.
 #' @param outline Optional sf geometry containing just the outline of the map.
+#' @param lazy When \code{TRUE}, defer evaulation of \code{data} until it it
+#'   used.
 #'
 #' @export
 register_map <- function(feature_type, data, feature_column,
-                         aliases = NULL, outline = NULL) {
+                         aliases = NULL, outline = NULL, lazy = TRUE) {
+  if (is.null(aliases)) aliases <- character(0)
+
+  if (lazy) {
+    delayedAssign(feature_type,
+      list(
+        data = validate_map_data(if (is.function(data)) data() else data,
+                                 feature_column),
+        feature_column = feature_column,
+        aliases = aliases,
+        outline = outline
+      ),
+      assign.env = ggautomap_global
+    )
+  } else {
+    ggautomap_global[[feature_type]] <- list(
+      data = validate_map_data(if (is.function(data)) data() else data,
+                               feature_column),
+      feature_column = feature_column,
+      aliases = aliases,
+      outline = outline
+    )
+  }
+}
+
+validate_map_data <- function(data, feature_column) {
   if (!inherits(data, "sf")) {
     cli::cli_abort("{.arg data} must be an sf object, not {class(data)}")
   }
   if (!feature_column %in% names(data)) {
     cli::cli_abort("{.field feature_column} {feature_column} not found")
   }
-  if (is.null(aliases)) aliases <- c()
-
-  ggautomap_global$maps[[feature_type]] <- list(
-    data = data,
-    feature_column = feature_column,
-    aliases = aliases,
-    outline = outline
-  )
+  invisible(data)
 }
 
 #' List known feature types
 #'
 #' @export
 feature_types <- function() {
-  names(ggautomap_global$maps)
+  names(ggautomap_global)
 }
 
 #' List known feature names
@@ -58,19 +88,19 @@ feature_names <- function(feature_type) {
 }
 
 get_feature_names <- function(feature_type) {
-  cfg <- ggautomap_global$maps[[feature_type]]
+  cfg <- ggautomap_global[[feature_type]]
   if (is.null(cfg)) cli::cli_abort("Unknown feature type {feature_type}")
   cfg$data[[cfg$feature_column]]
 }
 
 get_geom_feature_column <- function(feature_type) {
-  cfg <- ggautomap_global$maps[[feature_type]]
+  cfg <- ggautomap_global[[feature_type]]
   if (is.null(cfg)) cli::cli_abort("Unknown feature type {feature_type}")
   cfg$feature_column
 }
 
 get_geometry <- function(feature_type) {
-  cfg <- ggautomap_global$maps[[feature_type]]
+  cfg <- ggautomap_global[[feature_type]]
   if (is.null(cfg)) cli::cli_abort("Unknown feature type {feature_type}")
   cfg$data
 }
@@ -87,13 +117,13 @@ get_geometry_loc <- function(feature_type, location) {
 }
 
 get_aliases <- function(feature_type) {
-  cfg <- ggautomap_global$maps[[feature_type]]
+  cfg <- ggautomap_global[[feature_type]]
   if (is.null(cfg)) cli::cli_abort("Unknown feature type {feature_type}")
   cfg$aliases
 }
 
 get_outline <- function(feature_type) {
-  cfg <- ggautomap_global$maps[[feature_type]]
+  cfg <- ggautomap_global[[feature_type]]
   if (is.null(cfg)) cli::cli_abort("Unknown feature type {feature_type}")
   cfg$outline
 }

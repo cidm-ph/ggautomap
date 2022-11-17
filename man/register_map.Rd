@@ -9,14 +9,17 @@ register_map(
   data,
   feature_column,
   aliases = NULL,
-  outline = NULL
+  outline = NULL,
+  lazy = TRUE
 )
 }
 \arguments{
 \item{feature_type}{Name of the type. Should include the package name to
 avoid clashes if registered in a package.}
 
-\item{data}{A simple feature data frame with the map data.}
+\item{data}{A simple feature data frame with the map data, or a function
+that returns a data frame. When \code{lazy} is \code{TRUE}, the function
+will not be called until the data is first accessed.}
 
 \item{feature_column}{Name of the column of \code{data} that contains the
 feature names.}
@@ -26,9 +29,24 @@ values that appear in the feature column. This allows abbreviations or
 alternative names to be supported.}
 
 \item{outline}{Optional sf geometry containing just the outline of the map.}
+
+\item{lazy}{When \code{TRUE}, defer evaulation of \code{data} until it it
+used.}
 }
 \description{
 This adds a new feature type that can then be used by all the geoms in this
 package. If registering from another package, this should occur in the
 \code{.onLoad()} hook in the package.
+}
+\details{
+Registration supports delayed evaluation (lazy loading). This is particularly
+useful for larger datasets, so that they are not loaded into memory until
+they are accessed.
+}
+\examples{
+register_map(
+  "sf.nc",
+  function() sf::st_read(system.file("shape/nc.shp", package = "sf")),
+  feature_column = "NAME")
+
 }
