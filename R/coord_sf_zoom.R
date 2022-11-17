@@ -1,4 +1,4 @@
-#' Zoom a map to show only certain features.
+#' Zoom a map to show only certain features
 #'
 #' This is a wrapper around [ggplot2::coord_sf()] that automatically calculates
 #' coordinate limits based on the data and/or any additional locations. The

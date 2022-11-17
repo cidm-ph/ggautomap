@@ -15,12 +15,19 @@ Character vector of names.
 }
 \description{
 This gives the list of feature names that are part of the specified map data.
-When matching your data column to the map data, the names are resolved by
-checking for the first match using:
+The list includes any aliases defined when the map was registered. Note that
+the \code{location} column matching is case insensitive (see Details below).
+}
+\details{
+When matching your data's \code{location} aesthetic column to the map data,
+the names are resolved by checking for the first match using:
 \enumerate{
 \item case sensitive match, then
 \item case sensitive match using aliases, then
 \item case insensitive match, then
 \item case insensitive match using aliases.
 }
+}
+\seealso{
+register_map
 }

@@ -7,5 +7,8 @@
 feature_types()
 }
 \description{
-List known feature types
+Each feature type corresponds to map data that has been registered.
+}
+\seealso{
+register_map
 }

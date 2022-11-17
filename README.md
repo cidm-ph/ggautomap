@@ -25,6 +25,16 @@ options(repos = c(
 install.packages('ggautomap')
 ```
 
+## Registering map data
+
+ggautomap provides the tools for visualising maps, but you need to get
+the map data itself from somewhere. You can either register it with
+`register_map()`, or use one of these packages that register their own
+map data:
+
+- `{nswgeo}` - map data of New South Wales, Australia. Also includes
+  more detailed examples of using ggautomap.
+
 ## Example
 
 ggautomap comes with one example dataset registered. You can register

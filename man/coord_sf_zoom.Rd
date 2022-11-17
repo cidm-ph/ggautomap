@@ -2,7 +2,7 @@
 % Please edit documentation in R/coord_sf_zoom.R
 \name{coord_sf_zoom}
 \alias{coord_sf_zoom}
-\title{Zoom a map to show only certain features.}
+\title{Zoom a map to show only certain features}
 \usage{
 coord_sf_zoom(include = NULL, include_data = TRUE, ...)
 }

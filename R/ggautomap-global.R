@@ -6,6 +6,7 @@ ggautomap_global <- new.env(parent = emptyenv())
 #' package. If registering from another package, this should occur in the
 #' \code{.onLoad()} hook in the package.
 #'
+#' @details
 #' Registration supports delayed evaluation (lazy loading). This is particularly
 #' useful for larger datasets, so that they are not loaded into memory until
 #' they are accessed.
@@ -69,6 +70,10 @@ validate_map_data <- function(data, feature_column) {
 
 #' List known feature types
 #'
+#' Each feature type corresponds to map data that has been registered.
+#'
+#' @seealso register_map
+#'
 #' @export
 feature_types <- function() {
   names(ggautomap_global)
@@ -77,12 +82,18 @@ feature_types <- function() {
 #' List known feature names
 #'
 #' This gives the list of feature names that are part of the specified map data.
-#' When matching your data column to the map data, the names are resolved by
-#' checking for the first match using:
+#' The list includes any aliases defined when the map was registered. Note that
+#' the \code{location} column matching is case insensitive (see Details below).
+#'
+#' @details
+#' When matching your data's \code{location} aesthetic column to the map data,
+#' the names are resolved by checking for the first match using:
 #'   1. case sensitive match, then
 #'   2. case sensitive match using aliases, then
 #'   3. case insensitive match, then
 #'   4. case insensitive match using aliases.
+#'
+#' @seealso register_map
 #'
 #' @param feature_type Type of map feature. See [feature_types] for a list of
 #'   registered types.
