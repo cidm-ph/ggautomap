@@ -14,5 +14,13 @@ registered types.}
 Character vector of names.
 }
 \description{
-List known feature names
+This gives the list of feature names that are part of the specified map data.
+When matching your data column to the map data, the names are resolved by
+checking for the first match using:
+\enumerate{
+\item case sensitive match, then
+\item case sensitive match using aliases, then
+\item case insensitive match, then
+\item case insensitive match using aliases.
+}
 }

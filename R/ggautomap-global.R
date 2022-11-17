@@ -76,6 +76,14 @@ feature_types <- function() {
 
 #' List known feature names
 #'
+#' This gives the list of feature names that are part of the specified map data.
+#' When matching your data column to the map data, the names are resolved by
+#' checking for the first match using:
+#'   1. case sensitive match, then
+#'   2. case sensitive match using aliases, then
+#'   3. case insensitive match, then
+#'   4. case insensitive match using aliases.
+#'
 #' @param feature_type Type of map feature. See [feature_types] for a list of
 #'   registered types.
 #'
@@ -84,7 +92,9 @@ feature_types <- function() {
 #' @export
 feature_names <- function(feature_type) {
   if (is.na(feature_type)) cli::cli_abort("Must specify a {.arg feature_type}")
-  get_feature_names(feature_type)
+  names <- get_feature_names(feature_type)
+  aliases <- get_aliases(feature_type)
+  c(names, unname(aliases))
 }
 
 get_feature_names <- function(feature_type) {
@@ -141,8 +151,49 @@ get_outline <- function(feature_type) {
 resolve_feature_type <- function (feature_type, locations, context) {
   if (is.null(feature_type)) return(NULL)
   if (is.na(feature_type)) feature_type <- guess_feature_type(locations)
-  validate_feature_type(context, feature_type)
+
+  if (is.null(feature_type) || is.na(feature_type)) {
+    cli::cli_abort("{.arg feature_type} must be provided for {.fn {context}}")
+  }
+  types <- feature_types()
+  if (!(feature_type %in% types)) {
+    cli::cli_abort(c(
+      paste0("Unknown {.arg feature_type} {.val ", feature_type, "}"),
+      i = "Expected one of {types}"
+    ))
+  }
+
   feature_type
+}
+
+resolve_feature_names <- function(locations, feature_type) {
+  feature_names <- get_feature_names(feature_type)
+  aliases <- get_aliases(feature_type)
+
+  matches <- mapply(
+    function(...) {
+      m <- c(...)
+      m <- as.integer(m[!is.na(m)])
+      if (length(m) > 0) m[[1]] else NA_integer_
+    },
+    match(locations, feature_names),
+    match(aliases[locations], feature_names),
+    match(tolower(locations), tolower(feature_names)),
+    match(stats::setNames(aliases, tolower(names(aliases)))[tolower(locations)], feature_names),
+    match(stats::setNames(tolower(aliases), tolower(names(aliases)))[tolower(locations)], tolower(feature_names))
+  )
+
+  unknown_features <- locations[is.na(matches)]
+  if (length(unknown_features) > 0) {
+    cli::cli_abort(c(
+      paste0("{.field location} contains unexpected values"),
+      "x" = "The unknown values are {unknown_features}.",
+      "i" = "Expected {feature_type} names like {head(feature_names, n = 3)}.",
+      "i" = "See feature_names('{feature_type}') for the full list."
+    ))
+  }
+
+  feature_names[matches]
 }
 
 guess_feature_type <- function (locations) {
@@ -162,31 +213,4 @@ guess_feature_type <- function (locations) {
                      "i" = "Specify {.arg feature_type} explicitly"))
   }
   names(found[which.max(found)])
-}
-
-validate_feature_type <- function (context, feature_type = NULL) {
-  if (is.null(feature_type) || is.na(feature_type)) {
-    cli::cli_abort("{.arg feature_type} must be provided for {.fn {context}}")
-  }
-  types <- feature_types()
-  if (!(feature_type %in% types)) {
-    cli::cli_abort(c(
-      paste0("Unknown {.arg feature_type} {.val ", feature_type, "}"),
-      i = "Expected one of {types}"
-    ))
-  }
-}
-
-validate_location <- function(location, feature_type, source = "{.arg location}") {
-  feature_names <- get_feature_names(feature_type)
-
-  unknown_features <- setdiff(location, feature_names)
-  if (length(unknown_features) > 0) {
-    cli::cli_abort(c(
-      paste0(source, " contains unexpected values"),
-      "x" = "The unknown values are {unknown_features}",
-      "i" = "Expected {feature_type} names like {head(feature_names, n = 3)}"
-    ))
-  }
-  location
 }

@@ -93,8 +93,7 @@ StatCentroids <- ggplot2::ggproto("StatCentroids", ggplot2::Stat,
 
   setup_data = function(data, params) {
     data <- ggplot2::Stat$setup_data(data, params)
-    validate_feature_type("{.fn stat_centroids}", params$feature_type)
-    validate_location(data$location, params$feature_type)
+    data$location <- resolve_feature_names(data$location, params$feature_type)
     data
   },
 

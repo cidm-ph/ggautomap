@@ -65,7 +65,7 @@ StatCentroidPie <- ggplot2::ggproto("StatCentroidPie", ggplot2::Stat,
 
   setup_data = function(data, params) {
     data <- ggplot2::Stat$setup_data(data, params)
-    validate_location(data$location, params$feature_type)
+    data$location <- resolve_feature_names(data$location, params$feature_type)
 
     # override group, as if we had specified aes(group = location)
     data$group <- as.integer(factor(data$location))

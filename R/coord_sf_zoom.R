@@ -60,7 +60,7 @@ ggplot_add.ggautomap_zoom_spec <- function(spec, plot, object_name) {
 
   feature_type <- resolve_feature_type(feature_type, data_location, context = "coord_sf_zoom")
 
-  include <- validate_location(spec$include, feature_type)
+  include <- resolve_feature_names(spec$include, feature_type)
   if (spec$include_data) {
     include <- unique(c(include, data_location))
   }
