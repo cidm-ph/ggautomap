@@ -21,7 +21,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
 Remotes: github::cidm-ph/ggmapinset
 Depends: 
-    R (>= 2.10),
+    R (>= 3.6),
 Imports: 
     cli (>= 3.4.0),
     dplyr (>= 1.0.0),
