@@ -8,17 +8,20 @@ Authors@R:
              email = "Carl.Suster@health.nsw.gov.au",
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7021-9380")),
+      person("Thomas Lin Pedersen",
+             role = "ctb",
+             comment = "Original author of some code in pie.R taken from 'ggforce'"),
       person("Western Sydney Local Health District, NSW Health",
              role = "cph"))
-Description: Mapping geometries based on ggplot2 for easy maps.
-    This package provides ggplot geoms that make maps from a data frame where
+Description: Mapping geometries based on 'ggplot2' for easy maps.
+    This package provides 'ggplot2' geoms that make maps from a data frame where
     one of the columns contains place names. The map data must be registered
-    either by the user or by another package (e.g. nswgeo).
+    either by the user or by another package (e.g. 'nswgeo').
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Remotes: github::cidm-ph/ggmapinset
 Depends: 
     R (>= 3.6),
@@ -45,6 +48,7 @@ Collate:
     'data.R'
     'geoscatter.R'
     'ggautomap-package.R'
+    'manual.R'
     'pie.R'
     'position_circle_repel.R'
     'zzz.R'

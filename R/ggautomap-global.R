@@ -6,16 +6,9 @@ ggautomap_global <- new.env(parent = emptyenv())
 #' package. If registering from another package, this should occur in the
 #' \code{.onLoad()} hook in the package.
 #'
-#' @details
 #' Registration supports delayed evaluation (lazy loading). This is particularly
 #' useful for larger datasets, so that they are not loaded into memory until
 #' they are accessed.
-#'
-#' @examples
-#' register_map(
-#'   "sf.nc",
-#'   function() sf::st_read(system.file("shape/nc.shp", package = "sf")),
-#'   feature_column = "NAME")
 #'
 #' @param feature_type Name of the type. Should include the package name to
 #'   avoid clashes if registered in a package.
@@ -31,7 +24,14 @@ ggautomap_global <- new.env(parent = emptyenv())
 #' @param lazy When \code{TRUE}, defer evaulation of \code{data} until it it
 #'   used.
 #'
+#' @returns No return value; this updates the global feature registry.
 #' @export
+#'
+#' @examples
+#' register_map(
+#'   "sf.nc",
+#'   function() sf::st_read(system.file("shape/nc.shp", package = "sf")),
+#'   feature_column = "NAME")
 register_map <- function(feature_type, data, feature_column,
                          aliases = NULL, outline = NULL, lazy = TRUE) {
   if (is.null(aliases)) aliases <- character(0)
@@ -74,6 +74,7 @@ validate_map_data <- function(data, feature_column) {
 #'
 #' @seealso register_map
 #'
+#' @returns Character vector of registered feature types.
 #' @export
 feature_types <- function() {
   names(ggautomap_global)
@@ -85,7 +86,6 @@ feature_types <- function() {
 #' The list includes any aliases defined when the map was registered. Note that
 #' the \code{location} column matching is case insensitive (see Details below).
 #'
-#' @details
 #' When matching your data's \code{location} aesthetic column to the map data,
 #' the names are resolved by checking for the first match using:
 #'   1. case sensitive match, then
@@ -98,9 +98,11 @@ feature_types <- function() {
 #' @param feature_type Type of map feature. See [feature_types] for a list of
 #'   registered types.
 #'
-#' @return Character vector of names.
-#'
+#' @returns Character vector of feature names.
 #' @export
+#'
+#' @examples
+#' feature_names("sf.nc")
 feature_names <- function(feature_type) {
   if (is.na(feature_type)) cli::cli_abort("Must specify a {.arg feature_type}")
   names <- get_feature_names(feature_type)

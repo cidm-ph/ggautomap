@@ -48,6 +48,9 @@ configuration. Only relevant when \code{inset} is specified.}
 
 \item{inset_clip}{When an inset is drawn, place included points only in the inset.}
 }
+\value{
+A ggplot layer.
+}
 \description{
 Assigns each point a longitude and latitude corresponding to the geographic
 centre of its administrative area. This means that all points in the same
@@ -71,10 +74,10 @@ The \code{location} aesthetic is required.
 
 \examples{
 library(ggplot2)
+data(nc_type_example)
 
 ggplot(nc_type_example, aes(location = location)) +
-geom_boundaries(feature_type = "sf.nc") +
-geom_centroids(aes(colour = type, scale = 6), size = 0.5)
-
+  geom_boundaries(feature_type = "sf.nc") +
+  geom_centroids(aes(colour = type, scale = 6), size = 0.5)
 }
 \keyword{datasets}

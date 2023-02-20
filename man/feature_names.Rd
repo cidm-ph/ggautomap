@@ -11,7 +11,7 @@ feature_names(feature_type)
 registered types.}
 }
 \value{
-Character vector of names.
+Character vector of feature names.
 }
 \description{
 This gives the list of feature names that are part of the specified map data.
@@ -27,6 +27,9 @@ the names are resolved by checking for the first match using:
 \item case insensitive match, then
 \item case insensitive match using aliases.
 }
+}
+\examples{
+feature_names("sf.nc")
 }
 \seealso{
 register_map

@@ -54,6 +54,9 @@ configuration. Only relevant when \code{inset} is specified.}
 
 \item{inset_clip}{When an inset is drawn, place included points only in the inset.}
 }
+\value{
+A ggplot layer.
+}
 \description{
 Each row of data is drawn as a single point inside the geographic area. This
 has similar strengths to a standard scatter plot, but has the potential to
@@ -76,10 +79,10 @@ The \code{location} aesthetic is required.
 
 \examples{
 library(ggplot2)
+data(nc_type_example)
 
 ggplot(nc_type_example, aes(location = location)) +
-geom_boundaries(feature_type = "sf.nc") +
-geom_geoscatter(aes(colour = type), size = 0.5)
-
+  geom_boundaries(feature_type = "sf.nc") +
+  geom_geoscatter(aes(colour = type), size = 0.5)
 }
 \keyword{datasets}

@@ -48,6 +48,9 @@ configuration. Only relevant when \code{inset} is specified.}
 
 \item{inset_clip}{When an inset is drawn, place included points only in the inset.}
 }
+\value{
+A ggplot layer.
+}
 \description{
 Instead of representing each row separately, aggregate them as counts that
 can be used to draw choropleths. Note that choropleths have a tendency to be
@@ -70,11 +73,11 @@ The \code{location} aesthetic is required.
 
 \examples{
 library(ggplot2)
+data(nc_type_example)
 
 ggplot(nc_type_example, aes(location = location)) +
-geom_boundaries(feature_type = "sf.nc") +
-geom_choropleth() +
-scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
-
+  geom_boundaries(feature_type = "sf.nc") +
+  geom_choropleth() +
+  scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
 }
 \keyword{datasets}

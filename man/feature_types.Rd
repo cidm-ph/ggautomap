@@ -6,6 +6,9 @@
 \usage{
 feature_types()
 }
+\value{
+Character vector of registered feature types.
+}
 \description{
 Each feature type corresponds to map data that has been registered.
 }

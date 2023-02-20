@@ -12,17 +12,19 @@
 #' The \code{location} aesthetic is required.
 #' \code{geom_centroids()} understands the same aesthetics as [ggplot2::geom_point()].
 #'
-#' @examples
-#' library(ggplot2)
-#'
-#' ggplot(nc_type_example, aes(location = location)) +
-#' geom_boundaries(feature_type = "sf.nc") +
-#' geom_centroids(aes(colour = type, scale = 6), size = 0.5)
-#'
 #' @inheritParams ggmapinset::geom_sf_inset
 #' @inheritParams stat_centroids
 #'
+#' @returns A ggplot layer.
 #' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' data(nc_type_example)
+#'
+#' ggplot(nc_type_example, aes(location = location)) +
+#'   geom_boundaries(feature_type = "sf.nc") +
+#'   geom_centroids(aes(colour = type, scale = 6), size = 0.5)
 geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
                            stat = "centroids", position = "circle_repel_sf",
                            ...,

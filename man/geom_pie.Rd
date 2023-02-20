@@ -33,6 +33,9 @@ the data.}
 \item{proportional}{If \code{TRUE}, scale the pies by the number of rows in
 each region. The radius of each pi is proportional to the count.}
 }
+\value{
+A ggplot layer.
+}
 \description{
 Summarise regions with pie charts
 }
@@ -43,10 +46,10 @@ The \code{location} aesthetic is required.
 
 \examples{
 library(ggplot2)
+data(nc_type_example)
 
 ggplot(nc_type_example, aes(location = location)) +
-geom_boundaries(feature_type = "sf.nc") +
-geom_pie(aes(fill = type), pie_radius = 0.1)
-
+  geom_boundaries(feature_type = "sf.nc") +
+  geom_pie(aes(fill = type), pie_radius = 0.1)
 }
 \keyword{datasets}

@@ -1,7 +1,8 @@
 #' Configure transformations underpinning a map inset
 #'
 #' This specialises [ggmapinset::configure_inset()] to allow the \code{centre}
-#' to be specified as a location.
+#' to be specified as a location. The centroid of that location is used as the
+#' inset's centre.
 #'
 #' @param centre Coordinates of the inset centre. Can instead be the name of a
 #'   geographic feature if \code{feature_type} is also provided.
@@ -14,7 +15,18 @@
 #'  See [ggmapinset::configure_inset()] for supported values.
 #' @inheritParams resolve_feature_type
 #'
+#' @returns An inset configuration object.
+#' @seealso ggmapinset::configure_inset
 #' @export
+#'
+#' @examples
+#' cfg <- configure_inset(
+#'   centre = "Yancey",
+#'   feature_type = "sf.nc",
+#'   scale = 2,
+#'   translation = c(70, -180),
+#'   radius = 50,
+#'   units = "mi")
 configure_inset <- function(centre = NULL, scale = NULL,
                             translation = NULL, radius = NULL,
                             units = "km",

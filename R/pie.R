@@ -3,20 +3,22 @@
 #' @section Aesthetics:
 #' The \code{location} aesthetic is required.
 #'
-#' @examples
-#' library(ggplot2)
-#'
-#' ggplot(nc_type_example, aes(location = location)) +
-#' geom_boundaries(feature_type = "sf.nc") +
-#' geom_pie(aes(fill = type), pie_radius = 0.1)
-#'
 #' @param pie_radius Scale the side of all pies
 #' @param proportional If \code{TRUE}, scale the pies by the number of rows in
 #'   each region. The radius of each pi is proportional to the count.
 #' @param mapping,data,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
 #' @inheritParams resolve_feature_type
 #'
+#' @returns A ggplot layer.
 #' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' data(nc_type_example)
+#'
+#' ggplot(nc_type_example, aes(location = location)) +
+#'   geom_boundaries(feature_type = "sf.nc") +
+#'   geom_pie(aes(fill = type), pie_radius = 0.1)
 geom_pie <- function(mapping = ggplot2::aes(), data = NULL,
                      stat = "centroid_pie", position = "identity",
                      ...,

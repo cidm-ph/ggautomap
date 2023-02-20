@@ -32,7 +32,23 @@ See \code{\link[ggmapinset:configure_inset]{ggmapinset::configure_inset()}} for 
 registered types. If \code{NA}, the type is guessed based on the values in
 the data.}
 }
+\value{
+An inset configuration object.
+}
 \description{
 This specialises \code{\link[ggmapinset:configure_inset]{ggmapinset::configure_inset()}} to allow the \code{centre}
-to be specified as a location.
+to be specified as a location. The centroid of that location is used as the
+inset's centre.
+}
+\examples{
+cfg <- configure_inset(
+  centre = "Yancey",
+  feature_type = "sf.nc",
+  scale = 2,
+  translation = c(70, -180),
+  radius = 50,
+  units = "mi")
+}
+\seealso{
+ggmapinset::configure_inset
 }

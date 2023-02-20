@@ -15,7 +15,24 @@
 #' @param include_data Scalar logical, if true then all features with data are
 #'   also included.
 #' @param ... Additional arguments passed to [ggplot2::coord_sf()].
+#'
+#' @returns A zoom specification that can be added to a ggplot object with [ggplot2::%+%].
 #' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' data(nc_type_example)
+#'
+#' # zoom in on locations that have data:
+#' ggplot(nc_type_example, aes(location = location)) +
+#'   geom_boundaries(feature_type = "sf.nc") +
+#'   geom_centroids() +
+#'   coord_sf_zoom()
+#'
+#' # or just zoom in on specific locations regardless of the data:
+#' ggplot(nc_type_example, aes(location = location)) +
+#'   geom_boundaries(feature_type = "sf.nc") +
+#'   coord_sf_zoom(include = c("Rowan", "Polk"), include_data = FALSE)
 coord_sf_zoom <- function(include = NULL, include_data = TRUE, ...) {
   structure(
     list(include = include, include_data = include_data,

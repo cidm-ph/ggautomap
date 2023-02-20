@@ -15,7 +15,7 @@ the projection.}
 See \code{\link[ggmapinset:configure_inset]{ggmapinset::configure_inset()}} for supported values.}
 }
 \value{
-CRS object from \code{sf}
+CRS object from \code{sf}.
 }
 \description{
 \code{crs_eqc()} gives a CRS that can be used for e.g. computing centroids or

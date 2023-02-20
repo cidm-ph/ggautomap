@@ -14,6 +14,9 @@ reference:
   - feature_names
   - feature_types
   - resolve_feature_type
+- title: conversion to sf data frame
+  contents:
+  - into_sf
 - title: map helpers
   contents:
   - configure_inset

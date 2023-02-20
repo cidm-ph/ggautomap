@@ -14,6 +14,9 @@ also included.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:ggsf]{ggplot2::coord_sf()}}.}
 }
+\value{
+A zoom specification that can be added to a ggplot object with \link[ggplot2:gg-add]{ggplot2::\%+\%}.
+}
 \description{
 This is a wrapper around \code{\link[ggplot2:ggsf]{ggplot2::coord_sf()}} that automatically calculates
 coordinate limits based on the data and/or any additional locations. The
@@ -26,4 +29,19 @@ geoms. It will copy the data and \code{feature_type} from the first such
 layer in the plot. If there is no such layer, it will attempt to guess the
 feature type and use the data and \code{location} mapping found at the top
 level \code{ggplot()} call.
+}
+\examples{
+library(ggplot2)
+data(nc_type_example)
+
+# zoom in on locations that have data:
+ggplot(nc_type_example, aes(location = location)) +
+  geom_boundaries(feature_type = "sf.nc") +
+  geom_centroids() +
+  coord_sf_zoom()
+
+# or just zoom in on specific locations regardless of the data:
+ggplot(nc_type_example, aes(location = location)) +
+  geom_boundaries(feature_type = "sf.nc") +
+  coord_sf_zoom(include = c("Rowan", "Polk"), include_data = FALSE)
 }

@@ -37,6 +37,9 @@ configuration. Only relevant when \code{inset} is specified.}
 \item{outline_colour, outline_linewidth}{Override the aesthetics of the state outline.
 If \code{NULL}, the aesthetic is inherited from \code{mapping}.}
 }
+\value{
+A ggplot layer.
+}
 \description{
 Small wrappers around \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}} that load the appropriate
 geometry dataset and add inset support.
@@ -48,8 +51,8 @@ drawn separately, with the possibility to override its \code{colour} and
 }
 \examples{
 library(ggplot2)
+data(nc_type_example)
 
 ggplot(nc_type_example, aes(location = location)) +
-geom_boundaries(feature_type = "sf.nc")
-
+  geom_boundaries(feature_type = "sf.nc")
 }

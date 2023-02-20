@@ -33,6 +33,9 @@ alternative names to be supported.}
 \item{lazy}{When \code{TRUE}, defer evaulation of \code{data} until it it
 used.}
 }
+\value{
+No return value; this updates the global feature registry.
+}
 \description{
 This adds a new feature type that can then be used by all the geoms in this
 package. If registering from another package, this should occur in the
@@ -48,5 +51,4 @@ register_map(
   "sf.nc",
   function() sf::st_read(system.file("shape/nc.shp", package = "sf")),
   feature_column = "NAME")
-
 }

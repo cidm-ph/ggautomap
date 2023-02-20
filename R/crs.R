@@ -11,8 +11,7 @@
 #' @param units Base length unit (e.g. \code{"km"} or \code{"mi"}).
 #'   See [ggmapinset::configure_inset()] for supported values.
 #'
-#' @returns CRS object from \code{sf}
-#'
+#' @returns CRS object from \code{sf}.
 #' @export
 crs_eqc <- function(latitude = 0, units = "km") {
   sf::st_crs(paste0("+proj=eqc", " +lat_ts=", latitude, " +units=", units))

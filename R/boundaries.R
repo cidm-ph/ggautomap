@@ -9,12 +9,6 @@
 #'
 #' @rdname boundaries
 #'
-#' @examples
-#' library(ggplot2)
-#'
-#' ggplot(nc_type_example, aes(location = location)) +
-#' geom_boundaries(feature_type = "sf.nc")
-#'
 #' @param outline_colour,outline_linewidth Override the aesthetics of the state outline.
 #'   If \code{NULL}, the aesthetic is inherited from \code{mapping}.
 #' @param data Ignored (this geometry always uses the registered geographic data).
@@ -22,7 +16,15 @@
 #' @inheritParams resolve_feature_type
 #' @inheritParams ggmapinset::geom_sf_inset
 #'
+#' @returns A ggplot layer.
 #' @export
+#'
+#' @examples
+#' library(ggplot2)
+#' data(nc_type_example)
+#'
+#' ggplot(nc_type_example, aes(location = location)) +
+#'   geom_boundaries(feature_type = "sf.nc")
 geom_boundaries <- function(mapping = ggplot2::aes(),
                             data = NULL,
                             stat = "sf", position = "identity",
