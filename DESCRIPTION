@@ -39,6 +39,7 @@ Imports:
 Collate: 
     'ggautomap-global.R'
     'aaa.R'
+    'automap.R'
     'boundaries.R'
     'centroids.R'
     'choropleth.R'
@@ -48,7 +49,6 @@ Collate:
     'data.R'
     'geoscatter.R'
     'ggautomap-package.R'
-    'manual.R'
     'pie.R'
     'position_circle_repel.R'
     'zzz.R'
