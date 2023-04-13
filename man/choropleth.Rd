@@ -37,16 +37,17 @@ stat_choropleth(
 \arguments{
 \item{mapping, data, stat, geom, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}}.}
 
-\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
-the data.}
+\code{feature_names}.}
 
 \item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.}
 
-\item{inset_copy}{Draw both the base layers and the inset layers using the same
+\item{inset_copy}{Draw both the base layer and the inset layer using the same
 configuration. Only relevant when \code{inset} is specified.}
 
-\item{inset_clip}{When an inset is drawn, place included points only in the inset.}
+\item{inset_clip}{Clip away the part of the base layer corresponding to the
+inset frame. Only relevant when \code{inset} is specified.}
 }
 \value{
 A ggplot layer.
@@ -73,9 +74,9 @@ The \code{location} aesthetic is required.
 
 \examples{
 library(ggplot2)
-data(nc_type_example)
 
-ggplot(nc_type_example, aes(location = location)) +
+cartographer::nc_type_example[1:49,] |>
+  ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_choropleth() +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")

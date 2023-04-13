@@ -1,6 +1,3 @@
-#' @include ggautomap-global.R
-NULL
-
 #' @export
 vec_math.ggautomap_location <- function(.fn, .x, ...) {
   switch(.fn, is.finite = !is.na(.x), stop("n/a"))

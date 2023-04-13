@@ -25,13 +25,13 @@ geom_boundaries(
 
 \item{data}{Ignored (this geometry always uses the registered geographic data).}
 
-\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
-the data.}
+\code{feature_names}.}
 
 \item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.}
 
-\item{inset_copy}{Draw both the base layers and the inset layers using the same
+\item{inset_copy}{Draw both the base layer and the inset layer using the same
 configuration. Only relevant when \code{inset} is specified.}
 
 \item{outline_colour, outline_linewidth}{Override the aesthetics of the state outline.
@@ -51,8 +51,6 @@ drawn separately, with the possibility to override its \code{colour} and
 }
 \examples{
 library(ggplot2)
-data(nc_type_example)
 
-ggplot(nc_type_example, aes(location = location)) +
-  geom_boundaries(feature_type = "sf.nc")
+ggplot() + geom_boundaries(feature_type = "sf.nc")
 }

@@ -20,9 +20,9 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' data(nc_type_example)
 #'
-#' ggplot(nc_type_example, aes(location = location)) +
+#' cartographer::nc_type_example[1:49,] |>
+#'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_centroids(aes(colour = type, scale = 6), size = 0.5)
 geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
@@ -58,7 +58,7 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
 #' }
 #'
 #' @param mapping,data,stat,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
-#' @inheritParams resolve_feature_type
+#' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export
 stat_centroids <- function(mapping = NULL, data = NULL,
@@ -95,15 +95,16 @@ StatCentroids <- ggplot2::ggproto("StatCentroids", ggplot2::Stat,
 
   setup_data = function(data, params) {
     data <- ggplot2::Stat$setup_data(data, params)
-    data$location <- resolve_feature_names(data$location, params$feature_type)
+    data$location <- cartographer::resolve_feature_names(data$location,
+                                                         params$feature_type)
     data
   },
 
   setup_params = function(data, params) {
     params <- ggplot2::Stat$setup_params(data, params)
     if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- resolve_feature_type(params$feature_type, data$location,
-                                                context = "stat_centroids")
+    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
+                                                              data$location)
     params
   },
 
@@ -121,12 +122,12 @@ StatCentroids <- ggplot2::ggproto("StatCentroids", ggplot2::Stat,
     }
 
     locations <- unique(data$location)
-    geometry <- sf::st_geometry(get_geometry(feature_type))
+    geometry <- sf::st_geometry(cartographer::map_sf(feature_type))
 
     all_centroids <- sf::st_transform(geometry, crs_eqc())
     all_centroids <- sf::st_transform(sf::st_centroid(all_centroids), sf::st_crs(geometry))
 
-    res <- all_centroids[match(data$location, get_feature_names(feature_type))]
+    res <- all_centroids[cartographer::map_sfc(data$location, feature_type)]
     centroids <- matrix(unlist(res), ncol = 2, byrow = TRUE)
     sf::st_sf(geometry = res, x = centroids[,1], y = centroids[,2])
   }

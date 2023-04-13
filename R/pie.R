@@ -7,16 +7,16 @@
 #' @param proportional If \code{TRUE}, scale the pies by the number of rows in
 #'   each region. The radius of each pi is proportional to the count.
 #' @param mapping,data,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
-#' @inheritParams resolve_feature_type
+#' @inheritParams cartographer::resolve_feature_type
 #'
 #' @returns A ggplot layer.
 #' @export
 #'
 #' @examples
 #' library(ggplot2)
-#' data(nc_type_example)
 #'
-#' ggplot(nc_type_example, aes(location = location)) +
+#' cartographer::nc_type_example[1:49,] |>
+#'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_pie(aes(fill = type), pie_radius = 0.1)
 geom_pie <- function(mapping = ggplot2::aes(), data = NULL,
@@ -67,7 +67,7 @@ StatCentroidPie <- ggplot2::ggproto("StatCentroidPie", ggplot2::Stat,
 
   setup_data = function(data, params) {
     data <- ggplot2::Stat$setup_data(data, params)
-    data$location <- resolve_feature_names(data$location, params$feature_type)
+    data$location <- cartographer::resolve_feature_names(data$location, params$feature_type)
 
     # override group, as if we had specified aes(group = location)
     data$group <- as.integer(factor(data$location))
@@ -81,8 +81,8 @@ StatCentroidPie <- ggplot2::ggproto("StatCentroidPie", ggplot2::Stat,
   setup_params = function(data, params) {
     params <- ggplot2::Stat$setup_params(data, params)
     if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- resolve_feature_type(params$feature_type, data$location,
-                                                context = "{.fn stat_centroid_pie}")
+    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
+                                                              data$location)
     params
   },
 
@@ -110,10 +110,10 @@ StatCentroidPie <- ggplot2::ggproto("StatCentroidPie", ggplot2::Stat,
 
     data$r <- if (proportional) entries * pie_radius else pie_radius
 
-    crs_orig <- sf::st_crs(get_geometry(feature_type))
+    crs_orig <- sf::st_crs(cartographer::map_sf(feature_type))
     crs_working <- crs_eqc_midpoint(feature_type)
 
-    geoms <- sapply(data$location, function (x) { get_geometry_loc(feature_type, x) }, USE.NAMES = FALSE)
+    geoms <- cartographer::map_sfc(data$location, feature_type)
     geometry <- sf::st_sfc(geoms, crs = crs_orig)
     centroids <- sf::st_transform(geometry, crs_working)
     centroids <- sf::st_transform(sf::st_centroid(centroids), crs_orig)

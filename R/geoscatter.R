@@ -23,9 +23,9 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' data(nc_type_example)
 #'
-#' ggplot(nc_type_example, aes(location = location)) +
+#' cartographer::nc_type_example[1:49,] |>
+#'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_geoscatter(aes(colour = type), size = 0.5)
 geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
@@ -69,7 +69,7 @@ geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
 #'   \code{"regular"} and \code{"hexagonal"} will evenly space points, leaving
 #'   a small margin close to the boundaries.
 #' @param mapping,data,stat,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
-#' @inheritParams resolve_feature_type
+#' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export
 stat_geoscatter <- function(mapping = NULL, data = NULL,
@@ -110,15 +110,16 @@ StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggplot2::Stat,
 
   setup_data = function(data, params) {
     data <- ggplot2::Stat$setup_data(data, params)
-    data$location <- resolve_feature_names(data$location, params$feature_type)
+    data$location <- cartographer::resolve_feature_names(data$location,
+                                                         params$feature_type)
     data
   },
 
   setup_params = function(data, params) {
     params <- ggplot2::Stat$setup_params(data, params)
     if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- resolve_feature_type(params$feature_type, data$location,
-                                                context = "{.fn stat_geoscatter}")
+    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
+                                                              data$location)
     params
   },
 
@@ -138,7 +139,7 @@ StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggplot2::Stat,
     data$ggautomap__row <- seq_len(nrow(data))
 
     coords <- dplyr::group_modify(dplyr::group_by(data, .data$location), function(dat, grp) {
-      geom <- get_geometry_loc(feature_type, grp$location[[1]])
+      geom <- cartographer::map_sfc(grp$location[[1]], feature_type)
 
       # work in a CRS that isn't distorted near the middle of the map
       crs_orig <- sf::st_crs(geom)

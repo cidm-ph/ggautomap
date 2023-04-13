@@ -24,9 +24,9 @@ geom_pie(
 \arguments{
 \item{mapping, data, stat, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}}.}
 
-\item{feature_type}{Type of map feature. See \code{\link[=feature_types]{feature_types()}} for a list of
+\item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
-the data.}
+\code{feature_names}.}
 
 \item{pie_radius}{Scale the side of all pies}
 
@@ -46,9 +46,9 @@ The \code{location} aesthetic is required.
 
 \examples{
 library(ggplot2)
-data(nc_type_example)
 
-ggplot(nc_type_example, aes(location = location)) +
+cartographer::nc_type_example[1:49,] |>
+  ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_pie(aes(fill = type), pie_radius = 0.1)
 }

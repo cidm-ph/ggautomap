@@ -18,6 +18,6 @@ crs_eqc <- function(latitude = 0, units = "km") {
 }
 
 crs_eqc_midpoint <- function(feature_type) {
-  bbox <- sf::st_bbox(get_geometry(feature_type))
+  bbox <- sf::st_bbox(cartographer::map_sf(feature_type))
   crs_eqc(latitude = mean(bbox[[2]], bbox[[4]]))
 }

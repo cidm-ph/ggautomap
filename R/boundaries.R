@@ -13,7 +13,7 @@
 #'   If \code{NULL}, the aesthetic is inherited from \code{mapping}.
 #' @param data Ignored (this geometry always uses the registered geographic data).
 #' @param mapping,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
-#' @inheritParams resolve_feature_type
+#' @inheritParams cartographer::resolve_feature_type
 #' @inheritParams ggmapinset::geom_sf_inset
 #'
 #' @returns A ggplot layer.
@@ -21,10 +21,8 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' data(nc_type_example)
 #'
-#' ggplot(nc_type_example, aes(location = location)) +
-#'   geom_boundaries(feature_type = "sf.nc")
+#' ggplot() + geom_boundaries(feature_type = "sf.nc")
 geom_boundaries <- function(mapping = ggplot2::aes(),
                             data = NULL,
                             stat = "sf", position = "identity",
@@ -42,12 +40,12 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
   }
   if (is.null(feature_type) || is.na(feature_type)) {
     cli::cli_abort(c("{.arg feature_type} must be specified",
-                     "i" = "Registered types: {feature_types()}"))
+                     "i" = "Registered types: {cartographer::feature_types()}"))
   }
 
   boundaries(mapping = mapping,
-             data_inner = get_geometry(feature_type),
-             data_outline = get_outline(feature_type),
+             data_inner = cartographer::map_sf(feature_type),
+             data_outline = cartographer::map_outline(feature_type),
              stat = stat, position = position, ...,
              inset = inset, inset_copy = inset_copy,
              na.rm = na.rm,

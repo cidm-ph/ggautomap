@@ -13,7 +13,7 @@
 #' @param radius Radius of the inset circle.
 #' @param units Base length unit (e.g. \code{"km"} or \code{"mi"}).
 #'  See [ggmapinset::configure_inset()] for supported values.
-#' @inheritParams resolve_feature_type
+#' @inheritParams cartographer::resolve_feature_type
 #'
 #' @returns An inset configuration object.
 #' @seealso ggmapinset::configure_inset
@@ -32,9 +32,8 @@ configure_inset <- function(centre = NULL, scale = NULL,
                             units = "km",
                             feature_type = NA) {
   if (is.character(centre)) {
-    feature_type <- resolve_feature_type(feature_type, centre,
-                                         context = "configure_inset")
-    geom <- get_geometry_loc(feature_type, centre)
+    feature_type <- cartographer::resolve_feature_type(feature_type, centre)
+    geom <- cartographer::map_sfc(centre, feature_type)
     crs_working <- crs_eqc_midpoint(feature_type)
     geom <- sf::st_transform(geom, crs_working)
     centre <- sf::st_centroid(geom)

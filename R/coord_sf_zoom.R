@@ -21,16 +21,17 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' data(nc_type_example)
 #'
 #' # zoom in on locations that have data:
-#' ggplot(nc_type_example, aes(location = location)) +
+#' cartographer::nc_type_example[1:49,] |>
+#'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_centroids() +
 #'   coord_sf_zoom()
 #'
 #' # or just zoom in on specific locations regardless of the data:
-#' ggplot(nc_type_example, aes(location = location)) +
+#' cartographer::nc_type_example[1:49,] |>
+#'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   coord_sf_zoom(include = c("Rowan", "Polk"), include_data = FALSE)
 coord_sf_zoom <- function(include = NULL, include_data = TRUE, ...) {
@@ -75,16 +76,15 @@ ggplot_add.ggautomap_zoom_spec <- function(spec, plot, object_name) {
                      "i" = "alternatively, define the {.arg data} and the {.field location} aesthetic in the top level {.fn ggplot} call"))
   }
 
-  feature_type <- resolve_feature_type(feature_type, data_location, context = "coord_sf_zoom")
+  feature_type <- cartographer::resolve_feature_type(feature_type, data_location)
 
-  include <- resolve_feature_names(spec$include, feature_type)
+  include <- cartographer::resolve_feature_names(spec$include, feature_type)
   if (spec$include_data) {
     include <- unique(c(include, data_location))
   }
 
-  geoms <- get_geometry(feature_type)
-  geom_locations <- get_geom_feature_column(feature_type)
-  geom_locations <- unlist(unclass(geoms)[geom_locations])
+  geoms <- cartographer::map_sf(feature_type)
+  geom_locations <- cartographer::feature_names(feature_type)
   bbox <- sf::st_bbox(geoms[geom_locations %in% include,])
 
   args <- spec$coord_sf_args

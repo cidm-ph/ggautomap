@@ -22,10 +22,12 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Remotes: github::cidm-ph/ggmapinset
+Remotes: github::cidm-ph/ggmapinset,
+    github::cidm-ph/cartographer
 Depends: 
     R (>= 3.6),
 Imports: 
+    cartographer,
     cli (>= 3.4.0),
     dplyr (>= 1.0.0),
     ggmapinset (>= 0.1.1),
@@ -37,21 +39,17 @@ Imports:
     tidyr (>= 1.2.0),
     vctrs (>= 0.4.0)
 Collate: 
-    'ggautomap-global.R'
     'aaa.R'
-    'automap.R'
     'boundaries.R'
     'centroids.R'
     'choropleth.R'
     'configure_inset.R'
     'coord_sf_zoom.R'
     'crs.R'
-    'data.R'
     'geoscatter.R'
     'ggautomap-package.R'
     'pie.R'
     'position_circle_repel.R'
-    'zzz.R'
 URL: https://github.com/cidm-ph/ggautomap,
     https://cidm-ph.github.io/ggautomap/
 BugReports: https://github.com/cidm-ph/ggautomap/issues

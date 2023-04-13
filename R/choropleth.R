@@ -18,9 +18,9 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' data(nc_type_example)
 #'
-#' ggplot(nc_type_example, aes(location = location)) +
+#' cartographer::nc_type_example[1:49,] |>
+#'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_choropleth() +
 #'   scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
@@ -61,7 +61,7 @@ geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
 #' }
 #'
 #' @param mapping,data,stat,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
-#' @inheritParams resolve_feature_type
+#' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export
 stat_choropleth <- function(mapping = NULL, data = NULL,
@@ -99,15 +99,16 @@ StatChoropleth <- ggplot2::ggproto("StatChoropleth", ggplot2::StatSf,
 
   setup_data = function(data, params) {
     data <- ggplot2::StatSf$setup_data(data, params)
-    data$location <- resolve_feature_names(data$location, params$feature_type)
+    data$location <- cartographer::resolve_feature_names(data$location,
+                                                         params$feature_type)
     data
   },
 
   setup_params = function(data, params) {
     params <- ggplot2::StatSf$setup_params(data, params)
     if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- resolve_feature_type(params$feature_type, data$location,
-                                                context = "{.fn stat_choropleth}")
+    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
+                                                              data$location)
     params
   },
 
@@ -126,8 +127,9 @@ StatChoropleth <- ggplot2::ggproto("StatChoropleth", ggplot2::StatSf,
     }
 
     counts <- dplyr::count(data, location = .data$location, name = "count")
-    geoms <- sapply(counts$location, function (x) { get_geometry_loc(feature_type, x) }, USE.NAMES = FALSE)
-    counts$geometry <- sf::st_sfc(geoms, crs = sf::st_crs(get_geometry(feature_type)))
+    geoms <- cartographer::map_sfc(counts$location, feature_type)
+    crs_data <- sf::st_crs(cartographer::map_sf(feature_type))
+    counts$geometry <- sf::st_sfc(geoms, crs = crs_data)
 
     ggplot2::StatSf$compute_group(sf::st_as_sf(counts), scales, coord)
   }
