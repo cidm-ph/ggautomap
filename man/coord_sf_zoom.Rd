@@ -32,16 +32,17 @@ level \code{ggplot()} call.
 }
 \examples{
 library(ggplot2)
-data(nc_type_example)
 
 # zoom in on locations that have data:
-ggplot(nc_type_example, aes(location = location)) +
+cartographer::nc_type_example[1:49,] |>
+  ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_centroids() +
   coord_sf_zoom()
 
 # or just zoom in on specific locations regardless of the data:
-ggplot(nc_type_example, aes(location = location)) +
+cartographer::nc_type_example[1:49,] |>
+  ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   coord_sf_zoom(include = c("Rowan", "Polk"), include_data = FALSE)
 }

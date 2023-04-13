@@ -123,19 +123,7 @@ StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggplot2::Stat,
     params
   },
 
-  # protect the location column from is.finite
-  compute_layer = function(self, data, params, layout) {
-    if (!is.null(data[["location"]])) {
-      data$location <- vctrs::new_vctr(data$location, class = "ggautomap_location")
-    }
-    ggplot2::ggproto_parent(ggplot2::Stat, self)$compute_layer(data, params, layout)
-  },
-
   compute_group = function(data, scales, feature_type, sample_type) {
-    if (inherits(data$location, "ggautomap_location")) {
-      class(data$location) <- "character"
-    }
-
     data$ggautomap__row <- seq_len(nrow(data))
 
     coords <- dplyr::group_modify(dplyr::group_by(data, .data$location), function(dat, grp) {

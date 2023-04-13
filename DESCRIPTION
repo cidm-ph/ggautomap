@@ -31,7 +31,7 @@ Imports:
     cli (>= 3.4.0),
     dplyr (>= 1.0.0),
     ggmapinset (>= 0.1.1),
-    ggplot2 (>= 3.4.0),
+    ggplot2 (>= 3.4.2),
     ggforce (>= 0.4.1),
     packcircles (>= 0.3.4),
     rlang (>= 1.0.0),

@@ -1,8 +1,3 @@
-#' @export
-vec_math.ggautomap_location <- function(.fn, .x, ...) {
-  switch(.fn, is.finite = !is.na(.x), stop("n/a"))
-} # NB: part of workaround used in implementing geoms
-
 #' @import sf
 #' @import vctrs
 #' @import ggplot2

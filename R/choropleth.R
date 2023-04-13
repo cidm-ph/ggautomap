@@ -112,25 +112,12 @@ StatChoropleth <- ggplot2::ggproto("StatChoropleth", ggplot2::StatSf,
     params
   },
 
-  # protect the location column from is.finite
-  compute_layer = function(self, data, params, layout) {
-    if (!is.null(data[["location"]])) {
-      data$location <- vctrs::new_vctr(data$location, class = "ggautomap_location")
-    }
-
-    ggplot2::ggproto_parent(ggplot2::StatSf, self)$compute_layer(data, params, layout)
-  },
-
-  compute_group = function(data, scales, coord, feature_type) {
-    if (inherits(data$location, "ggautomap_location")) {
-      class(data$location) <- "character"
-    }
-
+  compute_panel = function(data, scales, coord, feature_type) {
     counts <- dplyr::count(data, location = .data$location, name = "count")
     geoms <- cartographer::map_sfc(counts$location, feature_type)
     crs_data <- sf::st_crs(cartographer::map_sf(feature_type))
     counts$geometry <- sf::st_sfc(geoms, crs = crs_data)
 
-    ggplot2::StatSf$compute_group(sf::st_as_sf(counts), scales, coord)
+    ggplot2::StatSf$compute_panel(sf::st_as_sf(counts), scales, coord)
   }
 )

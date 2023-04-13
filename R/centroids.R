@@ -108,19 +108,7 @@ StatCentroids <- ggplot2::ggproto("StatCentroids", ggplot2::Stat,
     params
   },
 
-  # protect the location column from is.finite
-  compute_layer = function(self, data, params, layout) {
-    if ("location" %in% names(data)) {
-      data$location <- vctrs::new_vctr(data$location, class = "ggautomap_location")
-    }
-    ggplot2::ggproto_parent(ggplot2::Stat, self)$compute_layer(data, params, layout)
-  },
-
-  compute_group = function(data, scales, coord, feature_type) {
-    if (inherits(data$location, "ggautomap_location")) {
-      class(data$location) <- "character"
-    }
-
+  compute_panel = function(data, scales, coord, feature_type) {
     locations <- unique(data$location)
     geometry <- sf::st_geometry(cartographer::map_sf(feature_type))
 
