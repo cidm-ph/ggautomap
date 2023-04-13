@@ -8,15 +8,6 @@ reference:
   - starts_with("geom_")
   - position_circle_repel
   - coord_sf_zoom
-- title: map data
-  contents:
-  - register_map
-  - feature_names
-  - feature_types
-  - resolve_feature_type
-- title: conversion to sf data frame
-  contents:
-  - into_sf
 - title: map helpers
   contents:
   - configure_inset
@@ -24,4 +15,3 @@ reference:
 - title: package
   contents:
   - ggautomap-package
-  - nc_type_example

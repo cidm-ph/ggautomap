@@ -44,9 +44,9 @@ head(nc_type_example)
 #> 6 PAMLICO    B
 ```
 
-A possible workflow is to use \[`cartographer::add_geometry()`\] to
-convert this into a spatial data frame and then use
-\[`ggplot2::geom_sf()`\] to draw it.
+A possible workflow is to use `cartographer::add_geometry()` to convert
+this into a spatial data frame and then use `ggplot2::geom_sf()` to draw
+it.
 
 `ggautomap` instead provides geoms that do this transparently as needed,
 so you don’t need to do a lot of boilerplate to wrangle the data into
