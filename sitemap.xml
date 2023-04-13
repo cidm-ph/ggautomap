@@ -34,12 +34,6 @@
     <loc>https://cidm-ph.github.io/ggautomap/reference/crs_eqc.html</loc>
   </url>
   <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/feature_names.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/feature_types.html</loc>
-  </url>
-  <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/geom_pie.html</loc>
   </url>
   <url>
@@ -52,21 +46,9 @@
     <loc>https://cidm-ph.github.io/ggautomap/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/into_sf.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/nc_type_example.html</loc>
-  </url>
-  <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/position_circle_repel.html</loc>
   </url>
   <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/register_map.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/resolve_feature_type.html</loc>
   </url>
 </urlset>

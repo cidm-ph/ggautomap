@@ -79,9 +79,9 @@ geometry dataset and add inset support.</p>
 
 
 <dt>feature_type</dt>
-<dd><p>Type of map feature. See <code><a href="feature_types.html">feature_types()</a></code> for a list of
+<dd><p>Type of map feature. See <code><a href="https://cidm-ph.github.io/cartographer/reference/feature_types.html" class="external-link">feature_types()</a></code> for a list of
 registered types. If <code>NA</code>, the type is guessed based on the values in
-the data.</p></dd>
+<code>feature_names</code>.</p></dd>
 
 
 <dt>inset</dt>
@@ -89,7 +89,7 @@ the data.</p></dd>
 
 
 <dt>inset_copy</dt>
-<dd><p>Draw both the base layers and the inset layers using the same
+<dd><p>Draw both the base layer and the inset layer using the same
 configuration. Only relevant when <code>inset</code> is specified.</p></dd>
 
 
@@ -114,10 +114,8 @@ drawn separately, with the possibility to override its <code>colour</code> and
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nc_type_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">nc_type_example</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>location <span class="op">=</span> <span class="va">location</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu">geom_boundaries</span><span class="op">(</span>feature_type <span class="op">=</span> <span class="st">"sf.nc"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_boundaries</span><span class="op">(</span>feature_type <span class="op">=</span> <span class="st">"sf.nc"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="boundaries-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

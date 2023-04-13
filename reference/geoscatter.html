@@ -93,9 +93,9 @@ of the points.</p>
 
 
 <dt>feature_type</dt>
-<dd><p>Type of map feature. See <code><a href="feature_types.html">feature_types()</a></code> for a list of
+<dd><p>Type of map feature. See <code><a href="https://cidm-ph.github.io/cartographer/reference/feature_types.html" class="external-link">feature_types()</a></code> for a list of
 registered types. If <code>NA</code>, the type is guessed based on the values in
-the data.</p></dd>
+<code>feature_names</code>.</p></dd>
 
 
 <dt>sample_type</dt>
@@ -110,12 +110,13 @@ a small margin close to the boundaries.</p></dd>
 
 
 <dt>inset_copy</dt>
-<dd><p>Draw both the base layers and the inset layers using the same
+<dd><p>Draw both the base layer and the inset layer using the same
 configuration. Only relevant when <code>inset</code> is specified.</p></dd>
 
 
 <dt>inset_clip</dt>
-<dd><p>When an inset is drawn, place included points only in the inset.</p></dd>
+<dd><p>Clip away the part of the base layer corresponding to the
+inset frame. Only relevant when <code>inset</code> is specified.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -147,9 +148,9 @@ configuration. Only relevant when <code>inset</code> is specified.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nc_type_example</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">nc_type_example</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>location <span class="op">=</span> <span class="va">location</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span><span class="fu">cartographer</span><span class="fu">::</span><span class="va"><a href="https://cidm-ph.github.io/cartographer/reference/nc_type_example.html" class="external-link">nc_type_example</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">49</span>,<span class="op">]</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>location <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="boundaries.html">geom_boundaries</a></span><span class="op">(</span>feature_type <span class="op">=</span> <span class="st">"sf.nc"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">geom_geoscatter</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="geoscatter-1.png" alt="" width="700" height="433"></span>
