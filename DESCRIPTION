@@ -40,6 +40,7 @@ Imports:
     vctrs (>= 0.4.0)
 Collate: 
     'aaa.R'
+    'stat_automap.R'
     'boundaries.R'
     'centroids.R'
     'choropleth.R'
