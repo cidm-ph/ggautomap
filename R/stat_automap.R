@@ -1,8 +1,8 @@
 #' Attach spatial data with cartographer
 #'
-#' Use cartographer to attach a spatial column to the data based on place names
-#' in another column. The result can then be used by [ggplot2::geom_sf()] or
-#' [ggmapinset::geom_sf_inset()].
+#' Use [`cartographer`][cartographer] to attach a spatial column to the data based
+#' on place names in another column. The result can then be used by
+#' [ggplot2::geom_sf()] or [ggmapinset::geom_sf_inset()].
 #'
 #' @section Computed variables:
 #' \describe{
@@ -10,7 +10,7 @@
 #'   \item{...}{limits as computed by [ggplot2::stat_sf()]}
 #' }
 #'
-#' @param mapping,data,stat,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
+#' @param mapping,data,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
 #' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export

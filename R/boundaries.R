@@ -29,7 +29,8 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
                             ...,
                             feature_type = NULL,
                             inset = NULL,
-                            inset_copy = TRUE,
+                            map_base = "normal",
+                            map_inset = "auto",
                             na.rm = FALSE,
                             outline_colour = "#666666",
                             outline_linewidth = NULL,
@@ -47,7 +48,7 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
              data_inner = cartographer::map_sf(feature_type),
              data_outline = cartographer::map_outline(feature_type),
              stat = stat, position = position, ...,
-             inset = inset, inset_copy = inset_copy,
+             inset = inset, map_base = map_base, map_inset = map_inset,
              na.rm = na.rm,
              outline_colour = outline_colour,
              outline_linewidth = outline_linewidth,
@@ -61,7 +62,8 @@ boundaries <- function(mapping,
                        position,
                        ...,
                        inset,
-                       inset_copy,
+                       map_base = "normal",
+                       map_inset = "auto",
                        na.rm,
                        outline_colour,
                        outline_linewidth,
@@ -89,7 +91,7 @@ boundaries <- function(mapping,
     data = data_inner, mapping = mapping,
     stat = stat, position = position,
     show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, inset_copy = inset_copy, inset_clip = FALSE
+    inset = inset, map_base = map_base, map_inset = map_inset
   )
 
   if (!is.null(data_outline)) {
@@ -98,7 +100,7 @@ boundaries <- function(mapping,
         data = data_outline, mapping = ggplot2::aes(),
         stat = stat, position = position,
         show.legend = show.legend, inherit.aes = inherit.aes, params = params_outline,
-        inset = inset, inset_copy = inset_copy, inset_clip = FALSE
+        inset = inset, map_base = map_base, map_inset = map_inset
       )
     )
   }

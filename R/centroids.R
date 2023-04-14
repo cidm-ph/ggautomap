@@ -30,8 +30,8 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
                            ...,
                            feature_type = NA,
                            inset = NULL,
-                           inset_copy = TRUE,
-                           inset_clip = TRUE,
+                           map_base = "clip",
+                           map_inset = "auto",
                            na.rm = TRUE,
                            show.legend = "point",
                            inherit.aes = TRUE) {
@@ -45,7 +45,7 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
     data = data, mapping = mapping,
     stat = stat, position = position,
     show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, inset_copy = inset_copy, inset_clip = inset_clip
+    inset = inset, map_base = map_base, map_inset = map_inset
   )
 }
 

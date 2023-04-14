@@ -16,8 +16,8 @@ geom_geoscatter(
   feature_type = NA,
   sample_type = c("random", "regular", "hexagonal"),
   inset = NULL,
-  inset_copy = TRUE,
-  inset_clip = TRUE,
+  map_base = "clip",
+  map_inset = "auto",
   na.rm = TRUE,
   show.legend = "point",
   inherit.aes = TRUE
@@ -49,11 +49,15 @@ a small margin close to the boundaries.}
 
 \item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.}
 
-\item{inset_copy}{Draw both the base layer and the inset layer using the same
-configuration. Only relevant when \code{inset} is specified.}
+\item{map_base}{Controls the layer with the base map. Possible values are
+\code{"normal"} to create a layer as though the inset were not specified,
+\code{"clip"} to create a layer with the inset viewport cut out, and
+\code{"none"} to prevent the insertion of a layer for the base map.}
 
-\item{inset_clip}{Clip away the part of the base layer corresponding to the
-inset frame. Only relevant when \code{inset} is specified.}
+\item{map_inset}{Controls the layer with the inset map. Possible values are
+\code{"auto"} to choose the behaviour based on whether \code{inset} is specified,
+\code{"normal"} to create a layer with the viewport cut out and transformed, and
+\code{"none"} to prevent the insertion og a layer for the viewport map.}
 }
 \value{
 A ggplot layer.

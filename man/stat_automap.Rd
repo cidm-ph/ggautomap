@@ -19,7 +19,7 @@ stat_automap(
 )
 }
 \arguments{
-\item{mapping, data, stat, geom, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}}.}
+\item{mapping, data, geom, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}}.}
 
 \item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
@@ -29,9 +29,9 @@ registered types. If \code{NA}, the type is guessed based on the values in
 A plot layer
 }
 \description{
-Use cartographer to attach a spatial column to the data based on place names
-in another column. The result can then be used by \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}} or
-\code{\link[ggmapinset:geom_sf_inset]{ggmapinset::geom_sf_inset()}}.
+Use \code{\link{cartographer}} to attach a spatial column to the data based
+on place names in another column. The result can then be used by
+\code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}} or \code{\link[ggmapinset:geom_sf_inset]{ggmapinset::geom_sf_inset()}}.
 }
 \section{Computed variables}{
 

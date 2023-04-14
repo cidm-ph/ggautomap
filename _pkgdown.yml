@@ -6,6 +6,7 @@ reference:
 - title: ggplot2 extensions
   contents:
   - starts_with("geom_")
+  - starts_with("stat_")
   - position_circle_repel
   - coord_sf_zoom
 - title: map helpers

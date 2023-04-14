@@ -28,14 +28,14 @@
 #'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_choropleth() +
-#'   scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
+#'   scale_fill_steps(low = "#e6f9ff", high = "#00394d")
 geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
                             stat = "choropleth", position = "identity",
                             ...,
                             feature_type = NA,
                             inset = NULL,
-                            inset_copy = TRUE,
-                            inset_clip = FALSE,
+                            map_base = "normal",
+                            map_inset = "auto",
                             na.rm = TRUE,
                             show.legend = NA,
                             inherit.aes = TRUE) {
@@ -52,7 +52,7 @@ geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
     data = data, mapping = mapping,
     stat = stat, position = position,
     show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, inset_copy = inset_copy, inset_clip = inset_clip
+    inset = inset, map_base = map_base, map_inset = map_inset
   )
 }
 
