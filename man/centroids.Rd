@@ -2,7 +2,7 @@
 % Please edit documentation in R/centroids.R
 \name{geom_centroids}
 \alias{geom_centroids}
-\title{Geographic centroid of administrative areas}
+\title{Geographic centroid of locations}
 \usage{
 geom_centroids(
   mapping = ggplot2::aes(),

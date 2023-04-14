@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat_automap_coords.R
 \name{stat_automap_coords}
 \alias{stat_automap_coords}
-\title{Attach spatial data with cartographer and reduce to coordinates}
+\title{Attach coordinates with 'cartographer'}
 \usage{
 stat_automap_coords(
   mapping = NULL,
@@ -13,6 +13,7 @@ stat_automap_coords(
   feature_type = NA,
   na.rm = TRUE,
   fun.geometry = NULL,
+  crs_working = NULL,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -24,11 +25,14 @@ stat_automap_coords(
 registered types. If \code{NA}, the type is guessed based on the values in
 \code{feature_names}.}
 
-\item{fun.geometry}{A function that takes a \code{sfc} object and returns a \code{sfc_POINT} with the
-same length as the input. If \code{NULL}, \code{function(x) sf::st_point_on_surface(sf::st_zm(x))}
-will be used. Note that the function may warn about the incorrectness of
-the result if the data is not projected, but you can ignore this except
-when you really care about the exact locations.}
+\item{fun.geometry}{Function to transform the geometry into one point per row.
+See \code{\link[ggplot2:stat_sf_coordinates]{stat_sf_coordinates()}}; the difference
+is that the spatial data are first transformed to \code{crs_working} to
+reduce the risk of projection-related distortions.}
+
+\item{crs_working}{Coordinate reference system where \code{fun.geometry} is
+applied. If not provided, \code{\link[=crs_eqc]{crs_eqc()}} is used with a midpoint based on the
+map data.}
 }
 \value{
 A plot layer
@@ -44,6 +48,7 @@ The result can then be used by \code{\link[ggplot2:ggsf]{geom_sf()}} or
 \section{Computed variables}{
 
 \describe{
+\item{geometry}{\code{sf} geometry column containing the points}
 \item{x}{X dimension of the simple feature}
 \item{y}{Y dimension of the simple feature}
 }

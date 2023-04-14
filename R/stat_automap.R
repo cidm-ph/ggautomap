@@ -1,4 +1,4 @@
-#' Attach spatial data with cartographer
+#' Attach spatial data with 'cartographer'
 #'
 #' Use [`cartographer`][cartographer] to attach a spatial column to the data based
 #' on place names in another column. The result can then be used by

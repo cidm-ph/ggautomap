@@ -5,7 +5,7 @@
 \alias{stat_automap}
 \alias{StatAutomap}
 \alias{StatAutomapCoords}
-\title{Attach spatial data with cartographer}
+\title{Attach spatial data with 'cartographer'}
 \usage{
 stat_automap(
   mapping = NULL,

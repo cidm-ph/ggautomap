@@ -1,4 +1,4 @@
-#' Attach spatial data with cartographer and reduce to coordinates
+#' Attach coordinates with 'cartographer'
 #'
 #' Use [`cartographer`][cartographer] to attach a spatial column to the data based
 #' on place names in another column. The spatial data is then reduced to
@@ -9,13 +9,20 @@
 #'
 #' @section Computed variables:
 #' \describe{
+#'   \item{geometry}{\code{sf} geometry column containing the points}
 #'   \item{x}{X dimension of the simple feature}
 #'   \item{y}{Y dimension of the simple feature}
 #' }
 #'
 #' @param mapping,data,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::stat_sf_coordinates()].
 #' @inheritParams cartographer::resolve_feature_type
-#' @inheritParams ggplot2::stat_sf_coordinates
+#' @param fun.geometry Function to transform the geometry into one point per row.
+#'   See [`stat_sf_coordinates()`][ggplot2::stat_sf_coordinates]; the difference
+#'   is that the spatial data are first transformed to \code{crs_working} to
+#'   reduce the risk of projection-related distortions.
+#' @param crs_working Coordinate reference system where \code{fun.geometry} is
+#'   applied. If not provided, [crs_eqc()] is used with a midpoint based on the
+#'   map data.
 #'
 #' @export
 #' @returns A plot layer
@@ -35,6 +42,7 @@ stat_automap_coords <- function(mapping = NULL, data = NULL,
                                 feature_type = NA,
                                 na.rm = TRUE,
                                 fun.geometry = NULL,
+                                crs_working = NULL,
                                 show.legend = NA,
                                 inherit.aes = TRUE) {
   ggplot2::layer_sf(
@@ -49,6 +57,7 @@ stat_automap_coords <- function(mapping = NULL, data = NULL,
       feature_type = feature_type,
       na.rm = na.rm,
       fun.geometry = fun.geometry,
+      crs_working = crs_working,
       ...
     )
   )
@@ -77,11 +86,24 @@ StatAutomapCoords <- ggplot2::ggproto("StatAutomapCoords", ggplot2::StatSfCoordi
     params
   },
 
-  compute_group = function(data, scales, coord, feature_type, ...) {
+  compute_group = function(data, scales, coord, feature_type, fun.geometry = NULL,
+                           crs_working = NULL) {
+    if (is.null(crs_working)) crs_working <- crs_eqc_midpoint(feature_type)
+    if (is.null(fun.geometry)) {
+      # fun.geometry <- function(x) sf::st_point_on_surface(sf::st_zm(x))
+      fun.geometry <- sf::st_centroid
+    }
+
     geoms <- cartographer::map_sfc(data$location, feature_type)
     crs_data <- sf::st_crs(cartographer::map_sf(feature_type))
     data$geometry <- sf::st_sfc(geoms, crs = crs_data)
+    data$geometry <- sf::st_transform(fun.geometry(data$geometry), crs_data)
 
-    ggplot2::StatSfCoordinates$compute_group(sf::st_as_sf(data), scales, coord, ...)
+    # fun_transform <- function(geom) {
+    #   sf::st_transform(fun.geometry(geom), crs_data)
+    # }
+
+    ggplot2::StatSfCoordinates$compute_group(data, scales, coord,
+                                             fun.geometry = function(x) x)
   }
 )

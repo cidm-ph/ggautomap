@@ -36,21 +36,22 @@ different scales, which is especially useful when combined with map insets.
 library(ggplot2)
 
 points <- data.frame(
-  x = c(1, 1, 1, 1:3),
-  y = c(2, 2, 2, 3:5),
+  x = c(rep(1, 10), 1:3),
+  y = c(rep(2, 10), 3:5),
   s = 0.05)
 ggplot(points, aes(x, y)) +
-  geom_point(position = position_circle_repel(0.05), size = 3)
+  geom_point(size = 3, colour = "red") +
+  geom_point(position = position_circle_repel(0.05), size = 3, alpha = 0.5)
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 set.seed(1234567)
 counties <- sample(nc$NAME[1:3], size = 10, replace = TRUE, prob = c(0.8, 0.1, 0.1))
-points <- data.frame(county = counties, s = ifelse(counties == nc$NAME[[1]], 5, 10))
+points <- data.frame(county = counties)
 points
 
 ggplot(points, aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_centroids(aes(scale = s), position = "circle_repel_sf", size = 3) +
+  geom_centroids(position = position_circle_repel_sf(scale = 0.05), size = 3) +
   coord_sf_zoom()
 }
 \keyword{datasets}

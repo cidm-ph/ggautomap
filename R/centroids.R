@@ -1,4 +1,4 @@
-#' Geographic centroid of administrative areas
+#' Geographic centroid of locations
 #'
 #' Assigns each point a longitude and latitude corresponding to the geographic
 #' centre of its administrative area. This means that all points in the same

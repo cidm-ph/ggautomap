@@ -72,7 +72,7 @@ ggplot(nc_type_example2, aes(location = county)) +
 ``` r
 ggplot(nc_type_example2, aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_centroids(aes(colour = type, scale = 6), size = 0.5)
+  geom_centroids(aes(colour = type), size = 0.5, position = position_circle_repel_sf(scale = 6))
 ```
 
 <img src="man/figures/README-example-basic-2.png" width="100%" />
