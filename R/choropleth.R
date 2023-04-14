@@ -1,8 +1,13 @@
 #' Associate regions with counts
 #'
-#' Instead of representing each row separately, aggregate them as counts that
-#' can be used to draw choropleths. Note that choropleths have a tendency to be
-#' misleading by emphasising geographically larger areas.
+#' Counts the number of occurrences of each location, then by default maps the
+#' count to the fill aesthetic. If your data has only one row per location and
+#' some other field that you'd like to map to aesthetics, use
+#' [`geom_sf()`][ggplot2::geom_sf] or [`geom_sf_inset()`][ggmapinset::geom_sf_inset]
+#' with `stat = "automap"` instead.
+#'
+#' Note that choropleths have a tendency to be misleading by emphasising
+#' geographically larger areas.
 #'
 #' @rdname choropleth
 #'
@@ -93,31 +98,11 @@ stat_choropleth <- function(mapping = NULL, data = NULL,
 #'
 #' @importFrom rlang .data
 #' @export
-StatChoropleth <- ggplot2::ggproto("StatChoropleth", ggplot2::StatSf,
-  required_aes = c("location"),
+StatChoropleth <- ggplot2::ggproto("StatChoropleth", StatAutomap,
   default_aes = ggplot2::aes(fill = ggplot2::after_stat(count)),
-
-  setup_data = function(data, params) {
-    data <- ggplot2::StatSf$setup_data(data, params)
-    data$location <- cartographer::resolve_feature_names(data$location,
-                                                         params$feature_type)
-    data
-  },
-
-  setup_params = function(data, params) {
-    params <- ggplot2::StatSf$setup_params(data, params)
-    if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
-                                                              data$location)
-    params
-  },
 
   compute_panel = function(data, scales, coord, feature_type) {
     counts <- dplyr::count(data, location = .data$location, name = "count")
-    geoms <- cartographer::map_sfc(counts$location, feature_type)
-    crs_data <- sf::st_crs(cartographer::map_sf(feature_type))
-    counts$geometry <- sf::st_sfc(geoms, crs = crs_data)
-
-    ggplot2::StatSf$compute_panel(sf::st_as_sf(counts), scales, coord)
+    StatAutomap$compute_panel(counts, scales, coord, feature_type)
   }
 )

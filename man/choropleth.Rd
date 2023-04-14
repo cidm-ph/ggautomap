@@ -53,9 +53,15 @@ inset frame. Only relevant when \code{inset} is specified.}
 A ggplot layer.
 }
 \description{
-Instead of representing each row separately, aggregate them as counts that
-can be used to draw choropleths. Note that choropleths have a tendency to be
-misleading by emphasising geographically larger areas.
+Counts the number of occurrences of each location, then by default maps the
+count to the fill aesthetic. If your data has only one row per location and
+some other field that you'd like to map to aesthetics, use
+\code{\link[ggplot2:ggsf]{geom_sf()}} or \code{\link[ggmapinset:geom_sf_inset]{geom_sf_inset()}}
+with \code{stat = "automap"} instead.
+}
+\details{
+Note that choropleths have a tendency to be misleading by emphasising
+geographically larger areas.
 }
 \section{Aesthetics}{
 
