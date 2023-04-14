@@ -15,8 +15,7 @@ geom_boundaries(
   map_base = "normal",
   map_inset = "auto",
   na.rm = FALSE,
-  outline_colour = "#666666",
-  outline_linewidth = NULL,
+  outline.params = list(colour = "#666666"),
   show.legend = NA,
   inherit.aes = FALSE
 )
@@ -41,6 +40,8 @@ registered types. If \code{NA}, the type is guessed based on the values in
 \code{"auto"} to choose the behaviour based on whether \code{inset} is specified,
 \code{"normal"} to create a layer with the viewport cut out and transformed, and
 \code{"none"} to prevent the insertion og a layer for the viewport map.}
+
+\item{outline.params}{A list to override the parameters for the outline of the map.}
 }
 \value{
 A ggplot layer.

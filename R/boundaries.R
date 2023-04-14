@@ -9,14 +9,14 @@
 #'
 #' @rdname boundaries
 #'
-#' @param outline_colour,outline_linewidth Override the aesthetics of the state outline.
-#'   If \code{NULL}, the aesthetic is inherited from \code{mapping}.
+#' @param outline.params A list to override the parameters for the outline of the map.
 #' @param data Ignored (this geometry always uses the registered geographic data).
 #' @param mapping,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
 #' @inheritParams cartographer::resolve_feature_type
 #' @inheritParams ggmapinset::geom_sf_inset
 #'
 #' @returns A ggplot layer.
+#' @importFrom utils modifyList
 #' @export
 #'
 #' @examples
@@ -32,8 +32,7 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
                             map_base = "normal",
                             map_inset = "auto",
                             na.rm = FALSE,
-                            outline_colour = "#666666",
-                            outline_linewidth = NULL,
+                            outline.params = list(colour = "#666666"),
                             show.legend = NA,
                             inherit.aes = FALSE) {
   if (!is.null(data)) {
@@ -50,8 +49,7 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
              stat = stat, position = position, ...,
              inset = inset, map_base = map_base, map_inset = map_inset,
              na.rm = na.rm,
-             outline_colour = outline_colour,
-             outline_linewidth = outline_linewidth,
+             outline.params = outline.params,
              show.legend = show.legend, inherit.aes = inherit.aes)
 }
 
@@ -65,8 +63,7 @@ boundaries <- function(mapping,
                        map_base = "normal",
                        map_inset = "auto",
                        na.rm,
-                       outline_colour,
-                       outline_linewidth,
+                       outline.params,
                        show.legend,
                        inherit.aes) {
 
@@ -78,15 +75,6 @@ boundaries <- function(mapping,
     params$fill <- NA
   }
 
-  params_outline <- params
-  # params_outline$shape <- NULL
-  if (!is.null(outline_colour)) { params_outline$colour <- outline_colour }
-  params_outline$fill <- NA
-  if (!is.null(outline_linewidth)) { params_outline$linewidth <- outline_linewidth }
-  params_outline$linetype <- 1
-  # params_outline$alpha <- NA
-  # params_outline$stroke <- 0.5
-
   layers <- ggmapinset::build_sf_inset_layers(
     data = data_inner, mapping = mapping,
     stat = stat, position = position,
@@ -95,6 +83,7 @@ boundaries <- function(mapping,
   )
 
   if (!is.null(data_outline)) {
+    params_outline <- modifyList(params, outline.params, keep.null = TRUE)
     layers <- c(layers,
       ggmapinset::build_sf_inset_layers(
         data = data_outline, mapping = ggplot2::aes(),
