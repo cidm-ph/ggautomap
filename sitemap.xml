@@ -51,4 +51,10 @@
   <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/reexports.html</loc>
   </url>
+  <url>
+    <loc>https://cidm-ph.github.io/ggautomap/reference/stat_automap.html</loc>
+  </url>
+  <url>
+    <loc>https://cidm-ph.github.io/ggautomap/reference/stat_automap_coords.html</loc>
+  </url>
 </urlset>

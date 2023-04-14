@@ -59,10 +59,10 @@ geometry dataset and add inset support.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  feature_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  inset <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  inset_copy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  map_base <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  map_inset <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  outline_colour <span class="op">=</span> <span class="st">"#666666"</span>,</span>
-<span>  outline_linewidth <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outline.params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"#666666"</span><span class="op">)</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -88,14 +88,22 @@ registered types. If <code>NA</code>, the type is guessed based on the values in
 <dd><p>Inset configuration; see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html" class="external-link">configure_inset()</a></code>.</p></dd>
 
 
-<dt>inset_copy</dt>
-<dd><p>Draw both the base layer and the inset layer using the same
-configuration. Only relevant when <code>inset</code> is specified.</p></dd>
+<dt>map_base</dt>
+<dd><p>Controls the layer with the base map. Possible values are
+<code>"normal"</code> to create a layer as though the inset were not specified,
+<code>"clip"</code> to create a layer with the inset viewport cut out, and
+<code>"none"</code> to prevent the insertion of a layer for the base map.</p></dd>
 
 
-<dt>outline_colour, outline_linewidth</dt>
-<dd><p>Override the aesthetics of the state outline.
-If <code>NULL</code>, the aesthetic is inherited from <code>mapping</code>.</p></dd>
+<dt>map_inset</dt>
+<dd><p>Controls the layer with the inset map. Possible values are
+<code>"auto"</code> to choose the behaviour based on whether <code>inset</code> is specified,
+<code>"normal"</code> to create a layer with the viewport cut out and transformed, and
+<code>"none"</code> to prevent the insertion og a layer for the viewport map.</p></dd>
+
+
+<dt>outline.params</dt>
+<dd><p>A list to override the parameters for the outline of the map.</p></dd>
 
 </dl></div>
     <div class="section level2">
