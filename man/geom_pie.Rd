@@ -47,7 +47,7 @@ The \code{location} aesthetic is required.
 \examples{
 library(ggplot2)
 
-cartographer::nc_type_example[1:49,] |>
+cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_pie(aes(fill = type), pie_radius = 0.1)

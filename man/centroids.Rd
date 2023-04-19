@@ -57,8 +57,8 @@ The \code{location} aesthetic is required.
 \examples{
 library(ggplot2)
 
-cartographer::nc_type_example[1:49,] |>
+cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_centroids(aes(colour = type, scale = 6), size = 0.5)
+  geom_centroids(aes(colour = type), scale = 6, size = 0.5)
 }
