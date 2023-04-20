@@ -39,7 +39,7 @@ geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
                             na.rm = TRUE,
                             show.legend = "point",
                             inherit.aes = TRUE) {
-  sample_type <- match.arg(sample_type)
+  sample_type <- rlang::arg_match(sample_type)
 
   params <- rlang::list2(
     feature_type = feature_type,
@@ -76,10 +76,10 @@ stat_geoscatter <- function(mapping = NULL, data = NULL,
                             geom = "sf", position = "identity",
                             ...,
                             feature_type = NA,
-                            sample_type = c("random", "regular", "hexagonal"),
+                            sample_type = "random",
                             show.legend = NA,
                             inherit.aes = TRUE) {
-  sample_type <- match.arg(sample_type)
+  sample_type <- rlang::arg_match0(sample_type, c("random", "regular", "hexagonal"))
 
   params <- rlang::list2(
     feature_type = feature_type,
