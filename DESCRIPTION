@@ -23,7 +23,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Remotes: github::cidm-ph/ggmapinset,
-    github::cidm-ph/cartographer
+    github::cidm-ph/cartographer,
+    github::cidm-ph/nswgeo
 Depends: 
     R (>= 3.6),
 Imports: 
@@ -55,3 +56,8 @@ Collate:
 URL: https://github.com/cidm-ph/ggautomap,
     https://cidm-ph.github.io/ggautomap/
 BugReports: https://github.com/cidm-ph/ggautomap/issues
+Suggests: 
+    knitr,
+    nswgeo,
+    rmarkdown
+VignetteBuilder: knitr
