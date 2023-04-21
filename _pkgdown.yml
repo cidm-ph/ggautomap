@@ -7,8 +7,8 @@ reference:
   contents:
   - starts_with("geom_")
   - starts_with("stat_")
-  - position_circle_repel
-  - coord_sf_zoom
+  - starts_with("position_")"
+  - starts_with("coord_")
 - title: map helpers
   contents:
   - configure_inset

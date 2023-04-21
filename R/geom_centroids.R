@@ -4,7 +4,7 @@
 #' centre of its administrative area. This means that all points in the same
 #' area will overlap. The default \code{position} uses [position_circle_repel()]
 #' to repel the points outwards with an amount controllable with its
-#' \code{density} parameter.
+#' \code{scale} parameter.
 #'
 #' @rdname centroids
 #'
@@ -13,6 +13,7 @@
 #' \code{geom_centroids()} understands the same aesthetics as [ggplot2::geom_point()].
 #'
 #' @inheritParams ggmapinset::geom_sf_inset
+#' @param mapping,data,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::stat_sf_coordinates()].
 #' @inheritParams stat_automap_coords
 #'
 #' @returns A ggplot layer.
@@ -28,8 +29,9 @@
 geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
                            stat = "automap_coords", position = "circle_repel_sf",
                            ...,
+                           fun.geometry = NULL,
                            feature_type = NA,
-                           inset = NULL,
+                           inset = NA,
                            map_base = "clip",
                            map_inset = "auto",
                            na.rm = TRUE,
@@ -38,6 +40,7 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
   params <- rlang::list2(
     feature_type = feature_type,
     na.rm = na.rm,
+    fun.geometry = fun.geometry,
     ...
   )
 

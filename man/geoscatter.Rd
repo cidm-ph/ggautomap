@@ -15,7 +15,7 @@ geom_geoscatter(
   ...,
   feature_type = NA,
   sample_type = c("random", "regular", "hexagonal"),
-  inset = NULL,
+  inset = NA,
   map_base = "clip",
   map_inset = "auto",
   na.rm = TRUE,
@@ -26,11 +26,11 @@ geom_geoscatter(
 stat_geoscatter(
   mapping = NULL,
   data = NULL,
-  geom = "sf",
+  geom = "sf_inset",
   position = "identity",
   ...,
   feature_type = NA,
-  sample_type = c("random", "regular", "hexagonal"),
+  sample_type = "random",
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -47,7 +47,8 @@ registered types. If \code{NA}, the type is guessed based on the values in
 \code{"regular"} and \code{"hexagonal"} will evenly space points, leaving
 a small margin close to the boundaries.}
 
-\item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.}
+\item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.
+If \code{NA} (the default), this is inherited from the coord (see \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}).}
 
 \item{map_base}{Controls the layer with the base map. Possible values are
 \code{"normal"} to create a layer as though the inset were not specified,
@@ -57,7 +58,7 @@ a small margin close to the boundaries.}
 \item{map_inset}{Controls the layer with the inset map. Possible values are
 \code{"auto"} to choose the behaviour based on whether \code{inset} is specified,
 \code{"normal"} to create a layer with the viewport cut out and transformed, and
-\code{"none"} to prevent the insertion og a layer for the viewport map.}
+\code{"none"} to prevent the insertion of a layer for the viewport map.}
 }
 \value{
 A ggplot layer.

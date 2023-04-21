@@ -33,7 +33,7 @@ geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
                             ...,
                             feature_type = NA,
                             sample_type = c("random", "regular", "hexagonal"),
-                            inset = NULL,
+                            inset = NA,
                             map_base = "clip",
                             map_inset = "auto",
                             na.rm = TRUE,
@@ -73,7 +73,7 @@ geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
 #'
 #' @export
 stat_geoscatter <- function(mapping = NULL, data = NULL,
-                            geom = "sf", position = "identity",
+                            geom = "sf_inset", position = "identity",
                             ...,
                             feature_type = NA,
                             sample_type = "random",
@@ -81,13 +81,7 @@ stat_geoscatter <- function(mapping = NULL, data = NULL,
                             inherit.aes = TRUE) {
   sample_type <- rlang::arg_match0(sample_type, c("random", "regular", "hexagonal"))
 
-  params <- rlang::list2(
-    feature_type = feature_type,
-    sample_type = sample_type,
-    ...
-  )
-
-  ggplot2::layer(
+  ggplot2::layer_sf(
     data = data,
     mapping = mapping,
     stat = StatGeoscatter,
@@ -95,7 +89,11 @@ stat_geoscatter <- function(mapping = NULL, data = NULL,
     position = position,
     show.legend = show.legend,
     inherit.aes = inherit.aes,
-    params = params,
+    params = rlang::list2(
+      feature_type = feature_type,
+      sample_type = sample_type,
+      ...
+    )
   )
 }
 
@@ -105,25 +103,25 @@ stat_geoscatter <- function(mapping = NULL, data = NULL,
 #'
 #' @importFrom rlang .data
 #' @export
-StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggplot2::Stat,
+StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggmapinset::StatSfInset,
   required_aes = c("location"),
 
   setup_data = function(data, params) {
-    data <- ggplot2::Stat$setup_data(data, params)
+    data <- ggmapinset::StatSfInset$setup_data(data, params)
     data$location <- cartographer::resolve_feature_names(data$location,
                                                          params$feature_type)
     data
   },
 
   setup_params = function(data, params) {
-    params <- ggplot2::Stat$setup_params(data, params)
+    params <- ggmapinset::StatSfInset$setup_params(data, params)
     if (is.null(params[["feature_type"]])) params$feature_type <- NA
     params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
                                                               data$location)
     params
   },
 
-  compute_group = function(data, scales, feature_type, sample_type) {
+  compute_panel = function(data, scales, feature_type, sample_type) {
     data$ggautomap__row <- seq_len(nrow(data))
 
     coords <- dplyr::group_modify(dplyr::group_by(data, .data$location), function(dat, grp) {
@@ -146,7 +144,8 @@ StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggplot2::Stat,
       points <- sf::st_transform(points, crs = crs_orig)
       # FIXME: it's still possible for non-random modes to generate too few points
 
-      data.frame(ggautomap__row = dat$ggautomap__row, geometry = points)
+      dat$geometry <- points
+      dat
     })
     coords <- dplyr::ungroup(coords)
     coords <- dplyr::arrange(coords, .data$ggautomap__row)

@@ -5,6 +5,9 @@
 \alias{reexports}
 \alias{geom_inset_frame}
 \alias{geom_sf_inset}
+\alias{GeomSfInset}
+\alias{stat_sf_inset}
+\alias{StatSfInset}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,6 +15,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ggmapinset}{\code{\link[ggmapinset]{geom_inset_frame}}, \code{\link[ggmapinset]{geom_sf_inset}}}
+  \item{ggmapinset}{\code{\link[ggmapinset]{geom_inset_frame}}, \code{\link[ggmapinset]{geom_sf_inset}}, \code{\link[ggmapinset:geom_sf_inset]{GeomSfInset}}, \code{\link[ggmapinset:geom_sf_inset]{stat_sf_inset}}, \code{\link[ggmapinset:geom_sf_inset]{StatSfInset}}}
 }}
 

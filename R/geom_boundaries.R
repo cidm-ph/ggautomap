@@ -1,15 +1,14 @@
-#' Map state boundaries
+#' Map feature boundaries
 #'
-#' Small wrappers around [ggplot2::geom_sf()] that load the appropriate
-#' geometry dataset and add inset support.
-#'
+#' Retrieves the full map data from `{cartographer}` and plots the boundaries.
 #' As well as the chosen feature boundaries, the outline of the map is
-#' drawn separately, with the possibility to override its \code{colour} and
-#' \code{linewidth} aesthetics.
+#' drawn separately if one has been registered with the map data, with the
+#' possibility to override its aesthetics.
 #'
 #' @rdname boundaries
 #'
-#' @param outline.params A list to override the parameters for the outline of the map.
+#' @param outline.aes A list to override the aesthetics for the outline of the map.
+#'   This has no effect if the map wasn't registered with a separate outline.
 #' @param data Ignored (this geometry always uses the registered geographic data).
 #' @param mapping,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::geom_sf()].
 #' @inheritParams cartographer::resolve_feature_type
@@ -25,21 +24,21 @@
 #' ggplot() + geom_boundaries(feature_type = "sf.nc")
 geom_boundaries <- function(mapping = ggplot2::aes(),
                             data = NULL,
-                            stat = "sf", position = "identity",
+                            stat = "sf_inset", position = "identity",
                             ...,
                             feature_type = NULL,
-                            inset = NULL,
+                            inset = NA,
                             map_base = "normal",
                             map_inset = "auto",
                             na.rm = FALSE,
-                            outline.params = list(colour = "#666666"),
+                            outline.aes = list(colour = "#666666"),
                             show.legend = NA,
                             inherit.aes = FALSE) {
   if (!is.null(data)) {
     cli::cli_abort("{.fn geom_boundaries} provides its own {.arg data}")
   }
   if (is.null(feature_type) || is.na(feature_type)) {
-    cli::cli_abort(c("{.arg feature_type} must be specified",
+    cli::cli_abort(c("{.arg feature_type} must be specified for {.fn geom_boundaries}",
                      "i" = "Registered types: {cartographer::feature_types()}"))
   }
 
@@ -49,7 +48,7 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
              stat = stat, position = position, ...,
              inset = inset, map_base = map_base, map_inset = map_inset,
              na.rm = na.rm,
-             outline.params = outline.params,
+             outline.aes = outline.aes,
              show.legend = show.legend, inherit.aes = inherit.aes)
 }
 
@@ -59,11 +58,11 @@ boundaries <- function(mapping,
                        stat,
                        position,
                        ...,
-                       inset,
+                       inset = NA,
                        map_base = "normal",
                        map_inset = "auto",
                        na.rm,
-                       outline.params,
+                       outline.aes,
                        show.legend,
                        inherit.aes) {
 
@@ -83,7 +82,7 @@ boundaries <- function(mapping,
   )
 
   if (!is.null(data_outline)) {
-    params_outline <- modifyList(params, outline.params, keep.null = TRUE)
+    params_outline <- modifyList(params, outline.aes, keep.null = TRUE)
     layers <- c(layers,
       ggmapinset::build_sf_inset_layers(
         data = data_outline, mapping = ggplot2::aes(),

@@ -14,7 +14,7 @@ geom_choropleth(
   position = "identity",
   ...,
   feature_type = NA,
-  inset = NULL,
+  inset = NA,
   map_base = "normal",
   map_inset = "auto",
   na.rm = TRUE,
@@ -41,7 +41,8 @@ stat_choropleth(
 registered types. If \code{NA}, the type is guessed based on the values in
 \code{feature_names}.}
 
-\item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.}
+\item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.
+If \code{NA} (the default), this is inherited from the coord (see \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}).}
 
 \item{map_base}{Controls the layer with the base map. Possible values are
 \code{"normal"} to create a layer as though the inset were not specified,
@@ -51,7 +52,7 @@ registered types. If \code{NA}, the type is guessed based on the values in
 \item{map_inset}{Controls the layer with the inset map. Possible values are
 \code{"auto"} to choose the behaviour based on whether \code{inset} is specified,
 \code{"normal"} to create a layer with the viewport cut out and transformed, and
-\code{"none"} to prevent the insertion og a layer for the viewport map.}
+\code{"none"} to prevent the insertion of a layer for the viewport map.}
 }
 \value{
 A ggplot layer.

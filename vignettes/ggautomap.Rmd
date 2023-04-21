@@ -43,7 +43,7 @@ All of the summary geoms of `{ggautomap}` can then be used to draw your data.
 
 ## Scatter
 
-```{r example-scatter, fig.height = 3, fig.width = 7}
+```{r scatter, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
   ggplot(aes(location = lga)) +
   geom_boundaries(feature_type = "nswgeo.lga") +
@@ -60,19 +60,18 @@ automatically crops the map around your data points.
 ## Insets
 
 To show a zoomed in part of the map as an inset, you can configure an inset and
-provide it to each relevant geom. The geoms all support `{ggmapinset}`.
+provide it to each relevant geom. The geoms in this package are all inset-aware.
+See `{ggmapinset}` for details.
 
-```{r example-scatter-inset, fig.height = 3, fig.width = 7}
-inset_cfg <- configure_inset(centre = "Blacktown", radius = 40, units = "km",
-                             scale = 7, translation = c(400, -100))
-
+```{r inset, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
   ggplot(aes(location = lga)) +
-  geom_boundaries(feature_type = "nswgeo.lga", inset = inset_cfg) +
-  geom_geoscatter(aes(colour = type), sample_type = "random",
-                  size = 0.5, inset = inset_cfg) +
-  geom_inset_frame(inset = inset_cfg) +
-  coord_sf(datum = NA) +
+  geom_boundaries(feature_type = "nswgeo.lga") +
+  geom_geoscatter(aes(colour = type), sample_type = "random", size = 0.5) +
+  geom_inset_frame() +
+  coord_automap(feature_type = "nswgeo.lga", datum = NA, inset = configure_inset(
+    centre = "Blacktown", radius = 40, units = "km",
+    scale = 7, translation = c(400, -100))) +
   theme_minimal()
 ```
 
@@ -82,19 +81,19 @@ This next example uses `geom_centroids()` to place the points in a
 packed circle in the centre of each feature. It also shows how you can
 fine-tune the plot with the usual `{ggplot2}` functions.
 
-```{r example-pack, fig.height = 3, fig.width = 7}
-inset_cfg <- configure_inset(centre = "Western Sydney", radius = 35, units = "km",
-                             scale = 8, translation = c(450, -100))
-
+```{r packed, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
   filter(year >= 2021) %>%
   # set the scale of the packing differently for the inset
   mutate(scale_km = if_else(lhd == "Western Sydney", 4, 30)) %>%
   ggplot(aes(location = lhd)) +
-  geom_boundaries(feature_type = "nswgeo.lhd", inset = inset_cfg) +
-  geom_centroids(aes(colour = type, scale = scale_km), size = 1, inset = inset_cfg) +
-  geom_inset_frame(inset = inset_cfg) +
-  coord_sf(datum = NA) +
+  geom_boundaries(feature_type = "nswgeo.lhd") +
+  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 30), size = 1) +
+  # geom_centroids(aes(colour = type, scale = scale_km), size = 1) +
+  geom_inset_frame() +
+  coord_automap(datum = NA, inset = configure_inset(
+    centre = "Western Sydney", radius = 35, units = "km",
+    scale = 8, translation = c(450, -100))) +
   facet_wrap(vars(year)) +
   # use the centroids stat + a fixed nudge to place the text in the right area
   geom_text(
@@ -108,32 +107,59 @@ covid_cases_nsw %>%
   theme_minimal()
 ```
 
+
 ## Choropleths
 
-```{r example-inset, fig.height = 3, fig.width = 7}
-inset_cfg <- configure_inset(centre = "Western Sydney", radius = 60, units = "km",
-                             scale = 3.5, translation = c(350, 0))
+If your data has multiple rows for each location (such as our example dataset where
+the rows are disease cases) then you can use `geom_choropleth()` to aggregate these
+into counts.
 
+```{r choro-long, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
   ggplot(aes(location = lhd, group = NA)) +
-  geom_choropleth(inset = inset_cfg) +
+  geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
-                  outline_colour = "black", inset = inset_cfg) +
-  geom_inset_frame(inset = inset_cfg) +
-  coord_sf(datum = NA) +
+                  outline.aes = list(colour = NA)) +
+  geom_inset_frame() +
+  coord_automap(datum = NA, inset = configure_inset(
+    centre = "Western Sydney", radius = 60, units = "km",
+    scale = 3.5, translation = c(350, 0))) +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
-  labs(x = NULL, y = NULL, fill = NULL) +
   theme_minimal()
 ```
 
-## Pies and Australia
+On the other hand, if your dataset has only one row per location and there is an
+existing column that you'd like to map to the `fill` aesthetic, then instead use
+`geom_sf_inset(..., stat = "automap")`:
+
+```{r choro-wide, fig.height = 3, fig.width = 7}
+summarised_data <- data.frame(
+  lhd = c("Western Sydney", "Sydney", "Far West", "Mid North Coast", "South Western Sydney"),
+  cases = c(250, 80, 20, NA, 100)
+)
+
+summarised_data %>%
+  ggplot(aes(location = lhd, group = NA)) +
+  geom_sf_inset(aes(fill = cases), stat = "automap", colour = NA) +
+  geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
+                  outline.aes = list(colour = NA)) +
+  geom_inset_frame() +
+  coord_automap(datum = NA, inset = configure_inset(
+    centre = "Western Sydney", radius = 60, units = "km",
+    scale = 3.5, translation = c(350, 0))) +
+  scale_fill_gradient(low = "#e6f9ff", high = "#00394d", na.value = "grey90") +
+  theme_minimal()
+```
+
+
+## Pies charts
 
 The `"nswgeo.states"` map data includes the other states for national summaries.
 Both the abbreviated state names (e.g. `"NSW"`) and the full names (e.g.
 `"New South Wales"`) are supported in the `location` aesthetic.
 This example also shows `geom_pie()`, which aggregates points in each location.
 
-```{r example-national}
+```{r pies}
 national_data <- data.frame(state = sample(c("qld", "nsw", "vic", "sa", "act"),
                                            size = 1000, replace = TRUE,
                                            prob = c(0.2, 0.35, 0.3, 0.1, 0.05)),

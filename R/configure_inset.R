@@ -34,9 +34,11 @@ configure_inset <- function(centre = NULL, scale = NULL,
   if (is.character(centre)) {
     feature_type <- cartographer::resolve_feature_type(feature_type, centre)
     geom <- cartographer::map_sfc(centre, feature_type)
+    crs_orig <- sf::st_crs(geom)
+
     crs_working <- crs_eqc_midpoint(feature_type)
     geom <- sf::st_transform(geom, crs_working)
-    centre <- sf::st_centroid(geom)
+    centre <- sf::st_transform(sf::st_centroid(geom), crs_orig)
   }
 
   ggmapinset::configure_inset(
