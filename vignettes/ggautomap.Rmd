@@ -105,7 +105,7 @@ into counts.
 
 ```{r choro-long, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
-  ggplot(aes(location = lhd, group = NA)) +
+  ggplot(aes(location = lhd)) +
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
                   outline.aes = list(colour = NA)) +
@@ -128,7 +128,7 @@ summarised_data <- data.frame(
 )
 
 summarised_data %>%
-  ggplot(aes(location = lhd, group = NA)) +
+  ggplot(aes(location = lhd)) +
   geom_sf_inset(aes(fill = cases), stat = "automap", colour = NA) +
   geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
                   outline.aes = list(colour = NA)) +
@@ -137,6 +137,66 @@ summarised_data %>%
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   scale_fill_gradient(low = "#e6f9ff", high = "#00394d", na.value = "grey90") +
+  theme_minimal()
+```
+
+
+## Positioning text
+
+These examples give some different ways of placing text, accounting for possible insets.
+
+```{r text-inset, fig.height = 3, fig.width = 7, eval=F}
+covid_cases_nsw %>%
+  ggplot(aes(location = lhd)) +
+  geom_choropleth() +
+  geom_boundaries(feature_type = "nswgeo.lhd") +
+  geom_inset_frame() +
+  geom_sf_label_inset(aes(label = lhd), stat = "automap_coords", data = ~ slice_head(.x, by = lhd)) +
+  coord_automap(datum = NA, inset = configure_inset(
+    centre = "Western Sydney", radius = 60, units = "km",
+    scale = 3.5, translation = c(350, 0))) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal()
+```
+
+The repulsive labels from `{ggrepel}` can be used; they just require a bit of
+massaging since they don't natively understand the spatial data.
+
+```{r text-repel, fig.height = 3, fig.width = 7, eval=F}
+library(ggrepel)
+
+covid_cases_nsw %>%
+  ggplot(aes(location = lhd)) +
+  geom_choropleth() +
+  geom_boundaries(feature_type = "nswgeo.lhd") +
+  geom_inset_frame() +
+  geom_label_repel(aes(x = after_stat(x_inset),
+                       y = after_stat(y_inset),
+                       label = lhd),
+                   stat = "automap_coords",
+                   data = ~ slice_head(.x, by = lhd)) +
+  coord_automap(datum = NA, inset = configure_inset(
+    centre = "Western Sydney", radius = 60, units = "km",
+    scale = 3.5, translation = c(350, 0))) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal()
+
+covid_cases_nsw %>%
+  ggplot(aes(location = lhd)) +
+  geom_choropleth() +
+  geom_boundaries(feature_type = "nswgeo.lhd") +
+  geom_inset_frame() +
+  geom_label_repel(aes(x = after_stat(x_inset),
+                       y = after_stat(y_inset),
+                       geometry = geometry,
+                       label = lhd_name),
+                   stat = "sf_coordinates_inset",
+                   data = cartographer::map_sf("nswgeo.lhd"),
+                   inherit.aes = FALSE) +
+  coord_automap(datum = NA, inset = configure_inset(
+    centre = "Western Sydney", radius = 60, units = "km",
+    scale = 3.5, translation = c(350, 0))) +
+  labs(x = NULL, y = NULL) +
   theme_minimal()
 ```
 

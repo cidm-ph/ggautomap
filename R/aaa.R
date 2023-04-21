@@ -22,3 +22,15 @@ ggmapinset::stat_sf_inset
 #' @importFrom ggmapinset StatSfInset
 #' @export
 ggmapinset::StatSfInset
+
+#' @importFrom ggmapinset StatSfCoordinatesInset
+#' @export
+ggmapinset::StatSfCoordinatesInset
+
+#' @importFrom ggmapinset geom_sf_text_inset
+#' @export
+ggmapinset::geom_sf_text_inset
+
+#' @importFrom ggmapinset geom_sf_label_inset
+#' @export
+ggmapinset::geom_sf_label_inset

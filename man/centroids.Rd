@@ -23,10 +23,11 @@ geom_centroids(
 \arguments{
 \item{mapping, data, stat, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:stat_sf_coordinates]{ggplot2::stat_sf_coordinates()}}.}
 
-\item{fun.geometry}{Function to transform the geometry into one point per row.
-See \code{\link[ggplot2:stat_sf_coordinates]{stat_sf_coordinates()}}; the difference
-is that the spatial data are first transformed to \code{crs_working} to
-reduce the risk of projection-related distortions.}
+\item{fun.geometry}{A function that takes a \code{sfc} object and returns a \code{sfc_POINT} with the
+same length as the input. If \code{NULL}, \code{function(x) sf::st_point_on_surface(sf::st_zm(x))}
+will be used. Note that the function may warn about the incorrectness of
+the result if the data is not projected, but you can ignore this except
+when you really care about the exact locations.}
 
 \item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in

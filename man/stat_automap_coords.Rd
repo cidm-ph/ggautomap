@@ -7,13 +7,13 @@
 stat_automap_coords(
   mapping = NULL,
   data = NULL,
-  geom = "sf",
+  geom = "sf_inset",
   position = "identity",
   ...,
   feature_type = NA,
   na.rm = TRUE,
+  inset = NA,
   fun.geometry = NULL,
-  crs_working = NULL,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -25,14 +25,14 @@ stat_automap_coords(
 registered types. If \code{NA}, the type is guessed based on the values in
 \code{feature_names}.}
 
-\item{fun.geometry}{Function to transform the geometry into one point per row.
-See \code{\link[ggplot2:stat_sf_coordinates]{stat_sf_coordinates()}}; the difference
-is that the spatial data are first transformed to \code{crs_working} to
-reduce the risk of projection-related distortions.}
+\item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.
+If \code{NA} (the default), this is inherited from the coord (see \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}).}
 
-\item{crs_working}{Coordinate reference system where \code{fun.geometry} is
-applied. If not provided, \code{\link[=crs_eqc]{crs_eqc()}} is used with a midpoint based on the
-map data.}
+\item{fun.geometry}{A function that takes a \code{sfc} object and returns a \code{sfc_POINT} with the
+same length as the input. If \code{NULL}, \code{function(x) sf::st_point_on_surface(sf::st_zm(x))}
+will be used. Note that the function may warn about the incorrectness of
+the result if the data is not projected, but you can ignore this except
+when you really care about the exact locations.}
 }
 \value{
 A plot layer
@@ -41,16 +41,17 @@ A plot layer
 Use \code{\link{cartographer}} to attach a spatial column to the data based
 on place names in another column. The spatial data is then reduced to
 coordinates in the same way as \code{\link[ggplot2:stat_sf_coordinates]{stat_sf_coordinates()}}.
-The result can then be used by \code{\link[ggplot2:ggsf]{geom_sf()}} or
-\code{\link[ggmapinset:geom_sf_inset]{geom_sf_inset()}} or any geom that needs \code{x} and
-\code{y} aesthetics.
 }
 \section{Computed variables}{
 
 \describe{
-\item{geometry}{\code{sf} geometry column containing the points}
+\item{geometry}{\code{sf} geometry column representing the points}
 \item{x}{X dimension of the simple feature}
 \item{y}{Y dimension of the simple feature}
+\item{x_inset}{X dimension of the simple feature after inset transformation}
+\item{y_inset}{Y dimension of the simple feature after inset transformation}
+\item{inside_inset}{logical indicating points inside the inset viewport}
+\item{inset_scale}{1 for points outside the inset, otherwise the configured inset scale parameter}
 }
 }
 
@@ -64,4 +65,7 @@ events <- data.frame(
 ggplot(events, aes(location = county)) +
   geom_sf(aes(fill = proportion_A), stat = "automap") +
   geom_label(aes(label = county), stat = "automap_coords")
+}
+\seealso{
+\code{\link[ggmapinset:stat_sf_coordinates_inset]{ggmapinset::stat_sf_coordinates_inset()}}
 }
