@@ -34,14 +34,14 @@ Let’s use the example dataset from `{cartographer}`:
 ``` r
 library(cartographer)
 
-head(nc_type_example)
-#>    county type
-#> 1  BERTIE    B
-#> 2  BERTIE    A
-#> 3  BERTIE    A
-#> 4 PAMLICO    B
-#> 5  WARREN    B
-#> 6 PAMLICO    B
+head(nc_type_example_2)
+#>      county type
+#> 1    MARTIN    A
+#> 2  ALAMANCE    B
+#> 3    BERTIE    A
+#> 4   CHATHAM    B
+#> 5   CHATHAM    B
+#> 6 HENDERSON    B
 ```
 
 A possible workflow is to use `cartographer::add_geometry()` to convert
@@ -60,9 +60,7 @@ geoms will usually be able to guess the correct value.
 library(ggplot2)
 library(ggautomap)
 
-nc_type_example2 <- cartographer::nc_type_example[1:49,]
-
-ggplot(nc_type_example2, aes(location = county)) +
+ggplot(nc_type_example_2, aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_geoscatter(aes(colour = type), size = 0.5)
 ```
@@ -70,26 +68,10 @@ ggplot(nc_type_example2, aes(location = county)) +
 <img src="man/figures/README-example-basic-1.png" width="100%" />
 
 ``` r
-ggplot(nc_type_example2, aes(location = county)) +
-  geom_boundaries(feature_type = "sf.nc") +
-  geom_centroids(aes(colour = type), size = 0.5, position = position_circle_repel_sf(scale = 6))
-```
-
-<img src="man/figures/README-example-basic-2.png" width="100%" />
-
-``` r
-ggplot(nc_type_example2, aes(location = county)) +
+ggplot(nc_type_example_2, aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_choropleth() +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
 ```
 
-<img src="man/figures/README-example-basic-3.png" width="100%" />
-
-``` r
-ggplot(nc_type_example2, aes(location = county)) +
-  geom_boundaries(feature_type = "sf.nc") +
-  geom_pie(aes(fill = type), pie_radius = 0.1)
-```
-
-<img src="man/figures/README-example-basic-4.png" width="100%" />
+<img src="man/figures/README-example-basic-2.png" width="100%" />

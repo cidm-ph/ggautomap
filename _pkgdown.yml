@@ -7,7 +7,7 @@ reference:
   contents:
   - starts_with("geom_")
   - starts_with("stat_")
-  - starts_with("position_")"
+  - starts_with("position_")
   - starts_with("coord_")
 - title: map helpers
   contents:

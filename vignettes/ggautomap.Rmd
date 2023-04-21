@@ -145,7 +145,7 @@ summarised_data %>%
 
 These examples give some different ways of placing text, accounting for possible insets.
 
-```{r text-inset, fig.height = 3, fig.width = 7, eval=F}
+```{r text-inset, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
   ggplot(aes(location = lhd)) +
   geom_choropleth() +
@@ -162,7 +162,7 @@ covid_cases_nsw %>%
 The repulsive labels from `{ggrepel}` can be used; they just require a bit of
 massaging since they don't natively understand the spatial data.
 
-```{r text-repel, fig.height = 3, fig.width = 7, eval=F}
+```{r text-repel, fig.height = 3, fig.width = 7}
 library(ggrepel)
 
 covid_cases_nsw %>%
@@ -201,12 +201,10 @@ covid_cases_nsw %>%
 ```
 
 
-## Pies charts
+## Pie charts
 
-The `"nswgeo.states"` map data includes the other states for national summaries.
-Both the abbreviated state names (e.g. `"NSW"`) and the full names (e.g.
-`"New South Wales"`) are supported in the `location` aesthetic.
-This example also shows `geom_pie()`, which aggregates points in each location.
+This example also shows `geom_pie()`, which aggregates points in each location and
+makes primitive pie charts. This geom does not currently support insets.
 
 ```{r pies}
 national_data <- data.frame(state = sample(c("qld", "nsw", "vic", "sa", "act"),
