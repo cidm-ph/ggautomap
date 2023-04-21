@@ -74,23 +74,42 @@ PositionCircleRepel <- ggplot2::ggproto("PositionCircleRepel", ggplot2::Position
 #'
 #' @export
 PositionCircleRepelSf <- ggplot2::ggproto("PositionCircleRepelSf", PositionCircleRepel,
-  required_aes = c("geometry"),
+  required_aes = c("geometry", "x", "y"),
   scale = 10,
 
   compute_panel = function(self, data, params, scales) {
-    tmp <- sf::st_transform(data$geometry, crs_eqc())
-    tmp <- matrix(unlist(tmp), ncol = 2, byrow = TRUE)
-    scale <- if (is.null(data[["scale"]])) params$scale else data$scale
-    tmp <- circle_repel(data.frame(x = tmp[,1], y = tmp[,2], scale = scale))
-    points <- mapply(function(x,y) st_point(c(x,y)), tmp$x, tmp$y, SIMPLIFY = FALSE)
-    points <- sf::st_sfc(points, crs = crs_eqc())
-    data$geometry <- sf::st_transform(points, sf::st_crs(data$geometry))
-    tmp <- matrix(unlist(data$geometry), ncol = 2, byrow = TRUE)
-    data$x <- tmp[,1]
-    data$y <- tmp[,2]
+    # if the points are in the inset, we rescale them to compensate for the
+    # transformation
+    scale <- params$scale
+    if ("inset_scale" %in% colnames(data)) {
+      scale <- scale / data$inset_scale
+    }
+
+    crs_data <- sf::st_crs(data$geometry)
+    crs_working <- crs_eqc()
+
+    geometry <- coords_to_points(data$x, data$y, crs = crs_data)
+    geometry <- sf::st_transform(geometry, crs_working)
+    coordinates <- sf::st_coordinates(geometry)
+
+    tmp <- circle_repel(data.frame(x = coordinates[, "X"], y = coordinates[, "Y"],
+                                   scale = scale))
+
+    placed_pts <- coords_to_points(tmp$x, tmp$y, crs = crs_working)
+    placed_pts <- sf::st_transform(placed_pts, crs_data)
+    data$geometry <- placed_pts
+    coordinates <- sf::st_coordinates(placed_pts)
+
+    data$x <- coordinates[, "X"]
+    data$y <- coordinates[, "Y"]
     data
   }
 )
+
+coords_to_points <- function(x, y, crs) {
+  points <- sf::st_multipoint(matrix(c(x, y), ncol = 2))
+  sf::st_cast(sf::st_sfc(points, crs = crs), "POINT")
+}
 
 circle_repel <- function (data) {
   tmp <- dplyr::mutate(data, row = seq_len(nrow(data)))

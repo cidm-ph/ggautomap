@@ -67,7 +67,7 @@ See `{ggmapinset}` for details.
 covid_cases_nsw %>%
   ggplot(aes(location = lga)) +
   geom_boundaries(feature_type = "nswgeo.lga") +
-  geom_geoscatter(aes(colour = type), sample_type = "random", size = 0.5) +
+  geom_geoscatter(aes(colour = type), size = 0.5) +
   geom_inset_frame() +
   coord_automap(feature_type = "nswgeo.lga", datum = NA, inset = configure_inset(
     centre = "Blacktown", radius = 40, units = "km",
@@ -84,25 +84,14 @@ fine-tune the plot with the usual `{ggplot2}` functions.
 ```{r packed, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
   filter(year >= 2021) %>%
-  # set the scale of the packing differently for the inset
-  mutate(scale_km = if_else(lhd == "Western Sydney", 4, 30)) %>%
   ggplot(aes(location = lhd)) +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 30), size = 1) +
-  # geom_centroids(aes(colour = type, scale = scale_km), size = 1) +
   geom_inset_frame() +
   coord_automap(datum = NA, inset = configure_inset(
     centre = "Western Sydney", radius = 35, units = "km",
     scale = 8, translation = c(450, -100))) +
   facet_wrap(vars(year)) +
-  # use the centroids stat + a fixed nudge to place the text in the right area
-  geom_text(
-    aes(after_stat(x), after_stat(y), label = lhd),
-    stat = "centroids",
-    nudge_y = -1.2,
-    size = 3,
-    data = ~ slice_head(group_by(.x, lhd, year), n = 1)) +
-  scale_x_continuous(expand = expansion(add = c(NA, 2))) +
   labs(x = NULL, y = NULL) +
   theme_minimal()
 ```
