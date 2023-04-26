@@ -101,7 +101,7 @@ stat_choropleth <- function(mapping = NULL, data = NULL,
 StatChoropleth <- ggplot2::ggproto("StatChoropleth", StatAutomap,
   default_aes = ggplot2::aes(fill = ggplot2::after_stat(count)),
 
-  compute_panel = function(data, scales, coord, feature_type) {
+  compute_panel = function(data, scales, coord, feature_type = NA) {
     counts <- dplyr::count(data, location = .data$location, name = "count")
     StatAutomap$compute_panel(counts, scales, coord, feature_type)
   }

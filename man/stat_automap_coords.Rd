@@ -65,6 +65,7 @@ events <- data.frame(
 ggplot(events, aes(location = county)) +
   geom_sf(aes(fill = proportion_A), stat = "automap") +
   geom_label(aes(label = county), stat = "automap_coords")
+  coord_automap(feature_type = "sf.nc")
 }
 \seealso{
 \code{\link[ggmapinset:stat_sf_coordinates_inset]{ggmapinset::stat_sf_coordinates_inset()}}

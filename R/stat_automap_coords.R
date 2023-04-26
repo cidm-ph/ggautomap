@@ -32,6 +32,7 @@
 #' ggplot(events, aes(location = county)) +
 #'   geom_sf(aes(fill = proportion_A), stat = "automap") +
 #'   geom_label(aes(label = county), stat = "automap_coords")
+#'   coord_automap(feature_type = "sf.nc")
 stat_automap_coords <- function(mapping = NULL, data = NULL,
                                 geom = "sf_inset", position = "identity",
                                 ...,

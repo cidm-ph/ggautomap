@@ -14,7 +14,7 @@ geom_geoscatter(
   position = "identity",
   ...,
   feature_type = NA,
-  sample_type = c("random", "regular", "hexagonal"),
+  sample_type = "random",
   inset = NA,
   map_base = "clip",
   map_inset = "auto",
@@ -89,6 +89,7 @@ library(ggplot2)
 cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_geoscatter(aes(colour = type), size = 0.5)
+  geom_geoscatter(aes(colour = type), size = 0.5) +
+  coord_automap(feature_type = "sf.nc")
 }
 \keyword{datasets}

@@ -28,13 +28,13 @@
 #'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_choropleth() +
-#'   coord_automap_zoom()
+#'   coord_automap_zoom(feature_type = "sf.nc")
 #'
 #' # or just zoom in on specific locations regardless of the data:
 #' cartographer::nc_type_example_2 |>
 #'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
-#'   coord_automap_zoom(include = c("Rowan", "Polk"), include_data = FALSE)
+#'   coord_automap_zoom(include = c("Rowan", "Polk"), include_data = FALSE, feature_type = "sf.nc")
 coord_automap_zoom <- function(include = NULL, include_data = TRUE, feature_type = NA, ...) {
   structure(
     list(include = include, include_data = include_data,

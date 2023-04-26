@@ -59,7 +59,7 @@ stat_automap <- function(mapping = NULL, data = NULL,
 StatAutomap <- ggplot2::ggproto("StatAutomap", ggmapinset::StatSfInset,
   required_aes = c("location"),
 
-  compute_panel = function(data, scales, coord, feature_type) {
+  compute_panel = function(data, scales, coord, feature_type = NA) {
     feature_type <- get_feature_type(feature_type, coord, data$location)
     data$location <- cartographer::resolve_feature_names(data$location, feature_type)
 
