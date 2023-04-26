@@ -10,6 +10,12 @@
     <loc>https://cidm-ph.github.io/ggautomap/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://cidm-ph.github.io/ggautomap/articles/ggautomap.html</loc>
+  </url>
+  <url>
+    <loc>https://cidm-ph.github.io/ggautomap/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://cidm-ph.github.io/ggautomap/authors.html</loc>
   </url>
   <url>
@@ -26,6 +32,9 @@
   </url>
   <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/configure_inset.html</loc>
+  </url>
+  <url>
+    <loc>https://cidm-ph.github.io/ggautomap/reference/coord_automap.html</loc>
   </url>
   <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/coord_sf_zoom.html</loc>

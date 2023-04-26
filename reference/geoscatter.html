@@ -24,7 +24,10 @@ of the points."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item">
+      <ul class="navbar-nav me-auto"><li class="nav-item">
+  <a class="nav-link" href="../articles/ggautomap.html">Get started</a>
+</li>
+<li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -65,7 +68,7 @@ of the points.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  feature_type <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  sample_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"random"</span>, <span class="st">"regular"</span>, <span class="st">"hexagonal"</span><span class="op">)</span>,</span>
-<span>  inset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  inset <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  map_base <span class="op">=</span> <span class="st">"clip"</span>,</span>
 <span>  map_inset <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -76,11 +79,11 @@ of the points.</p>
 <span><span class="fu">stat_geoscatter</span><span class="op">(</span></span>
 <span>  mapping <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  geom <span class="op">=</span> <span class="st">"sf"</span>,</span>
+<span>  geom <span class="op">=</span> <span class="st">"sf_inset"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  feature_type <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  sample_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"random"</span>, <span class="st">"regular"</span>, <span class="st">"hexagonal"</span><span class="op">)</span>,</span>
+<span>  sample_type <span class="op">=</span> <span class="st">"random"</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -106,7 +109,8 @@ a small margin close to the boundaries.</p></dd>
 
 
 <dt>inset</dt>
-<dd><p>Inset configuration; see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html" class="external-link">configure_inset()</a></code>.</p></dd>
+<dd><p>Inset configuration; see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html" class="external-link">configure_inset()</a></code>.
+If <code>NA</code> (the default), this is inherited from the coord (see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html" class="external-link">coord_sf_inset()</a></code>).</p></dd>
 
 
 <dt>map_base</dt>
@@ -120,7 +124,7 @@ a small margin close to the boundaries.</p></dd>
 <dd><p>Controls the layer with the inset map. Possible values are
 <code>"auto"</code> to choose the behaviour based on whether <code>inset</code> is specified,
 <code>"normal"</code> to create a layer with the viewport cut out and transformed, and
-<code>"none"</code> to prevent the insertion og a layer for the viewport map.</p></dd>
+<code>"none"</code> to prevent the insertion of a layer for the viewport map.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -153,7 +157,7 @@ a small margin close to the boundaries.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">cartographer</span><span class="fu">::</span><span class="va"><a href="https://cidm-ph.github.io/cartographer/reference/nc_type_example.html" class="external-link">nc_type_example</a></span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">49</span>,<span class="op">]</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">cartographer</span><span class="fu">::</span><span class="va"><a href="https://cidm-ph.github.io/cartographer/reference/nc_type_example.html" class="external-link">nc_type_example_2</a></span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>location <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="boundaries.html">geom_boundaries</a></span><span class="op">(</span>feature_type <span class="op">=</span> <span class="st">"sf.nc"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu">geom_geoscatter</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
