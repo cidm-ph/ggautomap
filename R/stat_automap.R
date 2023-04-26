@@ -59,22 +59,10 @@ stat_automap <- function(mapping = NULL, data = NULL,
 StatAutomap <- ggplot2::ggproto("StatAutomap", ggmapinset::StatSfInset,
   required_aes = c("location"),
 
-  setup_data = function(data, params) {
-    data <- ggmapinset::StatSfInset$setup_data(data, params)
-    data$location <- cartographer::resolve_feature_names(data$location,
-                                                         params$feature_type)
-    data
-  },
-
-  setup_params = function(data, params) {
-    params <- ggmapinset::StatSfInset$setup_params(data, params)
-    if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
-                                                              data$location)
-    params
-  },
-
   compute_panel = function(data, scales, coord, feature_type) {
+    feature_type <- get_feature_type(feature_type, coord, data$location)
+    data$location <- cartographer::resolve_feature_names(data$location, feature_type)
+
     geoms <- cartographer::map_sfc(data$location, feature_type)
     crs_data <- sf::st_crs(cartographer::map_sf(feature_type))
     data$geometry <- sf::st_sfc(geoms, crs = crs_data)

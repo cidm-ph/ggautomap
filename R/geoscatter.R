@@ -106,22 +106,10 @@ stat_geoscatter <- function(mapping = NULL, data = NULL,
 StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggmapinset::StatSfInset,
   required_aes = c("location"),
 
-  setup_data = function(data, params) {
-    data <- ggmapinset::StatSfInset$setup_data(data, params)
-    data$location <- cartographer::resolve_feature_names(data$location,
-                                                         params$feature_type)
-    data
-  },
+  compute_panel = function(data, scales, coord, feature_type = NA, sample_type = "random") {
+    feature_type <- get_feature_type(feature_type, coord, data$location)
+    data$location <- cartographer::resolve_feature_names(data$location, feature_type)
 
-  setup_params = function(data, params) {
-    params <- ggmapinset::StatSfInset$setup_params(data, params)
-    if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
-                                                              data$location)
-    params
-  },
-
-  compute_panel = function(data, scales, feature_type, sample_type) {
     data$ggautomap__row <- seq_len(nrow(data))
 
     coords <- dplyr::group_modify(dplyr::group_by(data, .data$location), function(dat, grp) {

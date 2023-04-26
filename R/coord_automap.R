@@ -17,3 +17,14 @@ coord_automap <- function(feature_type = NA, inset = NULL, ...) {
     feature_type = feature_type
   )
 }
+
+get_feature_type <- function (feature_type, coord, feature_names) {
+  if (is.null(feature_type)) feture_type <- NA_character_
+  if (is.na(feature_type) && inherits(coord, "CoordAutomap")) {
+    feature_type <- coord$feature_type
+  }
+  if (is.na(feature_type)) {
+    rlang::warn("Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress")
+  }
+  cartographer::resolve_feature_type(feature_type, feature_names)
+}

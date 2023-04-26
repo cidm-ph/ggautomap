@@ -67,22 +67,9 @@ stat_automap_coords <- function(mapping = NULL, data = NULL,
 StatAutomapCoords <- ggplot2::ggproto("StatAutomapCoords", ggmapinset::StatSfCoordinatesInset,
   required_aes = c("location"),
 
-  setup_data = function(data, params) {
-    data <- ggmapinset::StatSfCoordinatesInset$setup_data(data, params)
-    data$location <- cartographer::resolve_feature_names(data$location,
-                                                         params$feature_type)
-    data
-  },
-
-  setup_params = function(data, params) {
-    params <- ggmapinset::StatSfCoordinatesInset$setup_params(data, params)
-    if (is.null(params[["feature_type"]])) params$feature_type <- NA
-    params$feature_type <- cartographer::resolve_feature_type(params$feature_type,
-                                                              data$location)
-    params
-  },
-
-  compute_group = function(data, scales, coord, feature_type, inset = NA, fun.geometry = NULL) {
+  compute_group = function(data, scales, coord, feature_type = NA, inset = NA, fun.geometry = NULL) {
+    feature_type <- get_feature_type(feature_type, coord, data$location)
+    data$location <- cartographer::resolve_feature_names(data$location, feature_type)
     data$geometry <- cartographer::map_sfc(data$location, feature_type)
 
     crs_working <- sf::NA_crs_
