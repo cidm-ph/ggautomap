@@ -116,13 +116,15 @@ data.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>location <span class="op">=</span> <span class="va">lga</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/boundaries.html">geom_boundaries</a></span><span class="op">(</span>feature_type <span class="op">=</span> <span class="st">"nswgeo.lga"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="../reference/geoscatter.html">geom_geoscatter</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="va">type</span><span class="op">)</span>, sample_type <span class="op">=</span> <span class="st">"random"</span>, size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="../reference/coord_sf_zoom.html">coord_sf_zoom</a></span><span class="op">(</span>datum <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/coord_automap_zoom.html">coord_automap_zoom</a></span><span class="op">(</span>datum <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Guessing `feature_type`; provide `feature_type` to coord_automap() to</span></span>
+<span><span class="co">#&gt; suppress</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/scatter-1.png" width="672"></p>
 <p>Points are drawn at random within the boundaries of their location.
-This example also uses <code><a href="../reference/coord_sf_zoom.html">coord_sf_zoom()</a></code> as a replacement for
-<code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">coord_sf()</a></code> that automatically crops the map around your
-data points.</p>
+This example also uses <code><a href="../reference/coord_automap_zoom.html">coord_automap_zoom()</a></code> as a
+replacement for <code><a href="../reference/coord_automap.html">coord_automap()</a></code> that automatically crops
+the map around your data points.</p>
 </div>
 <div class="section level2">
 <h2 id="insets">Insets<a class="anchor" aria-label="anchor" href="#insets"></a>
@@ -161,7 +163,23 @@ functions.</p>
 <span>    scale <span class="op">=</span> <span class="fl">8</span>, translation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">450</span>, <span class="op">-</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/packed-1.png" width="672"></p>
 </div>
 <div class="section level2">
@@ -181,7 +199,9 @@ dataset where the rows are disease cases) then you can use
 <span>    centre <span class="op">=</span> <span class="st">"Western Sydney"</span>, radius <span class="op">=</span> <span class="fl">60</span>, units <span class="op">=</span> <span class="st">"km"</span>,</span>
 <span>    scale <span class="op">=</span> <span class="fl">3.5</span>, translation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">350</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_steps.html" class="external-link">scale_fill_steps</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#e6f9ff"</span>, high <span class="op">=</span> <span class="st">"#00394d"</span>, n.breaks <span class="op">=</span> <span class="fl">5</span>, na.value <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/choro-long-1.png" width="672"></p>
 <p>On the other hand, if your dataset has only one row per location and
 there is an existing column that you’d like to map to the
@@ -203,7 +223,11 @@ there is an existing column that you’d like to map to the
 <span>    centre <span class="op">=</span> <span class="st">"Western Sydney"</span>, radius <span class="op">=</span> <span class="fl">60</span>, units <span class="op">=</span> <span class="st">"km"</span>,</span>
 <span>    scale <span class="op">=</span> <span class="fl">3.5</span>, translation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">350</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"#e6f9ff"</span>, high <span class="op">=</span> <span class="st">"#00394d"</span>, na.value <span class="op">=</span> <span class="st">"grey90"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Computation failed in `stat_automap()`</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_automap()`</span></span>
+<span><span class="co">#&gt; Caused by error in `compute_panel()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> argument "feature_type" is missing, with no default</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/choro-wide-1.png" width="672"></p>
 </div>
 <div class="section level2">
@@ -222,7 +246,12 @@ for possible insets.</p>
 <span>    centre <span class="op">=</span> <span class="st">"Western Sydney"</span>, radius <span class="op">=</span> <span class="fl">60</span>, units <span class="op">=</span> <span class="st">"km"</span>,</span>
 <span>    scale <span class="op">=</span> <span class="fl">3.5</span>, translation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">350</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/text-inset-1.png" width="672"></p>
 <p>The repulsive labels from <a href="https://github.com/slowkow/ggrepel" class="external-link">ggrepel</a> can be used; they
 just require a bit of massaging since they don’t natively understand the
@@ -244,7 +273,12 @@ spatial data.</p>
 <span>    centre <span class="op">=</span> <span class="st">"Western Sydney"</span>, radius <span class="op">=</span> <span class="fl">60</span>, units <span class="op">=</span> <span class="st">"km"</span>,</span>
 <span>    scale <span class="op">=</span> <span class="fl">3.5</span>, translation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">350</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/text-repel-1.png" width="672"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -264,7 +298,9 @@ spatial data.</p>
 <span>    centre <span class="op">=</span> <span class="st">"Western Sydney"</span>, radius <span class="op">=</span> <span class="fl">60</span>, units <span class="op">=</span> <span class="st">"km"</span>,</span>
 <span>    scale <span class="op">=</span> <span class="fl">3.5</span>, translation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">350</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span>
+<span><span class="co">#&gt; Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span></span></code></pre></div>
 <p><img src="ggautomap_files/figure-html/text-repel-2.png" width="672"></p>
 </div>
 <div class="section level2">
