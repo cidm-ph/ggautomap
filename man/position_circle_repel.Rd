@@ -48,6 +48,6 @@ cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 4), size = 0.2) +
-  coord_sf_zoom()
+  coord_automap_zoom()
 }
 \keyword{datasets}

@@ -22,5 +22,5 @@ default configuration if none is specifically provided to that layer. This
 coord also expands the axis limits to include the inset area.
 }
 \seealso{
-\code{\link[=geom_sf_inset]{geom_sf_inset()}}
+\code{\link[=coord_automap_zoom]{coord_automap_zoom()}}
 }

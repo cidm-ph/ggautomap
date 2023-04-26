@@ -46,7 +46,7 @@ Collate:
     'choropleth.R'
     'configure_inset.R'
     'coord_automap.R'
-    'coord_sf_zoom.R'
+    'coord_automap_zoom.R'
     'crs.R'
     'geom_boundaries.R'
     'geom_centroids.R'

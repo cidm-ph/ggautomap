@@ -9,7 +9,7 @@
 #' @param inset Inset configuration; see [configure_inset()].
 #' @param ... Arguments passed to [ggmapinset::coord_sf_inset()]
 #'
-#' @seealso [geom_sf_inset()]
+#' @seealso [coord_automap_zoom()]
 #' @export
 coord_automap <- function(feature_type = NA, inset = NULL, ...) {
   parent <- ggmapinset::coord_sf_inset(inset, ...)
