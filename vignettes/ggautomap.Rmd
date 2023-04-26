@@ -48,7 +48,7 @@ covid_cases_nsw %>%
   ggplot(aes(location = lga)) +
   geom_boundaries(feature_type = "nswgeo.lga") +
   geom_geoscatter(aes(colour = type), sample_type = "random", size = 0.5) +
-  coord_automap_zoom(datum = NA) +
+  coord_automap_zoom(datum = NA, feature_type = "nswgeo.lga") +
   theme_minimal()
 ```
 
@@ -83,12 +83,12 @@ fine-tune the plot with the usual `{ggplot2}` functions.
 
 ```{r packed, fig.height = 3, fig.width = 7}
 covid_cases_nsw %>%
-  filter(year >= 2021) %>%
+  dplyr::filter(year >= 2021) %>%
   ggplot(aes(location = lhd)) +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 30), size = 1) +
   geom_inset_frame() +
-  coord_automap(datum = NA, inset = configure_inset(
+  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 35, units = "km",
     scale = 8, translation = c(450, -100))) +
   facet_wrap(vars(year)) +
@@ -110,7 +110,7 @@ covid_cases_nsw %>%
   geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
                   outline.aes = list(colour = NA)) +
   geom_inset_frame() +
-  coord_automap(datum = NA, inset = configure_inset(
+  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
@@ -133,7 +133,7 @@ summarised_data %>%
   geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
                   outline.aes = list(colour = NA)) +
   geom_inset_frame() +
-  coord_automap(datum = NA, inset = configure_inset(
+  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   scale_fill_gradient(low = "#e6f9ff", high = "#00394d", na.value = "grey90") +
@@ -151,8 +151,9 @@ covid_cases_nsw %>%
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_inset_frame() +
-  geom_sf_label_inset(aes(label = lhd), stat = "automap_coords", data = ~ slice_head(.x, by = lhd)) +
-  coord_automap(datum = NA, inset = configure_inset(
+  geom_sf_label_inset(aes(label = lhd), stat = "automap_coords",
+                      data = ~ dplyr::slice_head(.x, by = lhd)) +
+  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   labs(x = NULL, y = NULL) +
@@ -165,6 +166,7 @@ massaging since they don't natively understand the spatial data.
 ```{r text-repel, fig.height = 3, fig.width = 7}
 library(ggrepel)
 
+# label all features that have data
 covid_cases_nsw %>%
   ggplot(aes(location = lhd)) +
   geom_choropleth() +
@@ -174,13 +176,14 @@ covid_cases_nsw %>%
                        y = after_stat(y_inset),
                        label = lhd),
                    stat = "automap_coords",
-                   data = ~ slice_head(.x, by = lhd)) +
-  coord_automap(datum = NA, inset = configure_inset(
+                   data = ~ dplyr::slice_head(.x, by = lhd)) +
+  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   labs(x = NULL, y = NULL) +
   theme_minimal()
 
+# label all features in the map regardless of data, hiding visually overlapping labels
 covid_cases_nsw %>%
   ggplot(aes(location = lhd)) +
   geom_choropleth() +
@@ -192,8 +195,9 @@ covid_cases_nsw %>%
                        label = lhd_name),
                    stat = "sf_coordinates_inset",
                    data = cartographer::map_sf("nswgeo.lhd"),
+                   max.overlaps = 5,
                    inherit.aes = FALSE) +
-  coord_automap(datum = NA, inset = configure_inset(
+  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   labs(x = NULL, y = NULL) +

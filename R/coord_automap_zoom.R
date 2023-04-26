@@ -76,9 +76,7 @@ ggplot_add.ggautomap_zoom_spec <- function(spec, plot, object_name) {
                      "i" = "alternatively, define the {.arg data} and the {.field location} aesthetic in the top level {.fn ggplot} call"))
   }
 
-  feature_type <- get_feature_type(NA_character_,
-                                   list(feature_type = spec$feature_type),
-                                   data_location)
+  feature_type <- get_feature_type(spec$feature_type, list(), data_location)
 
   include <- cartographer::resolve_feature_names(spec$include, feature_type)
   if (spec$include_data) {
