@@ -52,26 +52,24 @@ it.
 so you don’t need to do a lot of boilerplate to wrangle the data into
 the right form before handing it off to the plotting code.
 
-You can then use this data with the geoms to provide map summaries. For
-the map outline, you’ll need to specify `feature_type`, but the other
-geoms will usually be able to guess the correct value.
-
 ``` r
 library(ggplot2)
 library(ggautomap)
 
 ggplot(nc_type_example_2, aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_geoscatter(aes(colour = type), size = 0.5)
+  geom_geoscatter(aes(colour = type), size = 0.5) +
+  coord_automap(feature_type = "sf.nc")
 ```
 
 <img src="man/figures/README-example-basic-1.png" width="100%" />
 
 ``` r
 ggplot(nc_type_example_2, aes(location = county)) +
-  geom_boundaries(feature_type = "sf.nc") +
   geom_choropleth() +
-  scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white")
+  geom_boundaries(feature_type = "sf.nc") +
+  scale_fill_steps(low = "#e6f9ff", high = "#00394d", na.value = "white") +
+  coord_automap(feature_type = "sf.nc")
 ```
 
 <img src="man/figures/README-example-basic-2.png" width="100%" />
