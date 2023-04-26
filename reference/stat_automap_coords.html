@@ -146,14 +146,52 @@ when you really care about the exact locations.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">events</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>location <span class="op">=</span> <span class="va">county</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">proportion_A</span><span class="op">)</span>, stat <span class="op">=</span> <span class="st">"automap"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">county</span><span class="op">)</span>, stat <span class="op">=</span> <span class="st">"automap_coords"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Computation failed in `stat_automap()`</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> Caused by error in `compute_panel()`:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> argument "feature_type" is missing, with no default</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Guessing `feature_type`; provide `feature_type` to coord_automap() to suppress</span>
 <span class="r-plt img"><img src="stat_automap_coords-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>  <span class="fu"><a href="coord_automap.html">coord_automap</a></span><span class="op">(</span>feature_type <span class="op">=</span> <span class="st">"sf.nc"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;ggproto object: Class CoordAutomap, CoordSfInset, CoordSf, CoordCartesian, Coord, gg&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     aspect: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     backtransform_range: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     clip: on</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     crs: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     datum: crs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     default: FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     default_crs: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     determine_crs: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     distance: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     expand: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     feature_type: sf.nc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     fixup_graticule_labels: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     get_default_crs: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     inset: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     is_free: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     is_linear: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     label_axes: list</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     label_graticule: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     labels: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     limits: list</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     lims_method: cross</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     modify_scales: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ndiscr: 100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     params: list</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     range: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     record_bbox: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     render_axis_h: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     render_axis_v: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     render_bg: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     render_fg: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     setup_data: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     setup_layout: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     setup_panel_guides: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     setup_panel_params: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     setup_params: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     train_panel_guides: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     transform: function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     super:  &lt;ggproto object: Class CoordSfInset, CoordSf, CoordCartesian, Coord, gg&gt;</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
