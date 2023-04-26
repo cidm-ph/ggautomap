@@ -26,8 +26,8 @@
 #'
 #' cartographer::nc_type_example_2 |>
 #'   ggplot(aes(location = county)) +
-#'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_choropleth() +
+#'   geom_boundaries(feature_type = "sf.nc") +
 #'   scale_fill_steps(low = "#e6f9ff", high = "#00394d")
 geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
                             stat = "choropleth", position = "identity",

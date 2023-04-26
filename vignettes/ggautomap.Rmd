@@ -48,8 +48,9 @@ covid_cases_nsw %>%
   ggplot(aes(location = lga)) +
   geom_boundaries(feature_type = "nswgeo.lga") +
   geom_geoscatter(aes(colour = type), sample_type = "random", size = 0.5) +
-  coord_automap_zoom(datum = NA, feature_type = "nswgeo.lga") +
-  theme_minimal()
+  coord_automap_zoom(feature_type = "nswgeo.lga") +
+  guides(colour = guide_legend(override.aes = list(size = 1))) +
+  theme_void()
 ```
 
 Points are drawn at random within the boundaries of their location.
@@ -69,10 +70,10 @@ covid_cases_nsw %>%
   geom_boundaries(feature_type = "nswgeo.lga") +
   geom_geoscatter(aes(colour = type), size = 0.5) +
   geom_inset_frame() +
-  coord_automap(feature_type = "nswgeo.lga", datum = NA, inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lga", inset = configure_inset(
     centre = "Blacktown", radius = 40, units = "km",
     scale = 7, translation = c(400, -100))) +
-  theme_minimal()
+  theme_void()
 ```
 
 ## Packed points
@@ -88,12 +89,13 @@ covid_cases_nsw %>%
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 30), size = 1) +
   geom_inset_frame() +
-  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 35, units = "km",
     scale = 8, translation = c(450, -100))) +
   facet_wrap(vars(year)) +
   labs(x = NULL, y = NULL) +
-  theme_minimal()
+  theme_void() +
+  theme(strip.text = element_text(size = 12))
 ```
 
 
@@ -110,11 +112,11 @@ covid_cases_nsw %>%
   geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
                   outline.aes = list(colour = NA)) +
   geom_inset_frame() +
-  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
-  theme_minimal()
+  theme_void()
 ```
 
 On the other hand, if your dataset has only one row per location and there is an
@@ -153,11 +155,11 @@ covid_cases_nsw %>%
   geom_inset_frame() +
   geom_sf_label_inset(aes(label = lhd), stat = "automap_coords",
                       data = ~ dplyr::slice_head(.x, by = lhd)) +
-  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   labs(x = NULL, y = NULL) +
-  theme_minimal()
+  theme_void()
 ```
 
 The repulsive labels from `{ggrepel}` can be used; they just require a bit of
@@ -196,12 +198,14 @@ covid_cases_nsw %>%
                    stat = "sf_coordinates_inset",
                    data = cartographer::map_sf("nswgeo.lhd"),
                    max.overlaps = 5,
+                   force = 2,
+                   force_pull = 1.5,
                    inherit.aes = FALSE) +
-  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
   labs(x = NULL, y = NULL) +
-  theme_minimal()
+  theme_void()
 ```
 
 
@@ -223,6 +227,5 @@ national_data %>%
   ggplot(aes(location = state)) +
   geom_boundaries(feature_type = "nswgeo.states") +
   geom_pie(aes(fill = type), pie_radius = 1.5) +
-  coord_sf(datum = NA) +
-  theme_minimal()
+  theme_void()
 ```
