@@ -45,7 +45,8 @@ coord_automap_zoom <- function(include = NULL, include_data = TRUE, feature_type
 }
 
 #' @export
-ggplot_add.ggautomap_zoom_spec <- function(spec, plot, object_name) {
+ggplot_add.ggautomap_zoom_spec <- function(object, plot, object_name) {
+  spec <- object
   data_location <- NA
 
   # find the first ggautomap layer with a mapping for location
