@@ -87,11 +87,11 @@ covid_cases_nsw %>%
   dplyr::filter(year >= 2021) %>%
   ggplot(aes(location = lhd)) +
   geom_boundaries(feature_type = "nswgeo.lhd") +
-  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 30), size = 1) +
+  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 35), size = 1) +
   geom_inset_frame() +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Western Sydney", radius = 35, units = "km",
-    scale = 8, translation = c(450, -100))) +
+    centre = "Sydney", radius = 80, units = "km", feature_type = "nswgeo.lhd",
+    scale = 6, translation = c(650, -100))) +
   facet_wrap(vars(year)) +
   labs(x = NULL, y = NULL) +
   theme_void() +
@@ -114,7 +114,7 @@ covid_cases_nsw %>%
   geom_inset_frame() +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0))) +
+    scale = 5, translation = c(400, -100))) +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
   theme_void()
 ```
@@ -163,9 +163,12 @@ covid_cases_nsw %>%
 ```
 
 The repulsive labels from `{ggrepel}` can be used; they just require a bit of
-massaging since they don't natively understand the spatial data.
+massaging since they don't natively understand the spatial data. Note that
+you may also wish to use `point.padding = NA` to disable the default repulsion
+caused by the labelled points, which is good for labelling scatter plots but
+often doesn't make sense in mapping contexts.
 
-```{r text-repel, fig.height = 3, fig.width = 7}
+```{r text-repel, fig.height = 4, fig.width = 7}
 library(ggrepel)
 
 # label all features that have data
@@ -178,7 +181,11 @@ covid_cases_nsw %>%
                        y = after_stat(y_inset),
                        label = lhd),
                    stat = "automap_coords",
+                   nudge_x = 3,
+                   nudge_y = 1,
+                   point.padding = NA,
                    data = ~ dplyr::slice_head(.x, by = lhd)) +
+  scale_fill_distiller(direction = 1) +
   coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0))) +
@@ -197,13 +204,12 @@ covid_cases_nsw %>%
                        label = lhd_name),
                    stat = "sf_coordinates_inset",
                    data = cartographer::map_sf("nswgeo.lhd"),
-                   max.overlaps = 5,
-                   force = 2,
-                   force_pull = 1.5,
+                   point.padding = NA,
                    inherit.aes = FALSE) +
+  scale_fill_distiller(direction = 1, palette = 2) +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0))) +
+    scale = 4, translation = c(500, 0))) +
   labs(x = NULL, y = NULL) +
   theme_void()
 ```
