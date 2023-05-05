@@ -8,9 +8,6 @@ Authors@R:
              email = "Carl.Suster@health.nsw.gov.au",
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7021-9380")),
-      person("Thomas Lin Pedersen",
-             role = "ctb",
-             comment = "Original author of some code in pie.R taken from 'ggforce'"),
       person("Western Sydney Local Health District, NSW Health",
              role = "cph"))
 Description: Mapping geometries based on 'ggplot2' for easy maps.
@@ -33,7 +30,6 @@ Imports:
     dplyr (>= 1.0.0),
     ggmapinset (>= 0.2.5),
     ggplot2 (>= 3.4.2),
-    ggforce (>= 0.4.1),
     packcircles (>= 0.3.4),
     rlang (>= 1.0.0),
     sf (>= 1.0),
@@ -52,7 +48,6 @@ Collate:
     'geom_centroids.R'
     'geoscatter.R'
     'ggautomap-package.R'
-    'pie.R'
     'position_circle_repel.R'
 URL: https://github.com/cidm-ph/ggautomap,
     https://cidm-ph.github.io/ggautomap/

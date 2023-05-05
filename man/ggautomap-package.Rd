@@ -25,7 +25,6 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Thomas Lin Pedersen (Original author of some code in pie.R taken from 'ggforce') [contributor]
   \item Western Sydney Local Health District, NSW Health [copyright holder]
 }
 

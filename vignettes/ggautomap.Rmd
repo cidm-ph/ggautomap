@@ -213,25 +213,3 @@ covid_cases_nsw %>%
   labs(x = NULL, y = NULL) +
   theme_void()
 ```
-
-
-## Pie charts
-
-This example also shows `geom_pie()`, which aggregates points in each location and
-makes primitive pie charts. This geom does not currently support insets.
-
-```{r pies}
-national_data <- data.frame(state = sample(c("qld", "nsw", "vic", "sa", "act"),
-                                           size = 1000, replace = TRUE,
-                                           prob = c(0.2, 0.35, 0.3, 0.1, 0.05)),
-                            type = sample(c("A", "B", "C"),
-                                          size = 1000, replace = TRUE,
-                                          prob = c(0.3, 0.6, 0.1)))
-national_data$type[national_data$state == "act"] <- "A"
-
-national_data %>%
-  ggplot(aes(location = state)) +
-  geom_boundaries(feature_type = "nswgeo.states") +
-  geom_pie(aes(fill = type), pie_radius = 1.5) +
-  theme_void()
-```
