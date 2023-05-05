@@ -7,6 +7,7 @@
 
 [![ggautomap status
 badge](https://cidm-ph.r-universe.dev/badges/ggautomap)](https://cidm-ph.r-universe.dev)
+[![R-CMD-check](https://github.com/cidm-ph/ggautomap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cidm-ph/ggautomap/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `ggautomap` provides `{ggplot2}` geometries that make use of
