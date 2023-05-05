@@ -39,12 +39,12 @@ geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
                             na.rm = TRUE,
                             show.legend = NA,
                             inherit.aes = TRUE) {
-  params = rlang::list2(
+  params <- rlang::list2(
     feature_type = feature_type,
     na.rm = na.rm,
     ...
   )
-  if (is.null(mapping[["colour"]]) & is.null(params[["colour"]])) {
+  if (is.null(mapping[["colour"]]) && is.null(params[["colour"]])) {
     params$colour <- NA
   }
 

@@ -27,7 +27,8 @@
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_centroids(aes(colour = type), scale = 6, size = 0.5)
 geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
-                           stat = "automap_coords", position = "circle_repel_sf",
+                           stat = "automap_coords",
+                           position = "circle_repel_sf",
                            ...,
                            fun.geometry = NULL,
                            feature_type = NA,

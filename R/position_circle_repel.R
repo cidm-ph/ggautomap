@@ -36,7 +36,7 @@
 #'   coord_automap_zoom()
 #
 # FIXME: points <- data.frame(county = counties, s = ifelse(counties == nc$NAME[[1]], 5, 10))
-position_circle_repel <- function(scale = 1/4) {
+position_circle_repel <- function(scale = 1 / 4) {
   ggplot2::ggproto(NULL, PositionCircleRepel, scale = scale)
 }
 
@@ -56,7 +56,7 @@ position_circle_repel_sf <- function(scale = 10) {
 #' @export
 PositionCircleRepel <- ggplot2::ggproto("PositionCircleRepel", ggplot2::Position,
   required_aes = c("x", "y"),
-  scale = 1/4,
+  scale = 1 / 4,
 
   setup_params = function(self, data) {
     list(scale = self$scale)
@@ -111,12 +111,12 @@ coords_to_points <- function(x, y, crs) {
   sf::st_cast(sf::st_sfc(points, crs = crs), "POINT")
 }
 
-circle_repel <- function (data) {
+circle_repel <- function(data) {
   tmp <- dplyr::mutate(data, row = seq_len(nrow(data)))
   tmp <- dplyr::group_by(tmp, .data$x, .data$y)
 
   tmp <- dplyr::mutate(tmp, shift = packcircles::circleRepelLayout(
-    rep(1, dplyr::n()))$layout[,c(1,2)] * scale)
+    rep(1, dplyr::n()))$layout[, c(1, 2)] * scale)
   tmp <- dplyr::ungroup(tmp)
   tmp <- dplyr::arrange(tmp, .data$row)
   tmp <- tidyr::unnest_wider(tmp, col = .data$shift, names_sep = "_")

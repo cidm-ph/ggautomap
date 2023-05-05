@@ -94,7 +94,7 @@ StatCentroidPie <- ggplot2::ggproto("StatCentroidPie", ggplot2::Stat,
     angles <- angles / max(angles) * 2 * pi
     data$start <- c(0, angles[-length(angles)])
     data$end <- angles
-    data <- data[,!names(data) %in% c("amount", "group_size")]
+    data <- data[, !names(data) %in% c("amount", "group_size")]
 
     data$r <- if (proportional) entries * pie_radius else pie_radius
 
@@ -106,13 +106,14 @@ StatCentroidPie <- ggplot2::ggproto("StatCentroidPie", ggplot2::Stat,
     centroids <- sf::st_transform(geometry, crs_working)
     centroids <- sf::st_transform(sf::st_centroid(centroids), crs_orig)
     centroids <- matrix(unlist(centroids), ncol = 2, byrow = TRUE)
-    data$x0 <- centroids[,1]
-    data$y0 <- centroids[,2]
+    data$x0 <- centroids[, 1]
+    data$y0 <- centroids[, 2]
 
     arcPaths(data)
   }
 )
 
+# nolint start
 # -----------------------------------------------------------------------------
 # The remainder of this file is adapted from the ggforce package.
 #
@@ -157,3 +158,4 @@ arcPaths <- function(data) {
   paths$y <- paths$y + paths$y0
   paths[, !names(paths) %in% c('x0', 'y0', 'nControl')]
 }
+# nolint end

@@ -65,7 +65,7 @@ ggplot_add.ggautomap_zoom_spec <- function(spec, plot, object_name) {
   }
 
   if (any(is.na(data_location))) {
-    if (inherits(plot$data, "data.frame") & ("location" %in% names(plot$mapping))) {
+    if (inherits(plot$data, "data.frame") && ("location" %in% names(plot$mapping))) {
       data_location <- dplyr::pull(plot$data, !!plot$mapping$location)
     }
   }
@@ -85,7 +85,7 @@ ggplot_add.ggautomap_zoom_spec <- function(spec, plot, object_name) {
 
   geoms <- cartographer::map_sf(feature_type)
   geom_locations <- cartographer::feature_names(feature_type)
-  bbox <- sf::st_bbox(geoms[geom_locations %in% include,])
+  bbox <- sf::st_bbox(geoms[geom_locations %in% include, ])
 
   args <- spec$coord_automap_args
   args$feature_type <- feature_type

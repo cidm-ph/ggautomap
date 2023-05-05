@@ -18,8 +18,8 @@ coord_automap <- function(feature_type = NA, inset = NULL, ...) {
   )
 }
 
-get_feature_type <- function (feature_type, coord, feature_names) {
-  if (is.null(feature_type)) feture_type <- NA_character_
+get_feature_type <- function(feature_type, coord, feature_names) {
+  if (is.null(feature_type)) feature_type <- NA_character_
   if (is.na(feature_type) && inherits(coord, "CoordAutomap")) {
     feature_type <- coord$feature_type
   }

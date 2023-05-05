@@ -67,12 +67,10 @@ boundaries <- function(mapping,
                        inherit.aes) {
 
   params <- rlang::list2(na.rm = na.rm, ...)
-  if (is.null(mapping[["colour"]]) & is.null(params[["colour"]])) {
+  if (is.null(mapping[["colour"]]) && is.null(params[["colour"]]))
     params$colour <- "#bbbbbb"
-  }
-  if (is.null(mapping[["fill"]]) & is.null(params[["fill"]])) {
+  if (is.null(mapping[["fill"]]) && is.null(params[["fill"]]))
     params$fill <- NA
-  }
 
   layers <- ggmapinset::build_sf_inset_layers(
     data = data_inner, mapping = mapping,
