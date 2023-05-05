@@ -21,7 +21,8 @@
 #' @examples
 #' library(ggplot2)
 #'
-#' ggplot() + geom_boundaries(feature_type = "sf.nc")
+#' ggplot() +
+#'   geom_boundaries(feature_type = "sf.nc")
 geom_boundaries <- function(mapping = ggplot2::aes(),
                             data = NULL,
                             stat = "sf_inset", position = "identity",
@@ -39,17 +40,20 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
   }
   if (is.null(feature_type) || is.na(feature_type)) {
     cli::cli_abort(c("{.arg feature_type} must be specified for {.fn geom_boundaries}",
-                     "i" = "Registered types: {cartographer::feature_types()}"))
+      "i" = "Registered types: {cartographer::feature_types()}"
+    ))
   }
 
-  boundaries(mapping = mapping,
-             data_inner = cartographer::map_sf(feature_type),
-             data_outline = cartographer::map_outline(feature_type),
-             stat = stat, position = position, ...,
-             inset = inset, map_base = map_base, map_inset = map_inset,
-             na.rm = na.rm,
-             outline.aes = outline.aes,
-             show.legend = show.legend, inherit.aes = inherit.aes)
+  boundaries(
+    mapping = mapping,
+    data_inner = cartographer::map_sf(feature_type),
+    data_outline = cartographer::map_outline(feature_type),
+    stat = stat, position = position, ...,
+    inset = inset, map_base = map_base, map_inset = map_inset,
+    na.rm = na.rm,
+    outline.aes = outline.aes,
+    show.legend = show.legend, inherit.aes = inherit.aes
+  )
 }
 
 boundaries <- function(mapping,
@@ -65,12 +69,13 @@ boundaries <- function(mapping,
                        outline.aes,
                        show.legend,
                        inherit.aes) {
-
   params <- rlang::list2(na.rm = na.rm, ...)
-  if (is.null(mapping[["colour"]]) && is.null(params[["colour"]]))
+  if (is.null(mapping[["colour"]]) && is.null(params[["colour"]])) {
     params$colour <- "#bbbbbb"
-  if (is.null(mapping[["fill"]]) && is.null(params[["fill"]]))
+  }
+  if (is.null(mapping[["fill"]]) && is.null(params[["fill"]])) {
     params$fill <- NA
+  }
 
   layers <- ggmapinset::build_sf_inset_layers(
     data = data_inner, mapping = mapping,
@@ -81,7 +86,8 @@ boundaries <- function(mapping,
 
   if (!is.null(data_outline)) {
     params_outline <- modifyList(params, outline.aes, keep.null = TRUE)
-    layers <- c(layers,
+    layers <- c(
+      layers,
       ggmapinset::build_sf_inset_layers(
         data = data_outline, mapping = ggplot2::aes(),
         stat = stat, position = position,

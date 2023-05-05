@@ -126,8 +126,9 @@ StatGeoscatter <- ggplot2::ggproto("StatGeoscatter", ggmapinset::StatSfInset,
       geom <- sf::st_buffer(geom, dist = -0.05 * min(bbox[[3]] - bbox[[1]], bbox[[4]] - bbox[[2]]))
 
       size <- nrow(dat)
-      if (sample_type != "random")
+      if (sample_type != "random") {
         size <- as.integer(size * 1.3)
+      }
 
       # FIXME ... additional arguments passed to [sf::st_sample()].
       points <- sf::st_sample(geom, size = size, type = sample_type, exact = TRUE)

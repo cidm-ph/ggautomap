@@ -60,11 +60,12 @@ library(ggplot2)
 
 events <- data.frame(
   county = c("Mecklenburg", "Carteret", "Moore", "Caldwell"),
-  proportion_A = c(0.1, 0.8, 0.0, 0.6))
+  proportion_A = c(0.1, 0.8, 0.0, 0.6)
+)
 
 ggplot(events, aes(location = county)) +
   geom_sf(aes(fill = proportion_A), stat = "automap") +
-  geom_label(aes(label = county), stat = "automap_coords")
+  geom_label(aes(label = county), stat = "automap_coords") +
   coord_automap(feature_type = "sf.nc")
 }
 \seealso{

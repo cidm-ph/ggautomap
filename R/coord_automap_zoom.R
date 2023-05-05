@@ -37,9 +37,11 @@
 #'   coord_automap_zoom(include = c("Rowan", "Polk"), include_data = FALSE, feature_type = "sf.nc")
 coord_automap_zoom <- function(include = NULL, include_data = TRUE, feature_type = NA, ...) {
   structure(
-    list(include = include, include_data = include_data,
-         feature_type = feature_type,
-         coord_automap_args = rlang::list2(...)),
+    list(
+      include = include, include_data = include_data,
+      feature_type = feature_type,
+      coord_automap_args = rlang::list2(...)
+    ),
     class = "ggautomap_zoom_spec"
   )
 }
@@ -73,8 +75,9 @@ ggplot_add.ggautomap_zoom_spec <- function(object, plot, object_name) {
 
   if (any(is.na(data_location))) {
     cli::cli_abort(c("{.fn coord_automap_zoom} unable to find plot data",
-                     "i" = "add {.emph after} a {.pkg ggautomap} layer like {.fn geom_geoscatter} or {.fn geom_centroids}",
-                     "i" = "alternatively, define the {.arg data} and the {.field location} aesthetic in the top level {.fn ggplot} call"))
+      "i" = "add {.emph after} a {.pkg ggautomap} layer like {.fn geom_geoscatter} or {.fn geom_centroids}",
+      "i" = "alternatively, define the {.arg data} and the {.field location} aesthetic in the top level {.fn ggplot} call"
+    ))
   }
 
   feature_type <- get_feature_type(spec$feature_type, list(), data_location)

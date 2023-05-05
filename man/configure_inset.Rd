@@ -47,7 +47,8 @@ cfg <- configure_inset(
   scale = 2,
   translation = c(70, -180),
   radius = 50,
-  units = "mi")
+  units = "mi"
+)
 }
 \seealso{
 ggmapinset::configure_inset

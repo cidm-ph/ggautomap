@@ -26,7 +26,8 @@
 #'   scale = 2,
 #'   translation = c(70, -180),
 #'   radius = 50,
-#'   units = "mi")
+#'   units = "mi"
+#' )
 configure_inset <- function(centre = NULL, scale = NULL,
                             translation = NULL, radius = NULL,
                             units = "km",

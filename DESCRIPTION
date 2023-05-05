@@ -23,7 +23,7 @@ Remotes: github::cidm-ph/ggmapinset,
     github::cidm-ph/cartographer,
     github::cidm-ph/nswgeo
 Depends: 
-    R (>= 3.6),
+    R (>= 4.1),
 Imports: 
     cartographer (>= 0.2.0),
     cli (>= 3.4.0),

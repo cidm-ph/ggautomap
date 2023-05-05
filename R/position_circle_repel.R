@@ -23,7 +23,8 @@
 #' points <- data.frame(
 #'   x = c(rep(1, 10), 1:3),
 #'   y = c(rep(2, 10), 3:5),
-#'   s = 0.05)
+#'   s = 0.05
+#' )
 #' ggplot(points, aes(x, y)) +
 #'   geom_point(size = 3, colour = "red") +
 #'   geom_point(position = position_circle_repel(0.05), size = 3, alpha = 0.5)
@@ -92,8 +93,10 @@ PositionCircleRepelSf <- ggplot2::ggproto("PositionCircleRepelSf", PositionCircl
     geometry <- sf::st_transform(geometry, crs_working)
     coordinates <- sf::st_coordinates(geometry)
 
-    tmp <- circle_repel(data.frame(x = coordinates[, "X"], y = coordinates[, "Y"],
-                                   scale = scale))
+    tmp <- circle_repel(data.frame(
+      x = coordinates[, "X"], y = coordinates[, "Y"],
+      scale = scale
+    ))
 
     placed_pts <- coords_to_points(tmp$x, tmp$y, crs = crs_working)
     placed_pts <- sf::st_transform(placed_pts, crs_data)
@@ -112,14 +115,14 @@ coords_to_points <- function(x, y, crs) {
 }
 
 circle_repel <- function(data) {
-  tmp <- dplyr::mutate(data, row = seq_len(nrow(data)))
-  tmp <- dplyr::group_by(tmp, .data$x, .data$y)
-
-  tmp <- dplyr::mutate(tmp, shift = packcircles::circleRepelLayout(
-    rep(1, dplyr::n()))$layout[, c(1, 2)] * scale)
-  tmp <- dplyr::ungroup(tmp)
-  tmp <- dplyr::arrange(tmp, .data$row)
-  tmp <- tidyr::unnest_wider(tmp, col = .data$shift, names_sep = "_")
+  tmp <- dplyr::mutate(data, row = seq_len(nrow(data))) |>
+    dplyr::group_by(.data$x, .data$y) |>
+    dplyr::mutate(shift = packcircles::circleRepelLayout(
+      rep(1, dplyr::n())
+    )$layout[, c(1, 2)] * scale) |>
+    dplyr::ungroup() |>
+    dplyr::arrange(.data$row) |>
+    tidyr::unnest_wider(col = .data$shift, names_sep = "_")
   data$x <- data$x + tmp$shift_x
   data$y <- data$y + tmp$shift_y
   data

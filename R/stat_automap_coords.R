@@ -27,11 +27,12 @@
 #'
 #' events <- data.frame(
 #'   county = c("Mecklenburg", "Carteret", "Moore", "Caldwell"),
-#'   proportion_A = c(0.1, 0.8, 0.0, 0.6))
+#'   proportion_A = c(0.1, 0.8, 0.0, 0.6)
+#' )
 #'
 #' ggplot(events, aes(location = county)) +
 #'   geom_sf(aes(fill = proportion_A), stat = "automap") +
-#'   geom_label(aes(label = county), stat = "automap_coords")
+#'   geom_label(aes(label = county), stat = "automap_coords") +
 #'   coord_automap(feature_type = "sf.nc")
 stat_automap_coords <- function(mapping = NULL, data = NULL,
                                 geom = "sf_inset", position = "identity",
@@ -79,9 +80,10 @@ StatAutomapCoords <- ggplot2::ggproto("StatAutomapCoords", ggmapinset::StatSfCoo
     }
 
     data <- ggmapinset::StatSfCoordinatesInset$compute_group(data, scales, coord,
-                                                             fun.geometry = fun.geometry,
-                                                             inset = inset,
-                                                             crs_working = crs_working)
+      fun.geometry = fun.geometry,
+      inset = inset,
+      crs_working = crs_working
+    )
     # data$geometry <- coords_to_points(data$x, data$y, crs = sf::st_crs(data$geometry))
     data
   }

@@ -57,5 +57,6 @@ possibility to override its aesthetics.
 \examples{
 library(ggplot2)
 
-ggplot() + geom_boundaries(feature_type = "sf.nc")
+ggplot() +
+  geom_boundaries(feature_type = "sf.nc")
 }

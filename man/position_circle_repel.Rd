@@ -38,7 +38,8 @@ library(ggplot2)
 points <- data.frame(
   x = c(rep(1, 10), 1:3),
   y = c(rep(2, 10), 3:5),
-  s = 0.05)
+  s = 0.05
+)
 ggplot(points, aes(x, y)) +
   geom_point(size = 3, colour = "red") +
   geom_point(position = position_circle_repel(0.05), size = 3, alpha = 0.5)

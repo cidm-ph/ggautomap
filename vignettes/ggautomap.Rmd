@@ -72,7 +72,8 @@ covid_cases_nsw %>%
   geom_inset_frame() +
   coord_automap(feature_type = "nswgeo.lga", inset = configure_inset(
     centre = "Blacktown", radius = 40, units = "km",
-    scale = 7, translation = c(400, -100))) +
+    scale = 7, translation = c(400, -100)
+  )) +
   theme_void()
 ```
 
@@ -91,7 +92,8 @@ covid_cases_nsw %>%
   geom_inset_frame() +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Sydney", radius = 80, units = "km", feature_type = "nswgeo.lhd",
-    scale = 6, translation = c(650, -100))) +
+    scale = 6, translation = c(650, -100)
+  )) +
   facet_wrap(vars(year)) +
   labs(x = NULL, y = NULL) +
   theme_void() +
@@ -109,12 +111,15 @@ into counts.
 covid_cases_nsw %>%
   ggplot(aes(location = lhd)) +
   geom_choropleth() +
-  geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
-                  outline.aes = list(colour = NA)) +
+  geom_boundaries(
+    feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
+    outline.aes = list(colour = NA)
+  ) +
   geom_inset_frame() +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 5, translation = c(400, -100))) +
+    scale = 5, translation = c(400, -100)
+  )) +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
   theme_void()
 ```
@@ -132,12 +137,15 @@ summarised_data <- data.frame(
 summarised_data %>%
   ggplot(aes(location = lhd)) +
   geom_sf_inset(aes(fill = cases), stat = "automap", colour = NA) +
-  geom_boundaries(feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
-                  outline.aes = list(colour = NA)) +
+  geom_boundaries(
+    feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
+    outline.aes = list(colour = NA)
+  ) +
   geom_inset_frame() +
   coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0))) +
+    scale = 3.5, translation = c(350, 0)
+  )) +
   scale_fill_gradient(low = "#e6f9ff", high = "#00394d", na.value = "grey90") +
   theme_minimal()
 ```
@@ -153,11 +161,14 @@ covid_cases_nsw %>%
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_inset_frame() +
-  geom_sf_label_inset(aes(label = lhd), stat = "automap_coords",
-                      data = ~ dplyr::slice_head(.x, by = lhd)) +
+  geom_sf_label_inset(aes(label = lhd),
+    stat = "automap_coords",
+    data = ~ dplyr::slice_head(.x, by = lhd)
+  ) +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0))) +
+    scale = 3.5, translation = c(350, 0)
+  )) +
   labs(x = NULL, y = NULL) +
   theme_void()
 ```
@@ -177,18 +188,23 @@ covid_cases_nsw %>%
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_inset_frame() +
-  geom_label_repel(aes(x = after_stat(x_inset),
-                       y = after_stat(y_inset),
-                       label = lhd),
-                   stat = "automap_coords",
-                   nudge_x = 3,
-                   nudge_y = 1,
-                   point.padding = NA,
-                   data = ~ dplyr::slice_head(.x, by = lhd)) +
+  geom_label_repel(
+    aes(
+      x = after_stat(x_inset),
+      y = after_stat(y_inset),
+      label = lhd
+    ),
+    stat = "automap_coords",
+    nudge_x = 3,
+    nudge_y = 1,
+    point.padding = NA,
+    data = ~ dplyr::slice_head(.x, by = lhd)
+  ) +
   scale_fill_distiller(direction = 1) +
   coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0))) +
+    scale = 3.5, translation = c(350, 0)
+  )) +
   labs(x = NULL, y = NULL) +
   theme_minimal()
 
@@ -198,18 +214,23 @@ covid_cases_nsw %>%
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_inset_frame() +
-  geom_label_repel(aes(x = after_stat(x_inset),
-                       y = after_stat(y_inset),
-                       geometry = geometry,
-                       label = lhd_name),
-                   stat = "sf_coordinates_inset",
-                   data = cartographer::map_sf("nswgeo.lhd"),
-                   point.padding = NA,
-                   inherit.aes = FALSE) +
+  geom_label_repel(
+    aes(
+      x = after_stat(x_inset),
+      y = after_stat(y_inset),
+      geometry = geometry,
+      label = lhd_name
+    ),
+    stat = "sf_coordinates_inset",
+    data = cartographer::map_sf("nswgeo.lhd"),
+    point.padding = NA,
+    inherit.aes = FALSE
+  ) +
   scale_fill_distiller(direction = 1, palette = 2) +
   coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
-    scale = 4, translation = c(500, 0))) +
+    scale = 4, translation = c(500, 0)
+  )) +
   labs(x = NULL, y = NULL) +
   theme_void()
 ```
