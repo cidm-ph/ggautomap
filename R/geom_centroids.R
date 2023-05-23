@@ -21,9 +21,11 @@
 #' library(ggplot2)
 #'
 #' cartographer::nc_type_example_2 |>
+#'   head(n = 100) |>
 #'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
-#'   geom_centroids(aes(colour = type), scale = 6, size = 0.5)
+#'   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 6), size = 0.5) +
+#'   coord_automap(feature_type = "sf.nc")
 geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
                            stat = "automap_coords",
                            position = "circle_repel_sf",
@@ -42,6 +44,14 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
     fun.geometry = fun.geometry,
     ...
   )
+  if ('group' %in% names(mapping)) {
+    cli::cli_warn(c(
+      "Ignoring aethetic mapping for {.field group} in {.fn geom_centroids}",
+      "i" = "Mapping for {.field group} was: {as.character(mapping$group)[[2]]}",
+      "i" = "{.fn geom_centroids} is always grouped by the geometry column"
+    ))
+  }
+  mapping$group <- "location"
 
   ggmapinset::build_sf_inset_layers(
     data = data, mapping = mapping,
