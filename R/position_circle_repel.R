@@ -34,7 +34,7 @@
 #'   ggplot(aes(location = county)) +
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 4), size = 0.2) +
-#'   coord_automap_zoom()
+#'   coord_automap(feature_type = "sf.nc")
 #
 # FIXME: points <- data.frame(county = counties, s = ifelse(counties == nc$NAME[[1]], 5, 10))
 position_circle_repel <- function(scale = 1 / 4) {
