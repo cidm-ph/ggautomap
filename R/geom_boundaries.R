@@ -5,8 +5,6 @@
 #' drawn separately if one has been registered with the map data, with the
 #' possibility to override its aesthetics.
 #'
-#' @rdname boundaries
-#'
 #' @param outline.aes A list to override the aesthetics for the outline of the map.
 #'   This has no effect if the map wasn't registered with a separate outline.
 #' @param data Ignored (this geometry always uses the registered geographic data).

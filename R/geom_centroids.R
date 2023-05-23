@@ -6,8 +6,6 @@
 #' to repel the points outwards with an amount controllable with its
 #' \code{scale} parameter.
 #'
-#' @rdname centroids
-#'
 #' @section Aesthetics:
 #' The \code{location} aesthetic is required.
 #' \code{geom_centroids()} understands the same aesthetics as [ggplot2::geom_point()].
