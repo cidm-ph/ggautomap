@@ -1,6 +1,6 @@
 Package: ggautomap
 Type: Package
-Title: Create Maps From a Column of Place Names
+Title: Create Maps from a Column of Place Names
 Version: 0.3.0
 Authors@R: 
     c(person(given = "Carl",

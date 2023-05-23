@@ -140,12 +140,12 @@ summarised_data %>%
     outline.aes = list(colour = NA)
   ) +
   geom_inset_frame() +
-  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0)
   )) +
   scale_fill_gradient(low = "#e6f9ff", high = "#00394d", na.value = "grey90") +
-  theme_minimal()
+  theme_void()
 ```
 
 
@@ -199,12 +199,12 @@ covid_cases_nsw %>%
     data = ~ dplyr::slice_head(.x, by = lhd)
   ) +
   scale_fill_distiller(direction = 1) +
-  coord_automap(datum = NA, feature_type = "nswgeo.lhd", inset = configure_inset(
+  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
     centre = "Western Sydney", radius = 60, units = "km",
     scale = 3.5, translation = c(350, 0)
   )) +
   labs(x = NULL, y = NULL) +
-  theme_minimal()
+  theme_void()
 
 # label all features in the map regardless of data, hiding visually overlapping labels
 covid_cases_nsw %>%
