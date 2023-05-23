@@ -22,12 +22,6 @@
     <loc>https://cidm-ph.github.io/ggautomap/index.html</loc>
   </url>
   <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/boundaries.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/centroids.html</loc>
-  </url>
-  <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/choropleth.html</loc>
   </url>
   <url>
@@ -37,10 +31,13 @@
     <loc>https://cidm-ph.github.io/ggautomap/reference/coord_automap.html</loc>
   </url>
   <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/coord_automap_zoom.html</loc>
+    <loc>https://cidm-ph.github.io/ggautomap/reference/crs_eqc.html</loc>
   </url>
   <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/crs_eqc.html</loc>
+    <loc>https://cidm-ph.github.io/ggautomap/reference/geom_boundaries.html</loc>
+  </url>
+  <url>
+    <loc>https://cidm-ph.github.io/ggautomap/reference/geom_centroids.html</loc>
   </url>
   <url>
     <loc>https://cidm-ph.github.io/ggautomap/reference/geoscatter.html</loc>
