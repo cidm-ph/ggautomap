@@ -16,6 +16,10 @@ With `ggautomap` your input dataset doesn’t need to be spatially aware:
 the geometries will automatically attach the map data (providing it’s
 been registered with `{cartographer}`).
 
+See [the ‘Getting started’
+article](https://cidm-ph.github.io/ggautomap/articles/ggautomap.html)
+(`vignette("ggautomap")`) for some recipes for different types of plots.
+
 ## Installation
 
 You can install ggautomap like so:

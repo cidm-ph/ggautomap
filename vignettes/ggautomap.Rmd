@@ -39,7 +39,7 @@ feature types; your dataset only needs to have one of these.
 
 In general you'll start with `geom_boundaries()` to draw the base map. This geom
 needs to be told which `feature_type` you're after (e.g. `"nswgeo.lga"` for LGAs).
-All of the summary geoms of `{ggautomap}` can then be used to draw your data.
+All of the summary geoms of `ggautomap` can then be used to draw your data.
 
 ## Scatter
 
