@@ -90,6 +90,7 @@ cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_choropleth() +
   geom_boundaries(feature_type = "sf.nc") +
-  scale_fill_steps(low = "#e6f9ff", high = "#00394d")
+  scale_fill_steps(low = "#e6f9ff", high = "#00394d") +
+  coord_automap(feature_type = "sf.nc")
 }
 \keyword{datasets}

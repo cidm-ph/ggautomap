@@ -28,7 +28,7 @@
 #'
 #' ggplot(events, aes(location = county)) +
 #'   stat_automap(aes(fill = proportion_A)) +
-#'   coord_sf()
+#'   coord_automap(feature_type = "sf.nc")
 stat_automap <- function(mapping = NULL, data = NULL,
                          geom = "sf", position = "identity",
                          ...,

@@ -44,7 +44,7 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
     fun.geometry = fun.geometry,
     ...
   )
-  if ('group' %in% names(mapping)) {
+  if ("group" %in% names(mapping)) {
     cli::cli_warn(c(
       "Ignoring aethetic mapping for {.field group} in {.fn geom_centroids}",
       "i" = "Mapping for {.field group} was: {as.character(mapping$group)[[2]]}",
