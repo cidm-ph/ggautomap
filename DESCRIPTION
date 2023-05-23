@@ -1,7 +1,7 @@
 Package: ggautomap
 Type: Package
 Title: Create Maps from a Column of Place Names
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: 
     c(person(given = "Carl",
              family = "Suster",
@@ -10,10 +10,11 @@ Authors@R:
              comment = c(ORCID = "0000-0001-7021-9380")),
       person("Western Sydney Local Health District, NSW Health",
              role = "cph"))
-Description: Mapping geometries for 'ggplot2' that convert place names to coordinates on the fly.
+Description: Mapping tools that convert place names to coordinates on the fly.
     These 'ggplot2' extensions make maps from a data frame where one of the
-    columns contains place names. The map data must be registered with
-    `cartographer` either by the user or by another package.
+    columns contains place names, without having to directly work with the
+    underlying geospatial data and tools. The corresponding map data must be
+    registered with 'cartographer' either by the user or by another package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
