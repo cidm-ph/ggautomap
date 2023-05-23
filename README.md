@@ -17,19 +17,19 @@ the geometries will automatically attach the map data (providing it’s
 been registered with `{cartographer}`).
 
 See [the ‘Getting started’
-article](https://cidm-ph.github.io/ggautomap/articles/ggautomap.html)
-(`vignette("ggautomap")`) for some recipes for different types of plots.
+article](https://cidm-ph.github.io/ggautomap/articles/ggautomap.html),
+`vignette("ggautomap")`, for some recipes for different types of plots.
 
 ## Installation
 
 You can install ggautomap like so:
 
 ``` r
-options(repos = c(
-  cidmph = 'https://cidm-ph.r-universe.dev',
-  CRAN = 'https://cloud.r-project.org'))
-  
+# CRAN release
 install.packages('ggautomap')
+
+# development version
+install.packages('ggautomap', repos = c('https://cidm-ph.r-universe.dev', 'https://cloud.r-project.org'))
 ```
 
 ## Example

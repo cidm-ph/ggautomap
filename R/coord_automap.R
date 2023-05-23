@@ -9,8 +9,17 @@
 #' @param inset Inset configuration; see [configure_inset()].
 #' @param ... Arguments passed to [ggmapinset::coord_sf_inset()]
 #'
+#' @returns A ggplot coordinate
 #' @seealso [coord_automap_zoom()]
 #' @export
+#' @examples
+#' library(ggplot2)
+#' library(cartographer)
+#'
+#' ggplot(nc_type_example_2, aes(location = county)) +
+#'   geom_choropleth(aes(colour = type), size = 0.5) +
+#'   geom_sf_label_inset(aes(label = county), stat = "automap_coords", size = 3) +
+#'   coord_automap(feature_type = "sf.nc")
 coord_automap <- function(feature_type = NA, inset = NULL, ...) {
   parent <- ggmapinset::coord_sf_inset(inset, ...)
   ggproto("CoordAutomap", parent,

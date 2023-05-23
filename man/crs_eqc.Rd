@@ -21,5 +21,10 @@ CRS object from \code{sf}.
 \code{crs_eqc()} gives a CRS that can be used for e.g. computing centroids or
 distances.
 It is an equidistant cylindrical system that by does not distort latitudes
-near \code{latitude}. The CRS is in units of kilometres.
+near \code{latitude}. The CRS is in units of kilometres by default.
+}
+\examples{
+# Sydney, Australia has a latitude of 33.87 S so this CRS will be suitable
+# for computations close to there:
+crs_eqc(latitude = -33.87)
 }

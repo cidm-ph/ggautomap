@@ -27,7 +27,7 @@ registered types. If \code{NA}, the type is guessed based on the values in
 \code{feature_names}.}
 }
 \value{
-A plot layer
+A ggplot layer
 }
 \description{
 Use \code{\link{cartographer}} to attach a spatial column to the data based

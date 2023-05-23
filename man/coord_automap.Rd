@@ -15,11 +15,23 @@ registered types. If \code{NA}, the type is guessed based on the values in
 
 \item{...}{Arguments passed to \code{\link[ggmapinset:coord_sf_inset]{ggmapinset::coord_sf_inset()}}}
 }
+\value{
+A ggplot coordinate
+}
 \description{
 This allows a default inset configuration to be provided to avoid having to
 repeat it for each layer. Any layer that is inset-aware can use this as the
 default configuration if none is specifically provided to that layer. This
 coord also expands the axis limits to include the inset area.
+}
+\examples{
+library(ggplot2)
+library(cartographer)
+
+ggplot(nc_type_example_2, aes(location = county)) +
+  geom_choropleth(aes(colour = type), size = 0.5) +
+  geom_sf_label_inset(aes(label = county), stat = "automap_coords", size = 3) +
+  coord_automap(feature_type = "sf.nc")
 }
 \seealso{
 \code{\link[=coord_automap_zoom]{coord_automap_zoom()}}

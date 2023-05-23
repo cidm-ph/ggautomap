@@ -14,7 +14,7 @@
 #' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export
-#' @returns A plot layer
+#' @returns A ggplot layer
 #' @examples
 #' library(ggplot2)
 #'
