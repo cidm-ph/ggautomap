@@ -10,15 +10,45 @@ badge](https://cidm-ph.r-universe.dev/badges/ggautomap)](https://cidm-ph.r-unive
 [![R-CMD-check](https://github.com/cidm-ph/ggautomap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cidm-ph/ggautomap/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`ggautomap` provides `{ggplot2}` geometries that make use of
-`{cartographer}`, a framework for matching place names with map data.
-With `ggautomap` your input dataset doesn’t need to be spatially aware:
-the geometries will automatically attach the map data (providing it’s
-been registered with `{cartographer}`).
+`ggautomap` helps when you have a spreadsheet/table of data that
+includes a column of place names, and you want to visualise that data on
+a map. It saves you from having to think about geospatial libraries when
+all you want to do is make a quick plot from your spreadsheet.
 
 See [the ‘Getting started’
 article](https://cidm-ph.github.io/ggautomap/articles/ggautomap.html),
-`vignette("ggautomap")`, for some recipes for different types of plots.
+`vignette("ggautomap")`, for some recipes for different types of plots
+it can make.
+
+`ggautomap` works best if:
+
+- your data is about regions/areas/countries etc.,
+- each row corresponds to an individual observation or data point, and
+- the locations names in your data are part of a map that is registered
+  with `{cartographer}`.
+
+`ggautomap` might not be right for you if …
+
+- … the place names in your location column aren’t known to
+  `{cartographer}`. You’ll have to register the map data with
+  `cartographer::register_map()` or load a package that does this for
+  you. This is fairly painless to set up, and can be reused for
+  subsequent plots once you get it working.
+
+- … your data is about points instead of regions, or has only a single
+  row for each region with aggregate data.
+
+- … your data has latitude and longitude columns, or is already a
+  geospatial object such as an `{sf}` dataframe.
+
+- … you want to manipulate the geometries or otherwise have more
+  control. `ggautomap` is aimed at the simple case, so the geometries
+  are attached on the fly when the plot is compiled.
+
+In most of these cases, you should instead use a combination of `{sf}`,
+`ggplot2::geom_sf()`, and possibly `{cartographer}` to have more direct
+control. If you just want the map insets from the vignette, see
+`{ggmapinset}`.
 
 ## Installation
 
