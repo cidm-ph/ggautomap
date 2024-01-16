@@ -12,8 +12,8 @@
     registered with cartographer either by the user or by another package.">
 <title>Create Maps from a Column of Place Names • ggautomap</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Create Maps from a Column of Place Names">
 <meta property="og:description" content="Mapping tools that convert place names to coordinates on the fly.
@@ -76,8 +76,22 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><code>ggautomap</code> provides <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> geometries that make use of <a href="https://github.com/cidm-ph/cartographer" class="external-link">cartographer</a>, a framework for matching place names with map data. With <code>ggautomap</code> your input dataset doesn’t need to be spatially aware: the geometries will automatically attach the map data (providing it’s been registered with <a href="https://github.com/cidm-ph/cartographer" class="external-link">cartographer</a>).</p>
-<p>See <a href="https://cidm-ph.github.io/ggautomap/articles/ggautomap.html">the ‘Getting started’ article</a>, <code><a href="articles/ggautomap.html">vignette("ggautomap")</a></code>, for some recipes for different types of plots.</p>
+<p><code>ggautomap</code> helps when you have a spreadsheet/table of data that includes a column of place names, and you want to visualise that data on a map. It saves you from having to think about geospatial libraries when all you want to do is make a quick plot from your spreadsheet.</p>
+<p>See <a href="https://cidm-ph.github.io/ggautomap/articles/ggautomap.html">the ‘Getting started’ article</a>, <code><a href="articles/ggautomap.html">vignette("ggautomap")</a></code>, for some recipes for different types of plots it can make.</p>
+<p><code>ggautomap</code> works best if:</p>
+<ul>
+<li>your data is about regions/areas/countries etc.,</li>
+<li>each row corresponds to an individual observation or data point, and</li>
+<li>the locations names in your data are part of a map that is registered with <a href="https://github.com/cidm-ph/cartographer" class="external-link">cartographer</a>.</li>
+</ul>
+<p><code>ggautomap</code> might not be right for you if …</p>
+<ul>
+<li><p>… the place names in your location column aren’t known to <a href="https://github.com/cidm-ph/cartographer" class="external-link">cartographer</a>. You’ll have to register the map data with <code><a href="https://cidm-ph.github.io/cartographer/reference/register_map.html" class="external-link">cartographer::register_map()</a></code> or load a package that does this for you. This is fairly painless to set up, and can be reused for subsequent plots once you get it working.</p></li>
+<li><p>… your data is about points instead of regions, or has only a single row for each region with aggregate data.</p></li>
+<li><p>… your data has latitude and longitude columns, or is already a geospatial object such as an <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> dataframe.</p></li>
+<li><p>… you want to manipulate the geometries or otherwise have more control. <code>ggautomap</code> is aimed at the simple case, so the geometries are attached on the fly when the plot is compiled.</p></li>
+</ul>
+<p>In most of these cases, you should instead use a combination of <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a>, <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">ggplot2::geom_sf()</a></code>, and possibly <a href="https://github.com/cidm-ph/cartographer" class="external-link">cartographer</a> to have more direct control. If you just want the map insets from the vignette, see <a href="https://github.com/cidm-ph/ggmapinset" class="external-link">ggmapinset</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
