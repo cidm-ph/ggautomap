@@ -48,12 +48,14 @@ covid_cases_nsw %>%
   ggplot(aes(location = lga)) +
   geom_boundaries(feature_type = "nswgeo.lga") +
   geom_geoscatter(aes(colour = type), sample_type = "random", size = 0.5) +
-  coord_automap(feature_type = "nswgeo.lga", xlim = c(147, 153), ylim = c(-33.7, -29)) +
+  coord_automap_zoom(feature_type = "nswgeo.lga") +
   guides(colour = guide_legend(override.aes = list(size = 1))) +
   theme_void()
 ```
 
 Points are drawn at random within the boundaries of their location.
+This example also uses `coord_automap_zoom()` as a replacement for `coord_automap()`
+that automatically crops the map around your data points.
 
 
 ## Insets

@@ -10,6 +10,7 @@
 #' @param ... Arguments passed to [ggmapinset::coord_sf_inset()]
 #'
 #' @returns A ggplot coordinate
+#' @seealso [coord_automap_zoom()]
 #' @export
 #' @examples
 #' library(ggplot2)
