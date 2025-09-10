@@ -1,6 +1,6 @@
 #' Attach coordinates with 'cartographer'
 #'
-#' Use [`cartographer`][cartographer] to attach a spatial column to the data based
+#' Use 'cartographer' to attach a spatial column to the data based
 #' on place names in another column. The spatial data is then reduced to
 #' coordinates in the same way as [`stat_sf_coordinates()`][ggplot2::stat_sf_coordinates].
 #'
@@ -15,7 +15,7 @@
 #'   \item{inset_scale}{1 for points outside the inset, otherwise the configured inset scale parameter}
 #' }
 #'
-#' @param mapping,data,geom,position,na.rm,show.legend,inherit.aes,... See [ggplot2::stat_sf_coordinates()].
+#' @param mapping,data,geom,position,na.rm,show.legend,inherit.aes,fun.geometry,... See [ggplot2::stat_sf_coordinates()].
 #' @inheritParams cartographer::resolve_feature_type
 #' @inheritParams ggmapinset::stat_sf_coordinates_inset
 #' @seealso [ggmapinset::stat_sf_coordinates_inset()]

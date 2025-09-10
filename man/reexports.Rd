@@ -18,6 +18,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{ggmapinset}{\code{\link[ggmapinset]{geom_inset_frame}}, \code{\link[ggmapinset]{geom_sf_inset}}, \code{\link[ggmapinset:geom_sf_inset]{geom_sf_label_inset}}, \code{\link[ggmapinset:geom_sf_inset]{geom_sf_text_inset}}, \code{\link[ggmapinset:geom_sf_inset]{GeomSfInset}}, \code{\link[ggmapinset:geom_sf_inset]{stat_sf_inset}}, \code{\link[ggmapinset:stat_sf_coordinates_inset]{StatSfCoordinatesInset}}, \code{\link[ggmapinset:geom_sf_inset]{StatSfInset}}}
+  \item{ggmapinset}{\code{\link[ggmapinset]{geom_inset_frame}}, \code{\link[ggmapinset]{geom_sf_inset}}, \code{\link[ggmapinset:stat_sf_coordinates_inset]{geom_sf_label_inset}}, \code{\link[ggmapinset:stat_sf_coordinates_inset]{geom_sf_text_inset}}, \code{\link[ggmapinset:geom_sf_inset]{GeomSfInset}}, \code{\link[ggmapinset:geom_sf_inset]{stat_sf_inset}}, \code{\link[ggmapinset:stat_sf_coordinates_inset]{StatSfCoordinatesInset}}, \code{\link[ggmapinset:geom_sf_inset]{StatSfInset}}}
 }}
 

@@ -19,7 +19,7 @@ stat_automap_coords(
 )
 }
 \arguments{
-\item{mapping, data, geom, position, na.rm, show.legend, inherit.aes, ...}{See \code{\link[ggplot2:stat_sf_coordinates]{ggplot2::stat_sf_coordinates()}}.}
+\item{mapping, data, geom, position, na.rm, show.legend, inherit.aes, fun.geometry, ...}{See \code{\link[ggplot2:stat_sf_coordinates]{ggplot2::stat_sf_coordinates()}}.}
 
 \item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of
 registered types. If \code{NA}, the type is guessed based on the values in
@@ -27,18 +27,12 @@ registered types. If \code{NA}, the type is guessed based on the values in
 
 \item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.
 If \code{NA} (the default), this is inherited from the coord (see \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}).}
-
-\item{fun.geometry}{A function that takes a \code{sfc} object and returns a \code{sfc_POINT} with the
-same length as the input. If \code{NULL}, \code{function(x) sf::st_point_on_surface(sf::st_zm(x))}
-will be used. Note that the function may warn about the incorrectness of
-the result if the data is not projected, but you can ignore this except
-when you really care about the exact locations.}
 }
 \value{
 A plot layer
 }
 \description{
-Use \code{\link{cartographer}} to attach a spatial column to the data based
+Use 'cartographer' to attach a spatial column to the data based
 on place names in another column. The spatial data is then reduced to
 coordinates in the same way as \code{\link[ggplot2:stat_sf_coordinates]{stat_sf_coordinates()}}.
 }

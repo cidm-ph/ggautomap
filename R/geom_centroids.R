@@ -11,7 +11,7 @@
 #' \code{geom_centroids()} understands the same aesthetics as [ggplot2::geom_point()].
 #'
 #' @inheritParams ggmapinset::geom_sf_inset
-#' @param mapping,data,stat,position,na.rm,show.legend,inherit.aes,... See [ggplot2::stat_sf_coordinates()].
+#' @param mapping,data,stat,position,na.rm,show.legend,inherit.aes,fun.geometry,... See [ggplot2::stat_sf_coordinates()].
 #' @inheritParams stat_automap_coords
 #'
 #' @returns A ggplot layer.

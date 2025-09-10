@@ -30,7 +30,7 @@ registered types. If \code{NA}, the type is guessed based on the values in
 A ggplot layer
 }
 \description{
-Use \code{\link{cartographer}} to attach a spatial column to the data based
+Use 'cartographer' to attach a spatial column to the data based
 on place names in another column. The result can then be used by
 \code{\link[ggplot2:ggsf]{ggplot2::geom_sf()}} or \code{\link[ggmapinset:geom_sf_inset]{ggmapinset::geom_sf_inset()}}.
 }
