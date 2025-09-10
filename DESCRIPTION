@@ -2,7 +2,7 @@ Package: ggautomap
 Type: Package
 Title: Create Maps from a Column of Place Names
 Version: 0.3.2.9000
-Authors@R: 
+Authors@R:
     c(person(given = "Carl",
              family = "Suster",
              email = "Carl.Suster@health.nsw.gov.au",
@@ -20,9 +20,9 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-Depends: 
+Depends:
     R (>= 4.1),
-Imports: 
+Imports:
     cartographer (>= 0.2),
     cli (>= 3.4.0),
     dplyr (>= 1.0.0),
@@ -33,7 +33,7 @@ Imports:
     sf (>= 1.0),
     tidyr (>= 1.2.0),
     vctrs (>= 0.4.0)
-Collate: 
+Collate:
     'aaa.R'
     'stat_automap.R'
     'stat_automap_coords.R'
@@ -49,7 +49,7 @@ Collate:
 URL: https://github.com/cidm-ph/ggautomap,
     https://cidm-ph.github.io/ggautomap/
 BugReports: https://github.com/cidm-ph/ggautomap/issues
-Suggests: 
+Suggests:
     ggrepel,
     knitr,
     nswgeo,
