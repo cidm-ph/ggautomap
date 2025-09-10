@@ -5,11 +5,12 @@ Version: 0.3.2.9000
 Authors@R:
     c(person(given = "Carl",
              family = "Suster",
-             email = "Carl.Suster@health.nsw.gov.au",
+             email = "carl.suster@sydney.edu.au",
              role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7021-9380")),
       person("Western Sydney Local Health District, NSW Health",
-             role = "cph"))
+             role = "cph",
+             comment = "2023-2025"))
 Description: Mapping tools that convert place names to coordinates on the fly.
     These 'ggplot2' extensions make maps from a data frame where one of the
     columns contains place names, without having to directly work with the

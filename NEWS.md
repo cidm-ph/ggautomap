@@ -1,4 +1,4 @@
-# ggautomap 0.3.2.9000
+# ggautomap 0.3.3
 
 * Doc tweaks and housekeeping.
 
