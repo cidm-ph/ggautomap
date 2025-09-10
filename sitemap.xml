@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/404.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/articles/ggautomap.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/choropleth.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/configure_inset.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/coord_automap.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/crs_eqc.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/geom_boundaries.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/geom_centroids.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/geoscatter.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/ggautomap-package.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/position_circle_repel.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/stat_automap.html</loc>
-  </url>
-  <url>
-    <loc>https://cidm-ph.github.io/ggautomap/reference/stat_automap_coords.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://cidm-ph.github.io/ggautomap/404.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/LICENSE-text.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/LICENSE.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/articles/ggautomap.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/articles/index.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/authors.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/index.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/news/index.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/choropleth.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/configure_inset.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/coord_automap.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/crs_eqc.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/geom_boundaries.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/geom_centroids.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/geoscatter.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/ggautomap-package.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/index.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/position_circle_repel.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/reexports.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/stat_automap.html</loc></url>
+<url><loc>https://cidm-ph.github.io/ggautomap/reference/stat_automap_coords.html</loc></url>
 </urlset>
+
