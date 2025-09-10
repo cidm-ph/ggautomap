@@ -232,3 +232,51 @@ covid_cases_nsw %>%
   labs(x = NULL, y = NULL) +
   theme_void()
 ```
+
+## Loading custom maps and shape files
+
+ggautomap accesses map data via the cartographer package's registry. See `vignette("registering_maps", package = "cartographer")` for a guide on how to register new map data. This can be as simple as a one-liner calling `cartographer::register_map()` to assign map data to a name that ggautomap can use.
+
+Before proceeding to load custom shape files, check the R package [rnaturalearth](https://github.com/ropensci/rnaturalearth) which contains maps for world maps and countries.
+
+Map data needs to be in any format understood by `sf::read_sf()`, such as a shape file (`.shp`).
+For example Australian maps can be retrieved from [ABS Digital boundary files](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files).
+
+First read in the shape file using the `sf` package:
+
+```{r, eval=FALSE}
+sf <- sf::read_sf("map_data.shp")
+```
+Shape files can be subset in a similar fashion to data.frames using `dplyr`:
+
+```{r, eval=FALSE}
+# subset to only include Victorian postcodes only
+sf_vic <-
+  sf::read_sf(map_files) |>
+  mutate(postcode = as.integer(POA_CODE21)) |>
+  filter(POA_CODE21 >= 3000 & POA_CODE21 <= 3999)
+```
+
+After reading in the shape file, register with `cartographer` package:
+```{r, eval=FALSE}
+cartographer::register_map(
+  "sf.vic", # the map name
+  data = sf_vic, # this is the object we subsetted above
+  feature_column = "postcode", # data column to include
+)
+```
+
+Check the map has been registered:
+```r
+cartographer::feature_types()
+ [1] "maps.italy"                    "rnaturalearth.countries_hires" "sf.vic"                        "maps.lakes"
+ [5] "rnaturalearth.countries"       "rnaturalearth.australia"       "maps.nz"                       "maps.world"
+ [9] "maps.state"                    "sf.nc"                         "maps.france"
+```
+
+To use the registered shapefile:
+```{r, eval=FALSE}
+ggplot() +
+  geom_boundaries(feature_type = "sf.vic") +
+  theme_void()
+```
