@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   ggautomap: ggautomap.html
-last_built: 2025-09-10T02:04Z
+last_built: 2025-09-10T03:48Z
 urls:
   reference: https://cidm-ph.github.io/ggautomap/reference
   article: https://cidm-ph.github.io/ggautomap/articles
