@@ -19,6 +19,7 @@ set.seed(2022)
 <!-- badges: start -->
 [![ggautomap status badge](https://cidm-ph.r-universe.dev/badges/ggautomap)](https://cidm-ph.r-universe.dev)
 [![R-CMD-check](https://github.com/cidm-ph/ggautomap/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/cidm-ph/ggautomap/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/ggautomap)](https://CRAN.R-project.org/package=ggautomap)
 <!-- badges: end -->
 
 `ggautomap` helps when you have a spreadsheet/table of data that includes a
