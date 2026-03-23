@@ -27,7 +27,7 @@ Imports:
     cartographer (>= 0.2),
     cli (>= 3.4.0),
     dplyr (>= 1.0.0),
-    ggmapinset (>= 0.3),
+    ggmapinset (> 0.4.0),
     ggplot2 (>= 3.4.2),
     packcircles (>= 0.3.4),
     rlang (>= 1.0.0),
@@ -39,7 +39,6 @@ Collate:
     'stat_automap.R'
     'stat_automap_coords.R'
     'choropleth.R'
-    'configure_inset.R'
     'coord_automap.R'
     'crs.R'
     'geom_boundaries.R'

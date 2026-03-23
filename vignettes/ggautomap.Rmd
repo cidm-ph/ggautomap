@@ -75,8 +75,10 @@ covid_cases_nsw |>
   coord_automap(
     feature_type = "nswgeo.lga",
     inset = configure_inset(
-      centre = "Blacktown",
-      radius = 40,
+      shape_circle(
+        centre = "Blacktown",
+        radius = 40
+      ),
       units = "km",
       scale = 7,
       translation = c(400, -100)
@@ -96,12 +98,25 @@ covid_cases_nsw |>
   dplyr::filter(year >= 2021) |>
   ggplot(aes(location = lhd)) +
   geom_boundaries(feature_type = "nswgeo.lhd") +
-  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 35), size = 1) +
+  geom_centroids(
+    aes(colour = type),
+    position = position_circle_repel_sf(scale = 35),
+    size = 1
+  ) +
   geom_inset_frame() +
-  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Sydney", radius = 80, units = "km", feature_type = "nswgeo.lhd",
-    scale = 6, translation = c(650, -100)
-  )) +
+  coord_automap(
+    feature_type = "nswgeo.lhd",
+    inset = configure_inset(
+      shape_circle(
+        centre = "Sydney",
+        radius = 80,
+        feature_type = "nswgeo.lhd"
+      ),
+      units = "km",
+      scale = 6,
+      translation = c(650, -100)
+    )
+  ) +
   facet_wrap(vars(year)) +
   labs(x = NULL, y = NULL) +
   theme_void() +
@@ -124,9 +139,16 @@ covid_cases_nsw |>
     outline.aes = list(colour = NA)
   ) +
   geom_inset_frame() +
-  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Western Sydney", radius = 60, units = "km",
-    scale = 5, translation = c(400, -100)
+  coord_automap(
+    feature_type = "nswgeo.lhd",
+    inset = configure_inset(
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
+      units = "km",
+      scale = 5,
+      translation = c(400, -100)
   )) +
   scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
   theme_void()
@@ -161,8 +183,10 @@ summarised_data |>
   coord_automap(
     feature_type = "nswgeo.lhd",
     inset = configure_inset(
-      centre = "Western Sydney",
-      radius = 60,
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60,
+      ),
       units = "km",
       scale = 3.5,
       translation = c(350, 0)
@@ -187,9 +211,16 @@ covid_cases_nsw |>
     stat = "automap_coords",
     data = ~ dplyr::slice_head(.x, by = lhd)
   ) +
-  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0)
+  coord_automap(
+    feature_type = "nswgeo.lhd",
+    inset = configure_inset(
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
+      units = "km",
+      scale = 3.5,
+      translation = c(350, 0)
   )) +
   labs(x = NULL, y = NULL) +
   theme_void()
@@ -226,8 +257,10 @@ covid_cases_nsw |>
   coord_automap(
     feature_type = "nswgeo.lhd",
     inset = configure_inset(
-      centre = "Western Sydney",
-      radius = 60,
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
       units = "km",
       scale = 3.5,
       translation = c(350, 0)
@@ -258,8 +291,10 @@ covid_cases_nsw |>
   coord_automap(
     feature_type = "nswgeo.lhd",
     inset = configure_inset(
-      centre = "Western Sydney",
-      radius = 60,
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
       units = "km",
       scale = 4,
       translation = c(500, 0)

@@ -34,3 +34,32 @@ ggmapinset::geom_sf_text_inset
 #' @importFrom ggmapinset geom_sf_label_inset
 #' @export
 ggmapinset::geom_sf_label_inset
+
+#' @importFrom ggmapinset configure_inset
+#' @export
+ggmapinset::configure_inset
+
+#' @importFrom ggmapinset shape_circle
+#' @export
+ggmapinset::shape_circle
+
+#' @importFrom ggmapinset shape_rectangle
+#' @export
+ggmapinset::shape_rectangle
+
+#' @importFrom ggmapinset shape_sf
+#' @export
+ggmapinset::shape_sf
+
+#' @importFrom ggmapinset coerce_centre
+#' @export
+coerce_centre.character <- function(centre, feature_type = NA) {
+    feature_type <- cartographer::resolve_feature_type(feature_type, centre)
+    geom <- cartographer::map_sfc(centre, feature_type)
+    crs_orig <- sf::st_crs(geom)
+
+    crs_working <- crs_eqc_midpoint(feature_type)
+    geom <- sf::st_transform(geom, crs_working)
+    centre <- sf::st_transform(sf::st_centroid(geom), crs_orig)
+    centre
+}
