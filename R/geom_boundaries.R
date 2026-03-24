@@ -86,7 +86,7 @@ boundaries <- function(
     params$fill <- NA
   }
 
-  layers <- ggmapinset::build_sf_inset_layers(
+  layers <- build_sf_inset_layers(
     data = data_inner,
     mapping = mapping,
     stat = stat,
@@ -103,7 +103,7 @@ boundaries <- function(
     params_outline <- modifyList(params, outline.aes, keep.null = TRUE)
     layers <- c(
       layers,
-      ggmapinset::build_sf_inset_layers(
+      build_sf_inset_layers(
         data = data_outline,
         mapping = aes(),
         stat = stat,

@@ -4,6 +4,7 @@
 #' on place names in another column. The spatial data is then reduced to
 #' coordinates in the same way as [`stat_sf_coordinates()`][ggplot2::stat_sf_coordinates].
 #'
+#' @aesthetics StatAutomapCoords
 #' @section Computed variables:
 #' \describe{
 #'   \item{geometry}{\code{sf} geometry column representing the points}
@@ -70,7 +71,7 @@ stat_automap_coords <- function(
 #' @format NULL
 #'
 #' @export
-StatAutomapCoords <- ggplot2::ggproto(
+StatAutomapCoords <- ggproto(
   "StatAutomapCoords",
   ggmapinset::StatSfCoordinatesInset,
   required_aes = c("location"),
@@ -83,7 +84,7 @@ StatAutomapCoords <- ggplot2::ggproto(
     inset = waiver(),
     fun.geometry = NULL
   ) {
-    inset <- ggmapinset::get_inset_config(inset, coord)
+    inset <- get_inset_config(inset, coord)
     feature_type <- get_feature_type(feature_type, coord, data$location)
     data$location <- cartographer::resolve_feature_names(
       data$location,

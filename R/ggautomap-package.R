@@ -9,4 +9,5 @@
 "_PACKAGE"
 
 #' @importFrom ggplot2 waiver ggproto aes
+#' @importFrom ggmapinset build_sf_inset_layers get_inset_config
 NULL

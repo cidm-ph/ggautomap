@@ -58,3 +58,13 @@ ggplot(events, aes(location = county)) +
   coord_automap(feature_type = "sf.nc")
 }
 \keyword{datasets}
+\section{Aesthetics}{
+
+\code{stat_automap()} understands the following aesthetics. Required aesthetics are displayed in bold and defaults are displayed for optional aesthetics:
+\tabular{rll}{
+ • \tab \strong{\code{location}} \tab   \cr
+ • \tab \code{\link[ggplot2:aes_group_order]{group}} \tab → inferred \cr
+}
+
+Learn more about setting these aesthetics in \code{vignette("ggplot2-specs")}.
+}

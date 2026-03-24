@@ -34,7 +34,7 @@ geom_centroids <- function(
   ...,
   fun.geometry = NULL,
   feature_type = NA,
-  inset = inset(),
+  inset = waiver(),
   map_base = "clip",
   map_inset = "auto",
   na.rm = TRUE,
@@ -56,7 +56,7 @@ geom_centroids <- function(
   }
   mapping$group <- "location"
 
-  ggmapinset::build_sf_inset_layers(
+  build_sf_inset_layers(
     data = data,
     mapping = mapping,
     stat = stat,

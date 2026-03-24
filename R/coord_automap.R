@@ -7,7 +7,7 @@
 #'
 #' @inheritParams cartographer::resolve_feature_type
 #' @param inset Inset configuration; see [configure_inset()].
-#' @param ... Arguments passed to [ggmapinset::coord_sf_inset()]
+#' @param ... Arguments passed to [`coord_sf_inset()`][ggmapinset::coord_sf_inset]
 #'
 #' @returns A ggplot coordinate
 #' @export

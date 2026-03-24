@@ -11,9 +11,7 @@
 #'
 #' @rdname choropleth
 #'
-#' @section Aesthetics:
-#' The \code{location} aesthetic is required.
-#' \code{geom_choropleth()} understands the same aesthetics as [ggplot2::geom_sf()].
+#' @aesthetics StatChoropleth
 #'
 #' @inheritParams stat_choropleth
 #' @inheritParams ggmapinset::geom_sf_inset
@@ -53,7 +51,7 @@ geom_choropleth <- function(
     params$colour <- NA
   }
 
-  ggmapinset::build_sf_inset_layers(
+  build_sf_inset_layers(
     data = data,
     mapping = mapping,
     stat = stat,
@@ -80,13 +78,17 @@ geom_choropleth <- function(
 #' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export
-stat_choropleth <- function(mapping = NULL, data = NULL,
-                            geom = "sf", position = "identity",
-                            ...,
-                            feature_type = NA,
-                            na.rm = TRUE,
-                            show.legend = NA,
-                            inherit.aes = TRUE) {
+stat_choropleth <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "sf",
+  position = "identity",
+  ...,
+  feature_type = NA,
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
   ggplot2::layer_sf(
     data = data,
     mapping = mapping,
@@ -109,7 +111,7 @@ stat_choropleth <- function(mapping = NULL, data = NULL,
 #'
 #' @importFrom rlang .data
 #' @export
-StatChoropleth <- ggplot2::ggproto(
+StatChoropleth <- ggproto(
   "StatChoropleth",
   StatAutomap,
   default_aes = aes(fill = ggplot2::after_stat(count)),

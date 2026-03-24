@@ -12,7 +12,7 @@ geom_centroids(
   ...,
   fun.geometry = NULL,
   feature_type = NA,
-  inset = inset(),
+  inset = waiver(),
   map_base = "clip",
   map_inset = "auto",
   na.rm = TRUE,

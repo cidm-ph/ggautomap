@@ -65,3 +65,15 @@ ggplot(events, aes(location = county)) +
 \seealso{
 \code{\link[ggmapinset:stat_sf_coordinates_inset]{ggmapinset::stat_sf_coordinates_inset()}}
 }
+\section{Aesthetics}{
+
+\code{stat_automap_coords()} understands the following aesthetics. Required aesthetics are displayed in bold and defaults are displayed for optional aesthetics:
+\tabular{rll}{
+ • \tab \strong{\code{location}} \tab   \cr
+ • \tab \code{\link[ggplot2:aes_group_order]{group}} \tab → inferred \cr
+ • \tab \code{\link[ggplot2:aes_position]{x}} \tab → \code{after_stat(x)} \cr
+ • \tab \code{\link[ggplot2:aes_position]{y}} \tab → \code{after_stat(y)} \cr
+}
+
+Learn more about setting these aesthetics in \code{vignette("ggplot2-specs")}.
+}

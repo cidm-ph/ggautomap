@@ -4,6 +4,7 @@
 #' on place names in another column. The result can then be used by
 #' [ggplot2::geom_sf()] or [ggmapinset::geom_sf_inset()].
 #'
+#' @aesthetics StatAutomap
 #' @section Computed variables:
 #' \describe{
 #'   \item{geometry}{\code{sf} geometry column}
@@ -57,12 +58,17 @@ stat_automap <- function(mapping = NULL, data = NULL,
 #' @format NULL
 #'
 #' @export
-StatAutomap <- ggplot2::ggproto("StatAutomap", ggmapinset::StatSfInset,
+StatAutomap <- ggproto(
+  "StatAutomap",
+  ggmapinset::StatSfInset,
   required_aes = c("location"),
 
   compute_panel = function(data, scales, coord, feature_type = NA) {
     feature_type <- get_feature_type(feature_type, coord, data$location)
-    data$location <- cartographer::resolve_feature_names(data$location, feature_type)
+    data$location <- cartographer::resolve_feature_names(
+      data$location,
+      feature_type
+    )
 
     geoms <- cartographer::map_sfc(data$location, feature_type)
     crs_data <- sf::st_crs(cartographer::map_sf(feature_type))

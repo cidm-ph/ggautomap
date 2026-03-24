@@ -56,7 +56,7 @@ geom_geoscatter <- function(
     ...
   )
 
-  ggmapinset::build_sf_inset_layers(
+  build_sf_inset_layers(
     data = data,
     mapping = mapping,
     stat = stat,
@@ -86,14 +86,21 @@ geom_geoscatter <- function(
 #' @inheritParams cartographer::resolve_feature_type
 #'
 #' @export
-stat_geoscatter <- function(mapping = NULL, data = NULL,
-                            geom = "sf_inset", position = "identity",
-                            ...,
-                            feature_type = NA,
-                            sample_type = "random",
-                            show.legend = NA,
-                            inherit.aes = TRUE) {
-  sample_type <- rlang::arg_match0(sample_type, c("random", "regular", "hexagonal"))
+stat_geoscatter <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "sf_inset",
+  position = "identity",
+  ...,
+  feature_type = NA,
+  sample_type = "random",
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
+  sample_type <- rlang::arg_match0(
+    sample_type,
+    c("random", "regular", "hexagonal")
+  )
 
   ggplot2::layer_sf(
     data = data,

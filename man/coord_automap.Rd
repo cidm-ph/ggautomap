@@ -13,7 +13,7 @@ registered types. If \code{NA}, the type is guessed based on the values in
 
 \item{inset}{Inset configuration; see \code{\link[=configure_inset]{configure_inset()}}.}
 
-\item{...}{Arguments passed to \code{\link[ggmapinset:coord_sf_inset]{ggmapinset::coord_sf_inset()}}}
+\item{...}{Arguments passed to \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}}
 }
 \value{
 A ggplot coordinate
