@@ -31,7 +31,7 @@
 #'   scale_fill_steps(low = "#e6f9ff", high = "#00394d") +
 #'   coord_automap(feature_type = "sf.nc")
 geom_choropleth <- function(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "choropleth",
   position = "identity",
@@ -109,8 +109,10 @@ stat_choropleth <- function(mapping = NULL, data = NULL,
 #'
 #' @importFrom rlang .data
 #' @export
-StatChoropleth <- ggplot2::ggproto("StatChoropleth", StatAutomap,
-  default_aes = ggplot2::aes(fill = ggplot2::after_stat(count)),
+StatChoropleth <- ggplot2::ggproto(
+  "StatChoropleth",
+  StatAutomap,
+  default_aes = aes(fill = ggplot2::after_stat(count)),
 
   compute_panel = function(data, scales, coord, feature_type = NA) {
     counts <- dplyr::count(data, location = .data$location, name = "count")

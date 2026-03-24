@@ -5,7 +5,7 @@
 \title{Geographic centroid of locations}
 \usage{
 geom_centroids(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "automap_coords",
   position = "circle_repel_sf",

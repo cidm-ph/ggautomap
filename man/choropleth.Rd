@@ -8,7 +8,7 @@
 \title{Associate regions with counts}
 \usage{
 geom_choropleth(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "choropleth",
   position = "identity",

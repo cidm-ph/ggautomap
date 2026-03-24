@@ -8,5 +8,5 @@
 #' @docType package
 "_PACKAGE"
 
-#' @importFrom ggplot2 waiver ggproto
+#' @importFrom ggplot2 waiver ggproto aes
 NULL

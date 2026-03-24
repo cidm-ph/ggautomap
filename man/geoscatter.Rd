@@ -8,7 +8,7 @@
 \title{Place points randomly or in a grid within locations}
 \usage{
 geom_geoscatter(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "geoscatter",
   position = "identity",

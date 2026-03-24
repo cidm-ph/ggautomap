@@ -27,7 +27,7 @@
 #'   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 6), size = 0.5) +
 #'   coord_automap(feature_type = "sf.nc")
 geom_centroids <- function(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "automap_coords",
   position = "circle_repel_sf",

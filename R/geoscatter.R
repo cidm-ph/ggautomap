@@ -30,7 +30,7 @@
 #'   geom_geoscatter(aes(colour = type), size = 0.5) +
 #'   coord_automap(feature_type = "sf.nc")
 geom_geoscatter <- function(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "geoscatter",
   position = "identity",

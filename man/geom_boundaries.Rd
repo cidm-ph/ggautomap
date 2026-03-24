@@ -5,7 +5,7 @@
 \title{Map feature boundaries}
 \usage{
 geom_boundaries(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "sf_inset",
   position = "identity",

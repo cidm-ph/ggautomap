@@ -22,7 +22,7 @@
 #' ggplot() +
 #'   geom_boundaries(feature_type = "sf.nc")
 geom_boundaries <- function(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "sf_inset",
   position = "identity",
@@ -105,7 +105,7 @@ boundaries <- function(
       layers,
       ggmapinset::build_sf_inset_layers(
         data = data_outline,
-        mapping = ggplot2::aes(),
+        mapping = aes(),
         stat = stat,
         position = position,
         show.legend = show.legend,
