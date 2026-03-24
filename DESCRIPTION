@@ -32,8 +32,7 @@ Imports:
     packcircles (>= 0.3.4),
     rlang (>= 1.0.0),
     sf (>= 1.0),
-    tidyr (>= 1.2.0),
-    vctrs (>= 0.4.0)
+    tidyr (>= 1.2.0)
 Collate:
     'aaa.R'
     'stat_automap.R'

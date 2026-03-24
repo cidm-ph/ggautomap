@@ -7,3 +7,6 @@
 #'
 #' @docType package
 "_PACKAGE"
+
+#' @importFrom ggplot2 waiver ggproto
+NULL
