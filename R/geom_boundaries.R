@@ -21,23 +21,27 @@
 #'
 #' ggplot() +
 #'   geom_boundaries(feature_type = "sf.nc")
-geom_boundaries <- function(mapping = ggplot2::aes(),
-                            data = NULL,
-                            stat = "sf_inset", position = "identity",
-                            ...,
-                            feature_type = NULL,
-                            inset = NA,
-                            map_base = "normal",
-                            map_inset = "auto",
-                            na.rm = FALSE,
-                            outline.aes = list(colour = "#666666"),
-                            show.legend = NA,
-                            inherit.aes = FALSE) {
+geom_boundaries <- function(
+  mapping = ggplot2::aes(),
+  data = NULL,
+  stat = "sf_inset",
+  position = "identity",
+  ...,
+  feature_type = NULL,
+  inset = waiver(),
+  map_base = "normal",
+  map_inset = "auto",
+  na.rm = FALSE,
+  outline.aes = list(colour = "#666666"),
+  show.legend = NA,
+  inherit.aes = FALSE
+) {
   if (!is.null(data)) {
     cli::cli_abort("{.fn geom_boundaries} provides its own {.arg data}")
   }
   if (is.null(feature_type) || is.na(feature_type)) {
-    cli::cli_abort(c("{.arg feature_type} must be specified for {.fn geom_boundaries}",
+    cli::cli_abort(c(
+      "{.arg feature_type} must be specified for {.fn geom_boundaries}",
       "i" = "Registered types: {cartographer::feature_types()}"
     ))
   }
@@ -46,27 +50,34 @@ geom_boundaries <- function(mapping = ggplot2::aes(),
     mapping = mapping,
     data_inner = cartographer::map_sf(feature_type),
     data_outline = cartographer::map_outline(feature_type),
-    stat = stat, position = position, ...,
-    inset = inset, map_base = map_base, map_inset = map_inset,
+    stat = stat,
+    position = position,
+    ...,
+    inset = inset,
+    map_base = map_base,
+    map_inset = map_inset,
     na.rm = na.rm,
     outline.aes = outline.aes,
-    show.legend = show.legend, inherit.aes = inherit.aes
+    show.legend = show.legend,
+    inherit.aes = inherit.aes
   )
 }
 
-boundaries <- function(mapping,
-                       data_inner,
-                       data_outline,
-                       stat,
-                       position,
-                       ...,
-                       inset = NA,
-                       map_base = "normal",
-                       map_inset = "auto",
-                       na.rm,
-                       outline.aes,
-                       show.legend,
-                       inherit.aes) {
+boundaries <- function(
+  mapping,
+  data_inner,
+  data_outline,
+  stat,
+  position,
+  ...,
+  inset = waiver(),
+  map_base = "normal",
+  map_inset = "auto",
+  na.rm,
+  outline.aes,
+  show.legend,
+  inherit.aes
+) {
   params <- rlang::list2(na.rm = na.rm, ...)
   if (is.null(mapping[["colour"]]) && is.null(params[["colour"]])) {
     params$colour <- "#bbbbbb"
@@ -76,10 +87,16 @@ boundaries <- function(mapping,
   }
 
   layers <- ggmapinset::build_sf_inset_layers(
-    data = data_inner, mapping = mapping,
-    stat = stat, position = position,
-    show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, map_base = map_base, map_inset = map_inset
+    data = data_inner,
+    mapping = mapping,
+    stat = stat,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params,
+    inset = inset,
+    map_base = map_base,
+    map_inset = map_inset
   )
 
   if (!is.null(data_outline)) {
@@ -87,10 +104,16 @@ boundaries <- function(mapping,
     layers <- c(
       layers,
       ggmapinset::build_sf_inset_layers(
-        data = data_outline, mapping = ggplot2::aes(),
-        stat = stat, position = position,
-        show.legend = show.legend, inherit.aes = inherit.aes, params = params_outline,
-        inset = inset, map_base = map_base, map_inset = map_inset
+        data = data_outline,
+        mapping = ggplot2::aes(),
+        stat = stat,
+        position = position,
+        show.legend = show.legend,
+        inherit.aes = inherit.aes,
+        params = params_outline,
+        inset = inset,
+        map_base = map_base,
+        map_inset = map_inset
       )
     )
   }

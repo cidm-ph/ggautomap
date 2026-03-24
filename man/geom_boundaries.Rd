@@ -11,7 +11,7 @@ geom_boundaries(
   position = "identity",
   ...,
   feature_type = NULL,
-  inset = NA,
+  inset = waiver(),
   map_base = "normal",
   map_inset = "auto",
   na.rm = FALSE,

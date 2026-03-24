@@ -15,7 +15,7 @@ geom_geoscatter(
   ...,
   feature_type = NA,
   sample_type = "random",
-  inset = NA,
+  inset = waiver(),
   map_base = "clip",
   map_inset = "auto",
   na.rm = TRUE,

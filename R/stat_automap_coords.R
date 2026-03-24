@@ -34,15 +34,19 @@
 #'   geom_sf(aes(fill = proportion_A), stat = "automap") +
 #'   geom_label(aes(label = county), stat = "automap_coords") +
 #'   coord_automap(feature_type = "sf.nc")
-stat_automap_coords <- function(mapping = NULL, data = NULL,
-                                geom = "sf_inset", position = "identity",
-                                ...,
-                                feature_type = NA,
-                                na.rm = TRUE,
-                                inset = NA,
-                                fun.geometry = NULL,
-                                show.legend = NA,
-                                inherit.aes = TRUE) {
+stat_automap_coords <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "sf_inset",
+  position = "identity",
+  ...,
+  feature_type = NA,
+  na.rm = TRUE,
+  inset = waiver(),
+  fun.geometry = NULL,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
   ggplot2::layer_sf(
     data = data,
     mapping = mapping,
@@ -66,12 +70,25 @@ stat_automap_coords <- function(mapping = NULL, data = NULL,
 #' @format NULL
 #'
 #' @export
-StatAutomapCoords <- ggplot2::ggproto("StatAutomapCoords", ggmapinset::StatSfCoordinatesInset,
+StatAutomapCoords <- ggplot2::ggproto(
+  "StatAutomapCoords",
+  ggmapinset::StatSfCoordinatesInset,
   required_aes = c("location"),
 
-  compute_group = function(data, scales, coord, feature_type = NA, inset = NA, fun.geometry = NULL) {
+  compute_group = function(
+    data,
+    scales,
+    coord,
+    feature_type = NA,
+    inset = waiver(),
+    fun.geometry = NULL
+  ) {
+    inset <- ggmapinset::get_inset_config(inset, coord)
     feature_type <- get_feature_type(feature_type, coord, data$location)
-    data$location <- cartographer::resolve_feature_names(data$location, feature_type)
+    data$location <- cartographer::resolve_feature_names(
+      data$location,
+      feature_type
+    )
     data$geometry <- cartographer::map_sfc(data$location, feature_type)
 
     crs_working <- sf::NA_crs_
@@ -79,7 +96,10 @@ StatAutomapCoords <- ggplot2::ggproto("StatAutomapCoords", ggmapinset::StatSfCoo
       crs_working <- crs_eqc_midpoint(feature_type)
     }
 
-    data <- ggmapinset::StatSfCoordinatesInset$compute_group(data, scales, coord,
+    data <- ggmapinset::StatSfCoordinatesInset$compute_group(
+      data,
+      scales,
+      coord,
       fun.geometry = fun.geometry,
       inset = inset,
       crs_working = crs_working

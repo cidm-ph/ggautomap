@@ -29,18 +29,25 @@
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_geoscatter(aes(colour = type), size = 0.5) +
 #'   coord_automap(feature_type = "sf.nc")
-geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
-                            stat = "geoscatter", position = "identity",
-                            ...,
-                            feature_type = NA,
-                            sample_type = "random",
-                            inset = NA,
-                            map_base = "clip",
-                            map_inset = "auto",
-                            na.rm = TRUE,
-                            show.legend = "point",
-                            inherit.aes = TRUE) {
-  sample_type <- rlang::arg_match0(sample_type, c("random", "regular", "hexagonal"))
+geom_geoscatter <- function(
+  mapping = ggplot2::aes(),
+  data = NULL,
+  stat = "geoscatter",
+  position = "identity",
+  ...,
+  feature_type = NA,
+  sample_type = "random",
+  inset = waiver(),
+  map_base = "clip",
+  map_inset = "auto",
+  na.rm = TRUE,
+  show.legend = "point",
+  inherit.aes = TRUE
+) {
+  sample_type <- rlang::arg_match0(
+    sample_type,
+    c("random", "regular", "hexagonal")
+  )
 
   params <- rlang::list2(
     feature_type = feature_type,
@@ -50,10 +57,16 @@ geom_geoscatter <- function(mapping = ggplot2::aes(), data = NULL,
   )
 
   ggmapinset::build_sf_inset_layers(
-    data = data, mapping = mapping,
-    stat = stat, position = position,
-    show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, map_base = map_base, map_inset = map_inset
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params,
+    inset = inset,
+    map_base = map_base,
+    map_inset = map_inset
   )
 }
 

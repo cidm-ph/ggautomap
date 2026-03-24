@@ -14,7 +14,7 @@ geom_choropleth(
   position = "identity",
   ...,
   feature_type = NA,
-  inset = NA,
+  inset = waiver(),
   map_base = "normal",
   map_inset = "auto",
   na.rm = TRUE,

@@ -19,11 +19,9 @@
 #'   geom_choropleth(aes(colour = type), size = 0.5) +
 #'   geom_sf_label_inset(aes(label = county), stat = "automap_coords", size = 3) +
 #'   coord_automap(feature_type = "sf.nc")
-coord_automap <- function(feature_type = NA, inset = NULL, ...) {
+coord_automap <- function(feature_type = NA, inset = waiver(), ...) {
   parent <- ggmapinset::coord_sf_inset(inset, ...)
-  ggproto("CoordAutomap", parent,
-    feature_type = feature_type
-  )
+  ggproto("CoordAutomap", parent, feature_type = feature_type)
 }
 
 get_feature_type <- function(feature_type, coord, feature_names) {

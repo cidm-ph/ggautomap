@@ -4,7 +4,7 @@
 \alias{coord_automap}
 \title{Specify an inset configuration for the whole plot}
 \usage{
-coord_automap(feature_type = NA, inset = NULL, ...)
+coord_automap(feature_type = NA, inset = waiver(), ...)
 }
 \arguments{
 \item{feature_type}{Type of map feature. See \code{\link[cartographer:feature_types]{feature_types()}} for a list of

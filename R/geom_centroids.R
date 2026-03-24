@@ -26,18 +26,21 @@
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 6), size = 0.5) +
 #'   coord_automap(feature_type = "sf.nc")
-geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
-                           stat = "automap_coords",
-                           position = "circle_repel_sf",
-                           ...,
-                           fun.geometry = NULL,
-                           feature_type = NA,
-                           inset = NA,
-                           map_base = "clip",
-                           map_inset = "auto",
-                           na.rm = TRUE,
-                           show.legend = "point",
-                           inherit.aes = TRUE) {
+geom_centroids <- function(
+  mapping = ggplot2::aes(),
+  data = NULL,
+  stat = "automap_coords",
+  position = "circle_repel_sf",
+  ...,
+  fun.geometry = NULL,
+  feature_type = NA,
+  inset = inset(),
+  map_base = "clip",
+  map_inset = "auto",
+  na.rm = TRUE,
+  show.legend = "point",
+  inherit.aes = TRUE
+) {
   params <- rlang::list2(
     feature_type = feature_type,
     na.rm = na.rm,
@@ -54,9 +57,15 @@ geom_centroids <- function(mapping = ggplot2::aes(), data = NULL,
   mapping$group <- "location"
 
   ggmapinset::build_sf_inset_layers(
-    data = data, mapping = mapping,
-    stat = stat, position = position,
-    show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, map_base = map_base, map_inset = map_inset
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params,
+    inset = inset,
+    map_base = map_base,
+    map_inset = map_inset
   )
 }

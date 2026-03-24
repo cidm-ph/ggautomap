@@ -12,7 +12,7 @@ stat_automap_coords(
   ...,
   feature_type = NA,
   na.rm = TRUE,
-  inset = NA,
+  inset = waiver(),
   fun.geometry = NULL,
   show.legend = NA,
   inherit.aes = TRUE

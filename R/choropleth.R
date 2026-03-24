@@ -30,16 +30,20 @@
 #'   geom_boundaries(feature_type = "sf.nc") +
 #'   scale_fill_steps(low = "#e6f9ff", high = "#00394d") +
 #'   coord_automap(feature_type = "sf.nc")
-geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
-                            stat = "choropleth", position = "identity",
-                            ...,
-                            feature_type = NA,
-                            inset = NA,
-                            map_base = "normal",
-                            map_inset = "auto",
-                            na.rm = TRUE,
-                            show.legend = NA,
-                            inherit.aes = TRUE) {
+geom_choropleth <- function(
+  mapping = ggplot2::aes(),
+  data = NULL,
+  stat = "choropleth",
+  position = "identity",
+  ...,
+  feature_type = NA,
+  inset = waiver(),
+  map_base = "normal",
+  map_inset = "auto",
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
   params <- rlang::list2(
     feature_type = feature_type,
     na.rm = na.rm,
@@ -50,10 +54,16 @@ geom_choropleth <- function(mapping = ggplot2::aes(), data = NULL,
   }
 
   ggmapinset::build_sf_inset_layers(
-    data = data, mapping = mapping,
-    stat = stat, position = position,
-    show.legend = show.legend, inherit.aes = inherit.aes, params = params,
-    inset = inset, map_base = map_base, map_inset = map_inset
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = params,
+    inset = inset,
+    map_base = map_base,
+    map_inset = map_inset
   )
 }
 
