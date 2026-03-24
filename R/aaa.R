@@ -53,13 +53,23 @@ ggmapinset::shape_sf
 
 #' @importFrom ggmapinset coerce_centre
 #' @export
-coerce_centre.character <- function(centre, feature_type = NA) {
-    feature_type <- cartographer::resolve_feature_type(feature_type, centre)
-    geom <- cartographer::map_sfc(centre, feature_type)
-    crs_orig <- sf::st_crs(geom)
+coerce_centre.character <- function(centre, ...) {
+  args <- rlang::list2(...)
+  extra_args <- setdiff(rlang::names2(args), c("feature_type"))
+  extra_args[extra_args == ""] <- "(unnamed)"
+  if (!rlang::is_empty(extra_args)) {
+    cli::cli_abort(
+      "unused arguments {.arg {extra_args}} for {.fn coerce_character}"
+    )
+  }
+  feature_type <- get0("feature_type", as.environment(args), ifnotfound = NA)
 
-    crs_working <- crs_eqc_midpoint(feature_type)
-    geom <- sf::st_transform(geom, crs_working)
-    centre <- sf::st_transform(sf::st_centroid(geom), crs_orig)
-    centre
+  feature_type <- cartographer::resolve_feature_type(feature_type, centre)
+  geom <- cartographer::map_sfc(centre, feature_type)
+  crs_orig <- sf::st_crs(geom)
+
+  crs_working <- crs_eqc_midpoint(feature_type)
+  geom <- sf::st_transform(geom, crs_working)
+  centre <- sf::st_transform(sf::st_centroid(geom), crs_orig)
+  centre
 }
