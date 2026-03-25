@@ -60,6 +60,8 @@ coerce_centre.character <- function(centre, ...) {
   feature_type <- get0("feature_type", as.environment(args), ifnotfound = NA)
 
   feature_type <- cartographer::resolve_feature_type(feature_type, centre)
+  centre <- cartographer::resolve_feature_names(centre, feature_type)
+
   geom <- cartographer::map_sfc(centre, feature_type)
   crs_orig <- sf::st_crs(geom)
 
