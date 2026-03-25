@@ -1,4 +1,4 @@
-# ggautomap (development version)
+# ggautomap 0.4.0
 
 * `configure_inset()` now uses the new inset shape definition style from {ggmapinset}.
   Previously {ggautomap} shadowed this function to implement the new functionality,
