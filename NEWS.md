@@ -1,8 +1,9 @@
 # ggautomap (development version)
 
-* Updated to use new inset shape definition style from {ggmapinset}.
-  There is no longer a need to override the `configure_inset()` function
-  which was brittle and depended on order of package attachment to work.
+* `configure_inset()` now uses the new inset shape definition style from {ggmapinset}.
+  Previously {ggautomap} shadowed this function to implement the new functionality,
+  which made results depend on the order of package attachment.
+  The old syntax will continuw to work with a warning until a future release.
 * Require a newer version of {ggmapinset} to fix a confusing behaviour
   where a geom with no inset configured could sometimes draw two copies
   of itself (#5).
