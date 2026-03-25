@@ -3,6 +3,9 @@
 * Updated to use new inset shape definition style from {ggmapinset}.
   There is no longer a need to override the `configure_inset()` function
   which was brittle and depended on order of package attachment to work.
+* `stat_geoscatter()` and `geom_geoscatter()` now use a fixed seed by
+  default so that the position of scattered points is reproducible.
+  The old behaviour can be restored by setting `seed = NA`.
 
 # ggautomap 0.3.3
 

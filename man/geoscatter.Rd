@@ -15,6 +15,7 @@ geom_geoscatter(
   ...,
   feature_type = NA,
   sample_type = "random",
+  seed = 12345,
   inset = waiver(),
   map_base = "clip",
   map_inset = "auto",
@@ -31,6 +32,7 @@ stat_geoscatter(
   ...,
   feature_type = NA,
   sample_type = "random",
+  seed = 12345,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -46,6 +48,8 @@ registered types. If \code{NA}, the type is guessed based on the values in
 \code{"random"} will place points randomly inside the boundaries, whereas
 \code{"regular"} and \code{"hexagonal"} will evenly space points, leaving
 a small margin close to the boundaries.}
+
+\item{seed}{random seed, used when \code{sample_type} is \code{"random"}.}
 
 \item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.
 If \code{NA} (the default), this is inherited from the coord (see \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}).}
@@ -89,7 +93,7 @@ library(ggplot2)
 cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_geoscatter(aes(colour = type), size = 0.5) +
+  geom_geoscatter(aes(colour = type), size = 0.5, seed = 123) +
   coord_automap(feature_type = "sf.nc")
 }
 \keyword{datasets}
