@@ -21,7 +21,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Carl Suster \email{carl.suster@sydney.edu.au} (\href{https://orcid.org/0000-0001-7021-9380}{ORCID})
+\strong{Maintainer}: Carl Suster \email{carl.suster@sydney.edu.au} (\href{https://orcid.org/0000-0001-7021-9380}{ORCID}) [copyright holder]
 
 Other contributors:
 \itemize{
