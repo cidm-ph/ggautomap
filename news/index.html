@@ -35,7 +35,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggautomap-development-version">ggautomap (development version)<a class="anchor" aria-label="anchor" href="#ggautomap-development-version"></a></h2>
-</div>
+<ul><li>Updated to use new inset shape definition style from {ggmapinset}. There is no longer a need to override the <code><a href="https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html" class="external-link">configure_inset()</a></code> function which was brittle and depended on order of package attachment to work.</li>
+<li>Require a newer version of {ggmapinset} to fix a confusing behaviour where a geom with no inset configured could sometimes draw two copies of itself (<a href="https://github.com/cidm-ph/ggautomap/issues/5" class="external-link">#5</a>).</li>
+<li>
+<code><a href="../reference/geoscatter.html">stat_geoscatter()</a></code> and <code><a href="../reference/geoscatter.html">geom_geoscatter()</a></code> now use a fixed seed by default so that the position of scattered points is reproducible. The old behaviour can be restored by setting <code>seed = NA</code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.3" id="ggautomap-033">ggautomap 0.3.3<a class="anchor" aria-label="anchor" href="#ggautomap-033"></a></h2><p class="text-muted">CRAN release: 2025-09-10</p>
 <ul><li>Doc tweaks and housekeeping.</li>

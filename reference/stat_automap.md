@@ -51,6 +51,20 @@ A ggplot layer
   limits as computed by
   [`ggplot2::stat_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html)
 
+## Aesthetics
+
+`stat_automap()` understands the following aesthetics. Required
+aesthetics are displayed in bold and defaults are displayed for optional
+aesthetics:
+
+|     |                                                                         |            |
+|-----|-------------------------------------------------------------------------|------------|
+| •   | **`location`**                                                          |            |
+| •   | [`group`](https://ggplot2.tidyverse.org/reference/aes_group_order.html) | → inferred |
+
+Learn more about setting these aesthetics in
+[`vignette("ggplot2-specs")`](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html).
+
 ## Examples
 
 ``` r

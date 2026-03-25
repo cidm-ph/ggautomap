@@ -76,24 +76,16 @@ covid_cases_nsw |>
   coord_automap(
     feature_type = "nswgeo.lga",
     inset = configure_inset(
-      centre = "Blacktown",
-      radius = 40,
+      shape_circle(
+        centre = "Blacktown",
+        radius = 40
+      ),
       units = "km",
       scale = 7,
       translation = c(400, -100)
     )
   ) +
   theme_void()
-#> Warning: The `radius` argument of `configure_inset()` is deprecated as of ggmapinset
-#> 0.4.0.
-#> ℹ Use `shape = shape_circle(centre, radius)` instead.
-#> ℹ The deprecated feature was likely used in the ggautomap package.
-#>   Please report the issue at <https://github.com/cidm-ph/ggautomap/issues>.
-#> This warning is displayed once per session.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/inset-1.png)
@@ -111,20 +103,29 @@ covid_cases_nsw |>
   dplyr::filter(year >= 2021) |>
   ggplot(aes(location = lhd)) +
   geom_boundaries(feature_type = "nswgeo.lhd") +
-  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 35), size = 1) +
+  geom_centroids(
+    aes(colour = type),
+    position = position_circle_repel_sf(scale = 35),
+    size = 1
+  ) +
   geom_inset_frame() +
-  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Sydney", radius = 80, units = "km", feature_type = "nswgeo.lhd",
-    scale = 6, translation = c(650, -100)
-  )) +
+  coord_automap(
+    feature_type = "nswgeo.lhd",
+    inset = configure_inset(
+      shape_circle(
+        centre = "Sydney",
+        radius = 80,
+        feature_type = "nswgeo.lhd"
+      ),
+      units = "km",
+      scale = 6,
+      translation = c(650, -100)
+    )
+  ) +
   facet_wrap(vars(year)) +
   labs(x = NULL, y = NULL) +
   theme_void() +
   theme(strip.text = element_text(size = 12))
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/packed-1.png)
@@ -141,18 +142,31 @@ covid_cases_nsw |>
   ggplot(aes(location = lhd)) +
   geom_choropleth() +
   geom_boundaries(
-    feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
+    feature_type = "nswgeo.lhd",
+    colour = "black",
+    linewidth = 0.1,
     outline.aes = list(colour = NA)
   ) +
   geom_inset_frame() +
-  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Western Sydney", radius = 60, units = "km",
-    scale = 5, translation = c(400, -100)
-  )) +
-  scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
+  coord_automap(
+    feature_type = "nswgeo.lhd",
+    inset = configure_inset(
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
+      units = "km",
+      scale = 5,
+      translation = c(400, -100)
+    )
+  ) +
+  scale_fill_steps(
+    low = "#e6f9ff",
+    high = "#00394d",
+    n.breaks = 5,
+    na.value = "white"
+  ) +
   theme_void()
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/choro-long-1.png)
@@ -186,8 +200,10 @@ summarised_data |>
   coord_automap(
     feature_type = "nswgeo.lhd",
     inset = configure_inset(
-      centre = "Western Sydney",
-      radius = 60,
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60,
+      ),
       units = "km",
       scale = 3.5,
       translation = c(350, 0)
@@ -195,8 +211,6 @@ summarised_data |>
   ) +
   scale_fill_gradient(low = "#e6f9ff", high = "#00394d", na.value = "grey90") +
   theme_void()
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/choro-wide-1.png)
@@ -212,18 +226,25 @@ covid_cases_nsw |>
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_inset_frame() +
-  geom_sf_label_inset(aes(label = lhd),
+  geom_sf_label_inset(
+    aes(label = lhd),
     stat = "automap_coords",
     data = ~ dplyr::slice_head(.x, by = lhd)
   ) +
-  coord_automap(feature_type = "nswgeo.lhd", inset = configure_inset(
-    centre = "Western Sydney", radius = 60, units = "km",
-    scale = 3.5, translation = c(350, 0)
-  )) +
+  coord_automap(
+    feature_type = "nswgeo.lhd",
+    inset = configure_inset(
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
+      units = "km",
+      scale = 3.5,
+      translation = c(350, 0)
+    )
+  ) +
   labs(x = NULL, y = NULL) +
   theme_void()
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/text-inset-1.png)
@@ -260,8 +281,10 @@ covid_cases_nsw |>
   coord_automap(
     feature_type = "nswgeo.lhd",
     inset = configure_inset(
-      centre = "Western Sydney",
-      radius = 60,
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
       units = "km",
       scale = 3.5,
       translation = c(350, 0)
@@ -269,8 +292,6 @@ covid_cases_nsw |>
   ) +
   labs(x = NULL, y = NULL) +
   theme_void()
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/text-repel-1.png)
@@ -299,8 +320,10 @@ covid_cases_nsw |>
   coord_automap(
     feature_type = "nswgeo.lhd",
     inset = configure_inset(
-      centre = "Western Sydney",
-      radius = 60,
+      shape_circle(
+        centre = "Western Sydney",
+        radius = 60
+      ),
       units = "km",
       scale = 4,
       translation = c(500, 0)
@@ -308,8 +331,6 @@ covid_cases_nsw |>
   ) +
   labs(x = NULL, y = NULL) +
   theme_void()
-#> Warning in rep(pch, length.out = length(x)): 'x' is NULL so the result will be
-#> NULL
 ```
 
 ![](ggautomap_files/figure-html/text-repel-2.png)

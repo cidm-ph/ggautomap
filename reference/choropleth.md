@@ -11,13 +11,13 @@ with `stat = "automap"` instead.
 
 ``` r
 geom_choropleth(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "choropleth",
   position = "identity",
   ...,
   feature_type = NA,
-  inset = NA,
+  inset = waiver(),
   map_base = "normal",
   map_inset = "auto",
   na.rm = TRUE,
@@ -57,7 +57,8 @@ stat_choropleth(
 
   Inset configuration; see
   [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html).
-  If `NA` (the default), this is inherited from the coord (see
+  If [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html),
+  the default, this is inherited from the coord (see
   [`coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)).
 
 - map_base:
@@ -83,12 +84,6 @@ A ggplot layer.
 Note that choropleths have a tendency to be misleading by emphasising
 geographically larger areas.
 
-## Aesthetics
-
-The `location` aesthetic is required. `geom_choropleth()` understands
-the same aesthetics as
-[`ggplot2::geom_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html).
-
 ## Computed variables
 
 - count:
@@ -103,6 +98,21 @@ the same aesthetics as
 
   limits as computed by
   [`ggplot2::stat_sf()`](https://ggplot2.tidyverse.org/reference/ggsf.html)
+
+## Aesthetics
+
+`stat_choropleth()` understands the following aesthetics. Required
+aesthetics are displayed in bold and defaults are displayed for optional
+aesthetics:
+
+|     |                                                                              |                                |
+|-----|------------------------------------------------------------------------------|--------------------------------|
+| •   | **`location`**                                                               |                                |
+| •   | [`fill`](https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html) | → `ggplot2::after_stat(count)` |
+| •   | [`group`](https://ggplot2.tidyverse.org/reference/aes_group_order.html)      | → inferred                     |
+
+Learn more about setting these aesthetics in
+[`vignette("ggplot2-specs")`](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html).
 
 ## Examples
 

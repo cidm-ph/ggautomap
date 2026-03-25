@@ -18,7 +18,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Carl Suster <carl.suster@sydney.edu.au>
-([ORCID](https://orcid.org/0000-0001-7021-9380))
+([ORCID](https://orcid.org/0000-0001-7021-9380)) \[copyright holder\]
 
 Other contributors:
 

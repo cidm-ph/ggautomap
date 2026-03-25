@@ -9,13 +9,13 @@ with the possibility to override its aesthetics.
 
 ``` r
 geom_boundaries(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "sf_inset",
   position = "identity",
   ...,
   feature_type = NULL,
-  inset = NA,
+  inset = waiver(),
   map_base = "normal",
   map_inset = "auto",
   na.rm = FALSE,
@@ -47,7 +47,8 @@ geom_boundaries(
 
   Inset configuration; see
   [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html).
-  If `NA` (the default), this is inherited from the coord (see
+  If [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html),
+  the default, this is inherited from the coord (see
   [`coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)).
 
 - map_base:
@@ -77,7 +78,11 @@ A ggplot layer.
 
 ``` r
 library(ggplot2)
+library(nswgeo)
 
 ggplot() +
-  geom_boundaries(feature_type = "sf.nc")
+  geom_boundaries(
+    feature_type = "nswgeo.lhd",
+    outline.aes = list(colour = "red", linewidth = 0.6)
+  )
 ```

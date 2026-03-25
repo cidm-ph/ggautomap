@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Carl Suster**. Author, maintainer.
+- **Carl Suster**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0001-7021-9380)
 
 - **Western Sydney Local Health District, NSW Health**. Copyright

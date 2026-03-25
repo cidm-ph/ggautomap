@@ -54,7 +54,7 @@ coordinates in the same way as <code><a href="https://ggplot2.tidyverse.org/refe
 <span>  <span class="va">...</span>,</span>
 <span>  feature_type <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  inset <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inset <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  fun.geometry <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  show.legend <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  inherit.aes <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -77,7 +77,7 @@ registered types. If <code>NA</code>, the type is guessed based on the values in
 
 <dt id="arg-inset">inset<a class="anchor" aria-label="anchor" href="#arg-inset"></a></dt>
 <dd><p>Inset configuration; see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html" class="external-link">configure_inset()</a></code>.
-If <code>NA</code> (the default), this is inherited from the coord (see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html" class="external-link">coord_sf_inset()</a></code>).</p></dd>
+If <code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver()</a></code>, the default, this is inherited from the coord (see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html" class="external-link">coord_sf_inset()</a></code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -114,6 +114,12 @@ If <code>NA</code> (the default), this is inherited from the coord (see <code><a
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://cidm-ph.github.io/ggmapinset/reference/stat_sf_coordinates_inset.html" class="external-link">ggmapinset::stat_sf_coordinates_inset()</a></code></p></div>
+    </div>
+    <div class="section level2">
+    <h2 id="aesthetics">Aesthetics<a class="anchor" aria-label="anchor" href="#aesthetics"></a></h2>
+
+
+<p><code>stat_automap_coords()</code> understands the following aesthetics. Required aesthetics are displayed in bold and defaults are displayed for optional aesthetics:</p><table class="table table"><tr><td>•</td><td><strong><code>location</code></strong></td><td></td></tr><tr><td>•</td><td><code><a href="https://ggplot2.tidyverse.org/reference/aes_group_order.html" class="external-link">group</a></code></td><td>→ inferred</td></tr><tr><td>•</td><td><code><a href="https://ggplot2.tidyverse.org/reference/aes_position.html" class="external-link">x</a></code></td><td>→ <code>after_stat(x)</code></td></tr><tr><td>•</td><td><code><a href="https://ggplot2.tidyverse.org/reference/aes_position.html" class="external-link">y</a></code></td><td>→ <code>after_stat(y)</code></td></tr></table><p>Learn more about setting these aesthetics in <code><a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html" class="external-link">vignette("ggplot2-specs")</a></code>.</p>
     </div>
 
     <div class="section level2">

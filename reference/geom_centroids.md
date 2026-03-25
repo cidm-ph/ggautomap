@@ -11,14 +11,14 @@ to repel the points outwards with an amount controllable with its
 
 ``` r
 geom_centroids(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "automap_coords",
   position = "circle_repel_sf",
   ...,
   fun.geometry = NULL,
   feature_type = NA,
-  inset = NA,
+  inset = waiver(),
   map_base = "clip",
   map_inset = "auto",
   na.rm = TRUE,
@@ -46,7 +46,8 @@ geom_centroids(
 
   Inset configuration; see
   [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html).
-  If `NA` (the default), this is inherited from the coord (see
+  If [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html),
+  the default, this is inherited from the coord (see
   [`coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)).
 
 - map_base:
@@ -82,6 +83,10 @@ cartographer::nc_type_example_2 |>
   head(n = 100) |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 6), size = 0.5) +
+  geom_centroids(
+    aes(colour = type),
+    position = position_circle_repel_sf(scale = 6),
+    size = 0.5
+  ) +
   coord_automap(feature_type = "sf.nc")
 ```

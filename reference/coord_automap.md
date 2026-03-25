@@ -24,12 +24,12 @@ coord_automap(feature_type = NA, inset = NULL, ...)
 - inset:
 
   Inset configuration; see
-  [`configure_inset()`](https://cidm-ph.github.io/ggautomap/reference/configure_inset.md).
+  [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html).
 
 - ...:
 
   Arguments passed to
-  [`ggmapinset::coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)
+  [`coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)
 
 ## Value
 

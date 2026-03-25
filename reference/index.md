@@ -24,8 +24,20 @@
 
 ## map helpers
 
-- [`configure_inset()`](https://cidm-ph.github.io/ggautomap/reference/configure_inset.md)
-  : Configure transformations underpinning a map inset
+- [`reexports`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`geom_inset_frame`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`geom_sf_inset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`GeomSfInset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`stat_sf_inset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`StatSfInset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`StatSfCoordinatesInset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`geom_sf_text_inset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`geom_sf_label_inset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`configure_inset`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`shape_circle`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`shape_rectangle`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  [`shape_sf`](https://cidm-ph.github.io/ggautomap/reference/reexports.md)
+  : Objects exported from other packages
 - [`crs_eqc()`](https://cidm-ph.github.io/ggautomap/reference/crs_eqc.md)
   : Coordinate reference system for spatial computations
 

@@ -9,14 +9,15 @@ exact placement of the points.
 
 ``` r
 geom_geoscatter(
-  mapping = ggplot2::aes(),
+  mapping = aes(),
   data = NULL,
   stat = "geoscatter",
   position = "identity",
   ...,
   feature_type = NA,
   sample_type = "random",
-  inset = NA,
+  seed = 12345,
+  inset = waiver(),
   map_base = "clip",
   map_inset = "auto",
   na.rm = TRUE,
@@ -32,6 +33,7 @@ stat_geoscatter(
   ...,
   feature_type = NA,
   sample_type = "random",
+  seed = 12345,
   show.legend = NA,
   inherit.aes = TRUE
 )
@@ -60,11 +62,17 @@ stat_geoscatter(
   `"regular"` and `"hexagonal"` will evenly space points, leaving a
   small margin close to the boundaries.
 
+- seed:
+
+  random seed, used when `sample_type` is `"random"`. When `NA`, the
+  global seed, if any, is used instead of a fixed seed.
+
 - inset:
 
   Inset configuration; see
   [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html).
-  If `NA` (the default), this is inherited from the coord (see
+  If [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html),
+  the default, this is inherited from the coord (see
   [`coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)).
 
 - map_base:
@@ -109,6 +117,6 @@ library(ggplot2)
 cartographer::nc_type_example_2 |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_geoscatter(aes(colour = type), size = 0.5) +
+  geom_geoscatter(aes(colour = type), size = 0.5, seed = 123) +
   coord_automap(feature_type = "sf.nc")
 ```

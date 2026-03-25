@@ -16,7 +16,7 @@ stat_automap_coords(
   ...,
   feature_type = NA,
   na.rm = TRUE,
-  inset = NA,
+  inset = waiver(),
   fun.geometry = NULL,
   show.legend = NA,
   inherit.aes = TRUE
@@ -42,7 +42,8 @@ stat_automap_coords(
 
   Inset configuration; see
   [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html).
-  If `NA` (the default), this is inherited from the coord (see
+  If [`waiver()`](https://ggplot2.tidyverse.org/reference/waiver.html),
+  the default, this is inherited from the coord (see
   [`coord_sf_inset()`](https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html)).
 
 ## Value
@@ -83,6 +84,22 @@ A plot layer
 ## See also
 
 [`ggmapinset::stat_sf_coordinates_inset()`](https://cidm-ph.github.io/ggmapinset/reference/stat_sf_coordinates_inset.html)
+
+## Aesthetics
+
+`stat_automap_coords()` understands the following aesthetics. Required
+aesthetics are displayed in bold and defaults are displayed for optional
+aesthetics:
+
+|     |                                                                         |                   |
+|-----|-------------------------------------------------------------------------|-------------------|
+| •   | **`location`**                                                          |                   |
+| •   | [`group`](https://ggplot2.tidyverse.org/reference/aes_group_order.html) | → inferred        |
+| •   | [`x`](https://ggplot2.tidyverse.org/reference/aes_position.html)        | → `after_stat(x)` |
+| •   | [`y`](https://ggplot2.tidyverse.org/reference/aes_position.html)        | → `after_stat(y)` |
+
+Learn more about setting these aesthetics in
+[`vignette("ggplot2-specs")`](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html).
 
 ## Examples
 

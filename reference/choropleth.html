@@ -53,13 +53,13 @@ with <code>stat = "automap"</code> instead.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geom_choropleth</span><span class="op">(</span></span>
-<span>  mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  stat <span class="op">=</span> <span class="st">"choropleth"</span>,</span>
 <span>  position <span class="op">=</span> <span class="st">"identity"</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  feature_type <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  inset <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  inset <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  map_base <span class="op">=</span> <span class="st">"normal"</span>,</span>
 <span>  map_inset <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -96,7 +96,7 @@ registered types. If <code>NA</code>, the type is guessed based on the values in
 
 <dt id="arg-inset">inset<a class="anchor" aria-label="anchor" href="#arg-inset"></a></dt>
 <dd><p>Inset configuration; see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html" class="external-link">configure_inset()</a></code>.
-If <code>NA</code> (the default), this is inherited from the coord (see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html" class="external-link">coord_sf_inset()</a></code>).</p></dd>
+If <code><a href="https://ggplot2.tidyverse.org/reference/waiver.html" class="external-link">waiver()</a></code>, the default, this is inherited from the coord (see <code><a href="https://cidm-ph.github.io/ggmapinset/reference/coord_sf_inset.html" class="external-link">coord_sf_inset()</a></code>).</p></dd>
 
 
 <dt id="arg-map-base">map_base<a class="anchor" aria-label="anchor" href="#arg-map-base"></a></dt>
@@ -123,13 +123,6 @@ If <code>NA</code> (the default), this is inherited from the coord (see <code><a
 geographically larger areas.</p>
     </div>
     <div class="section level2">
-    <h2 id="aesthetics">Aesthetics<a class="anchor" aria-label="anchor" href="#aesthetics"></a></h2>
-
-
-<p>The <code>location</code> aesthetic is required.
-<code>geom_choropleth()</code> understands the same aesthetics as <code><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">ggplot2::geom_sf()</a></code>.</p>
-    </div>
-    <div class="section level2">
     <h2 id="computed-variables">Computed variables<a class="anchor" aria-label="anchor" href="#computed-variables"></a></h2>
 
 
@@ -144,6 +137,12 @@ geographically larger areas.</p>
 
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="aesthetics">Aesthetics<a class="anchor" aria-label="anchor" href="#aesthetics"></a></h2>
+
+
+<p><code>stat_choropleth()</code> understands the following aesthetics. Required aesthetics are displayed in bold and defaults are displayed for optional aesthetics:</p><table class="table table"><tr><td>•</td><td><strong><code>location</code></strong></td><td></td></tr><tr><td>•</td><td><code><a href="https://ggplot2.tidyverse.org/reference/aes_colour_fill_alpha.html" class="external-link">fill</a></code></td><td>→ <code>ggplot2::after_stat(count)</code></td></tr><tr><td>•</td><td><code><a href="https://ggplot2.tidyverse.org/reference/aes_group_order.html" class="external-link">group</a></code></td><td>→ inferred</td></tr></table><p>Learn more about setting these aesthetics in <code><a href="https://ggplot2.tidyverse.org/articles/ggplot2-specs.html" class="external-link">vignette("ggplot2-specs")</a></code>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
