@@ -135,7 +135,9 @@ covid_cases_nsw |>
   ggplot(aes(location = lhd)) +
   geom_choropleth() +
   geom_boundaries(
-    feature_type = "nswgeo.lhd", colour = "black", linewidth = 0.1,
+    feature_type = "nswgeo.lhd",
+    colour = "black",
+    linewidth = 0.1,
     outline.aes = list(colour = NA)
   ) +
   geom_inset_frame() +
@@ -149,8 +151,14 @@ covid_cases_nsw |>
       units = "km",
       scale = 5,
       translation = c(400, -100)
-  )) +
-  scale_fill_steps(low = "#e6f9ff", high = "#00394d", n.breaks = 5, na.value = "white") +
+    )
+  ) +
+  scale_fill_steps(
+    low = "#e6f9ff",
+    high = "#00394d",
+    n.breaks = 5,
+    na.value = "white"
+  ) +
   theme_void()
 ```
 
@@ -207,7 +215,8 @@ covid_cases_nsw |>
   geom_choropleth() +
   geom_boundaries(feature_type = "nswgeo.lhd") +
   geom_inset_frame() +
-  geom_sf_label_inset(aes(label = lhd),
+  geom_sf_label_inset(
+    aes(label = lhd),
     stat = "automap_coords",
     data = ~ dplyr::slice_head(.x, by = lhd)
   ) +
@@ -221,7 +230,8 @@ covid_cases_nsw |>
       units = "km",
       scale = 3.5,
       translation = c(350, 0)
-  )) +
+    )
+  ) +
   labs(x = NULL, y = NULL) +
   theme_void()
 ```

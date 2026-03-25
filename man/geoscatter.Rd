@@ -49,7 +49,8 @@ registered types. If \code{NA}, the type is guessed based on the values in
 \code{"regular"} and \code{"hexagonal"} will evenly space points, leaving
 a small margin close to the boundaries.}
 
-\item{seed}{random seed, used when \code{sample_type} is \code{"random"}.}
+\item{seed}{random seed, used when \code{sample_type} is \code{"random"}.
+When \code{NA}, the global seed, if any, is used instead of a fixed seed.}
 
 \item{inset}{Inset configuration; see \code{\link[ggmapinset:configure_inset]{configure_inset()}}.
 If \code{NA} (the default), this is inherited from the coord (see \code{\link[ggmapinset:coord_sf_inset]{coord_sf_inset()}}).}
