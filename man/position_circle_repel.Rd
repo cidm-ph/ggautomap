@@ -34,21 +34,26 @@ different scales, which is especially useful when combined with map insets.
 }
 \examples{
 library(ggplot2)
+library(dplyr, warn.conflicts = FALSE)
 
 points <- data.frame(
-  x = c(rep(1, 10), 1:3),
-  y = c(rep(2, 10), 3:5),
-  s = 0.05
+  x = c(rep(1, 10), 2, 2, 3),
+  y = c(rep(1, 10), 2, 2, 3)
 )
 ggplot(points, aes(x, y)) +
   geom_point(size = 3, colour = "red") +
-  geom_point(position = position_circle_repel(0.05), size = 3, alpha = 0.5)
+  geom_point(position = position_circle_repel(0.05), size = 3, alpha = 0.5) +
+  coord_equal()
 
 cartographer::nc_type_example_2 |>
-  dplyr::filter(!county \%in\% c("HENDERSON", "GASTON", "LINCOLN")) |>
+  filter(!county \%in\% c("HENDERSON", "GASTON", "LINCOLN")) |>
   ggplot(aes(location = county)) +
   geom_boundaries(feature_type = "sf.nc") +
-  geom_centroids(aes(colour = type), position = position_circle_repel_sf(scale = 4), size = 0.2) +
+  geom_centroids(
+    aes(colour = type),
+    position = position_circle_repel_sf(scale = 4),
+    size = 0.2
+  ) +
   coord_automap(feature_type = "sf.nc")
 }
 \keyword{datasets}

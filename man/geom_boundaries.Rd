@@ -56,7 +56,11 @@ possibility to override its aesthetics.
 }
 \examples{
 library(ggplot2)
+library(nswgeo)
 
 ggplot() +
-  geom_boundaries(feature_type = "sf.nc")
+  geom_boundaries(
+    feature_type = "nswgeo.lhd",
+    outline.aes = list(colour = "red", linewidth = 0.6)
+  )
 }

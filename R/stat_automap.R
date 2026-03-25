@@ -30,13 +30,17 @@
 #' ggplot(events, aes(location = county)) +
 #'   stat_automap(aes(fill = proportion_A)) +
 #'   coord_automap(feature_type = "sf.nc")
-stat_automap <- function(mapping = NULL, data = NULL,
-                         geom = "sf", position = "identity",
-                         ...,
-                         feature_type = NA,
-                         na.rm = TRUE,
-                         show.legend = NA,
-                         inherit.aes = TRUE) {
+stat_automap <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "sf",
+  position = "identity",
+  ...,
+  feature_type = NA,
+  na.rm = TRUE,
+  show.legend = NA,
+  inherit.aes = TRUE
+) {
   ggplot2::layer_sf(
     data = data,
     mapping = mapping,
