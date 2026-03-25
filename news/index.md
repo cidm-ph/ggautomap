@@ -1,6 +1,6 @@
 # Changelog
 
-## ggautomap (development version)
+## ggautomap 0.4.0
 
 - [`configure_inset()`](https://cidm-ph.github.io/ggmapinset/reference/configure_inset.html)
   now uses the new inset shape definition style from {ggmapinset}.

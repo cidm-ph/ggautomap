@@ -15,12 +15,12 @@ Source:
 [`DESCRIPTION`](https://github.com/cidm-ph/ggautomap/blob/main/DESCRIPTION)
 
 Suster C (2026). *ggautomap: Create Maps from a Column of Place Names*.
-R package version 0.3.3.9000, <https://github.com/cidm-ph/ggautomap>.
+R package version 0.4.0, <https://github.com/cidm-ph/ggautomap>.
 
     @Manual{,
       title = {ggautomap: Create Maps from a Column of Place Names},
       author = {Carl Suster},
       year = {2026},
-      note = {R package version 0.3.3.9000},
+      note = {R package version 0.4.0},
       url = {https://github.com/cidm-ph/ggautomap},
     }
